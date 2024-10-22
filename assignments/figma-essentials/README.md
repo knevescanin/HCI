@@ -15,4 +15,4 @@ We hope you like it! 😊
 ## Deliverables
 A short video (10-15 seconds) demonstrating the responsiveness of your hero section frame and the ease of changing the look and feel of menu items:
 
-<img src="./figma.gif" width="100%" height="100%"/>
+<img src="./figma.gif" width="506px" height="284px"/>
