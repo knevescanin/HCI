@@ -13,6 +13,6 @@ We hope you like it! 😊
 * Use auto-layout, auto-spacing, constraints features.
 
 ## Deliverables
-A short video (10-15 seconds) demonstrating the responsiveness of your hero section frame and the ease of changing the look and feel of menu items:
+A short video (20 seconds) demonstrating the responsiveness of your hero section frame and the ease of changing the look and feel of menu items:
 
 ![figma-ezgif com-video-to-gif-converter-2](https://github.com/user-attachments/assets/225d677d-4ae8-41b1-ae2a-73ef7f3dd91d)
