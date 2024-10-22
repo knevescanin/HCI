@@ -15,4 +15,4 @@ We hope you like it! 😊
 ## Deliverables
 A short video (10-15 seconds) demonstrating the responsiveness of your hero section frame and the ease of changing the look and feel of menu items:
 
-<video src="Figma.mov" controls></video>
+<video src="./Figma.mov" controls></video>
