@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import Footer from "./components/Footer";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -11,6 +13,16 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+
+const latoRegular = localFont({
+  src: "./fonts/Lato-Regular.ttf",
+  variable: "--font-lato-regular"
+});
+
+const latoBlack = localFont({
+  src: "./fonts/Lato-Black.ttf",
+  variable: "--font-lato-black"
 });
 
 export const metadata: Metadata = {
@@ -26,9 +38,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased flex flex-col min-h-screen`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );

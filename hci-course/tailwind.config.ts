@@ -12,6 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        latoRegular: ['var(--font-lato-regular)'],
+        latoBlack: ['var(--font-lato-black)'],
+      },
     },
   },
   plugins: [],
