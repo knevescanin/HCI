@@ -1,7 +1,7 @@
 export default function page() {
     return (
-        <div>
-            Services
+        <div className="flex justify-center pt-10">
+            <h1 className="text-5xl">Services</h1>
         </div>
     );
 }

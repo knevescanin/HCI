@@ -1,7 +1,7 @@
 export default function page() {
     return (
-        <div>
-            Submit a ticket
+        <div className="flex justify-center pt-10">
+            <h1 className="text-5xl">Submit a ticket</h1>
         </div>
     );
 }

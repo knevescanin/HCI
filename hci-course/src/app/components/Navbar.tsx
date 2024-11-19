@@ -27,12 +27,12 @@ export default function Navbar() {
 	}
 
 	return (
-		<nav className="text-white p-4 sm:p-6 md:flex md:justify-between md:items-center bg-[#420081]">
+		<nav className="text-white font-latoRegular p-4 sm:p-6 md:flex md:justify-between md:items-center bg-[#4E00AF]">
 			<div className="container mx-auto flex flex-1 justify-between items-center">
 				<Link
 					href="/"
 					className="text-2xl font-bold">
-					<span className="font-latoBlack drop-shadow-lg">
+					<span className="ffont-latoBlack drop-shadow-lg">
 						<span className="text-3xl drop text-[#FE7163]">pric</span>
 						<span className="text-2xl text-[#FE7163]">€</span>
 						<span className="text-3xl text-[#FFFFFF]">
@@ -43,7 +43,7 @@ export default function Navbar() {
 						</span>
 					</span>
 				</Link>
-				<div className={`${getMenuClasses()} bg-[#420081]`}>
+				<div className={`${getMenuClasses()} bg-[#4E00AF]`}>
 					<Link
 						href="/search"
 						className="mx-2 hover:font-bold">
