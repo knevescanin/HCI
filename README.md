@@ -26,7 +26,8 @@
 
 - Link to Assignment 1: [**Figma essentials**](assignments/figma-essentials) <!-- Replace with actual URL -->
 - Link to Assignment 2: [**User personas**](assignments/user-personas) <!-- Replace with actual URL -->
-- Link to Assignment 3: [**NextJS App on Vercel**](https://hci-bay.vercel.app/)
+- Link to Assignment 3: [**NextJS App on Vercel**](https://hci-bay.vercel.app/resources)
+- Link to Assignment 4: [**Low/High-fidelity prototype**](assignments/low-high-fidelity-prototype)
 <!-- Add more assignments as necessary -->
 
 ## Project Requirements
