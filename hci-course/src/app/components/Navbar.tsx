@@ -55,6 +55,11 @@ export default function Navbar() {
 						Compare
 					</Link>
 					<Link
+						href="/docs"
+						className="mx-2 hover:font-bold">
+						Docs
+					</Link>
+					<Link
 						href="/about-us"
 						className="mx-2 hover:font-bold">
 						About Us
