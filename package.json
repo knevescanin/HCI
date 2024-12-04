@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "contentful": "^11.2.5"
+  }
+}
