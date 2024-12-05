@@ -28,7 +28,7 @@ We used a simple color palette (shades of purple) and typography to create a coh
 The design is evenly spaced and aligned to create a visual hierarchy and guide the user's eye through the page.
 
 <div align="center">
-    <img src="./Home_page.png" alt="High-fidelity prototype" width="400">
+    <img src="./Home_Page_V1.png" alt="High-fidelity prototype" width="400">
 </div>
 
 ### High Fidelity Prototype Version 2
@@ -40,7 +40,7 @@ We removed the "About Us" navigation to avoid redundancy.
 We will continue updating the design as we move forward.
 
 <div align="center">
-    <img src="./Home_page_v2.png" alt="High-fidelity prototype" width="400">
+    <img src="./Home_Page_V2.png" alt="High-fidelity prototype" width="400">
 </div>
 
 ### Components
