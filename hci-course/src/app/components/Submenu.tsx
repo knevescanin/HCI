@@ -1,21 +1,6 @@
+
 import SubmenuHeader from './SubmenuHeader'
 import SubmenuList from './SubmenuList'
-
-export interface Navigation {
-    name: string,
-    route: string
-}
-
-
-
-interface NavigationItem {
-	header: Header
-	navigations: Navigation[]
-}
-
-interface SubmenuProps {
-	submenuNavigations: NavigationItem[]
-}
 
 export default function Submenu({ submenuNavigations }: SubmenuProps) {
 	return (

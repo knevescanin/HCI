@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-export default function SubmenuHeader({name, route}: {name: string, route: string}) {
+export default function SubmenuHeader({name, route}: Header) {
     return (
         <li><Link href={route} className={""}>{name}</Link></li>
     );

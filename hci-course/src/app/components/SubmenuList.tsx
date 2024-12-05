@@ -1,12 +1,10 @@
 import Link from 'next/link'
 
-import { Navigation } from './Submenu'
-
 
 export default function SubmenuList({
 	navigations, name
 }: {
-	navigations: Navigation[], name: string
+	navigations: NavigationItem[], name: string
 }) {
 	return (
 		<li>
