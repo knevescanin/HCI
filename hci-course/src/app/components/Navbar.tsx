@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false)
+	const pathname = usePathname()
 
 	function getMenuClasses() {
 		let menuClasses = []
@@ -27,8 +29,8 @@ export default function Navbar() {
 	}
 
 	return (
-		<nav className="text-white font-latoRegular p-4 sm:p-6 md:flex md:justify-between md:items-center bg-[#4E00AF]">
-			<div className="container mx-auto flex flex-1 justify-between items-center">
+		<nav className="text-white font-latoRegular p-4 sm:pt-6 bg-transparent w-screen">
+			<div className="flex flex-1 justify-between items-center w-full md:px-20">
 				<Link
 					href="/"
 					className="text-2xl font-bold">
@@ -43,27 +45,22 @@ export default function Navbar() {
 						</span>
 					</span>
 				</Link>
-				<div className={`${getMenuClasses()} bg-[#4E00AF]`}>
-					<Link
-						href="/search"
-						className="mx-2 hover:font-bold">
-						Search
-					</Link>
-					<Link
-						href="/compare"
-						className="mx-2 hover:font-bold">
-						Compare
-					</Link>
-					<Link
-						href="/about-us"
-						className="mx-2 hover:font-bold">
-						About Us
-					</Link>
-					<Link
-						href="/log-in"
-						className="mx-2 hover:font-bold">
-						Log In
-					</Link>
+				<div className={`${getMenuClasses()} gap-[60px]`}>
+				<Link href="/" className={`font-bold hover:underline ${pathname === '/' ? 'underline' : ''}`}>
+            Home
+          </Link>
+          <Link href="/search" className={`font-bold hover:underline ${pathname === '/search' ? 'underline' : ''}`}>
+            Search
+          </Link>
+          <Link href="/compare" className={`font-bold hover:underline ${pathname === '/compare' ? 'underline' : ''}`}>
+            Compare
+          </Link>
+          <Link href="/docs" className={`font-bold hover:underline ${pathname === '/docs' ? 'underline' : ''}`}>
+            Docs
+          </Link>
+          <Link href="/log-in" className={`font-bold hover:underline ${pathname === '/log-in' ? 'underline' : ''}`}>
+            Log In
+          </Link>
 				</div>
 
 				<div className="md:hidden flex items-center">
