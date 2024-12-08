@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import FirstSectionBG from '../../public/home-page-assets/First Section BG.png'
-import SecondSectionBG from '../../public/home-page-assets/Second Section BG.png'
-import ThirdSectionBG from '../../public/home-page-assets/Third Section BG.png'
-import HeroIllustration from '../../public/home-page-assets/Hero Illustration.png'
+import FirstSectionBG from '../../public/home-page-assets/first-section-image.png'
+import SecondSectionBG from '../../public/home-page-assets/second-section-image.png'
+import ThirdSectionBG from '../../public/home-page-assets/third-section-image.png'
+import HeroIllustration from '../../public/home-page-assets/hero-illustration.png'
 import HeroImage from '../../public/home-page-assets/hero-image.jpg'
 
 export default function Home() {
@@ -27,12 +27,7 @@ export default function Home() {
 				</div>
 			</div>
 			<section
-				className="w-screen md:h-screen relative"
-				style={{
-					backgroundImage: `url(${FirstSectionBG})`,
-					backgroundSize: 'cover',
-					backgroundPosition: 'center',
-				}}>
+				className="w-screen md:h-screen relative">
 				<Image
 					height={815}
 					className="absolute w-screen -z-10"
