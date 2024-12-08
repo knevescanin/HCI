@@ -3,11 +3,9 @@ import Image from 'next/image'
 import localFont from 'next/font/local'
 import './globals.css'
 
-import HeroIllustration from '../../public/home-page-assets/Hero Illustration.png'
-import HeroImage from '../../public/home-page-assets/hero-image.jpg'
-
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -40,31 +38,13 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
+
 	return (
 		<html lang="en">
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased flex flex-col min-h-screen overflow-x-hidden bg-[#420081]`}>
-				{/* Hero section */}
-				<div
-					className="h-screen w-screen bg-no-repeat bg-cover"
-					style={{ backgroundImage: `url(${HeroImage.src})` }}>
-					{/* Navbar over hero image */}
-					<Navbar />
-          {/* Mozda dinamicka velicina citanjem visine navbara */}
-          <div className="flex justify-start w-screen relative" style={{ height: 'calc(100% - 76.5px)' }}> 
-            <h1 className="font-latoBlack text-9xl w-52 md:w-[948px] text-white ml-20">
-              SPEND LESS, BUY MORE
-            </h1>
-            <Image
-              src={HeroIllustration}
-              alt="Hero Illustration"
-              className="absolute w-auto right-0 bottom-0 h-3/5 mr-20"
-            />
-          </div>
-				</div>
-				{/* Main content */}
+				<Navbar />
 				<main className="flex-grow flex flex-col">{children}</main>
-				{/* Footer */}
 				<Footer />
 			</body>
 		</html>
