@@ -1,4 +1,4 @@
-
+"use client"
 import SubmenuHeader from './SubmenuHeader'
 import SubmenuList from './SubmenuList'
 
