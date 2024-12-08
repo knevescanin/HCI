@@ -1,6 +1,11 @@
 import * as contentful from 'contentful'
 
-import Submenu from '../../components/Submenu'
+import Submenu from '../../components/Submenu/Submenu'
+import SubmenuListItems from '@/app/components/Submenu/SubmenuListItems'
+
+import { submenuNavigations } from '@/app/components/Submenu/constants'
+import { getSubmenuNavigations } from '@/app/components/Submenu/actions'
+import { get } from 'http'
 
 export default function DocsLayout({
 	children,
@@ -13,24 +18,20 @@ export default function DocsLayout({
 		accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string,
 	})
 
-	const submenuNavigations = [
-		{
-			header: { name: 'Project Information', route: '/docs/project-information' },
-			navigations: [
-				{ name: 'Introduction', route: '/docs/project-information/introduction' },
-				{ name: 'First Ideas', route: '/docs/project-information/first-ideas' },
-				{ name: 'Getting Things Ready', route: '/docs/project-information/getting-things-ready' },
-			],
-		},
-	]
+	const navs = getSubmenuNavigations(submenuNavigations)
 
 	return (
-		<div className="grid grid-cols-3 gap-4">
-			<Submenu submenuNavigations={submenuNavigations} />
+		<div className="grid grid-cols-12 gap-4">
+			<div className="col-span-2">
+				<Submenu submenuNavigations={submenuNavigations} />
+			</div>
 
-			<div>{children}</div>
-
-			<div>{/* content of current page */}</div>
+			<div className="col-span-8">{children}</div>
+			{/* Problem u vezi client komponente I think */}
+			<div className="col-span-2">
+				<Submenu submenuNavigations={navs}
+				/>
+			</div>
 		</div>
 	)
 }

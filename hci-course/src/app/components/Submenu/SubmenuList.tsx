@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SubmenuListItems from './SubmenuListItems'
 
 
 export default function SubmenuList({
@@ -10,17 +11,7 @@ export default function SubmenuList({
 		<li>
 			<details open>
 				<summary>{name}</summary>
-			<ul>
-				{navigations.map((navigation, index) => (
-					<li key={index}>
-						<Link
-							href={navigation.route}
-							className={''}>
-							{navigation.name}
-						</Link>
-					</li>
-				))}
-			</ul>
+			<SubmenuListItems navigations={navigations}/>
             </details>
 		</li>
 	)

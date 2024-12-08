@@ -20,6 +20,7 @@ export default function page() {
 				/>
 				<button type="submit">Submit</button>
 			</form> */}
+			<div className='text-center bg-orange-400'>Docs page</div>
 		</div>
 	)
 }
