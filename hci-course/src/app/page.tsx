@@ -8,14 +8,14 @@ import HeroImage from '../../public/home-page-assets/hero-image.jpg'
 export default function Home() {
 	return (
 		<>
-			<div className="h-screen w-screen relative">
+		<Image  priority src={HeroImage} alt="Hero Image" className="absolute w-screen h-screen -z-10 inset-0" />
+			<div style={{height: "calc(100vh - 76.5px)"}} className="w-screen relative">
         {/* Treba bit Image jer bg-image stvara probleme zbog velicine??? */}
         {/* Jedna ideja je provjerit o kojem se pathu radi pa kondicionalno ispisati komponentu, ali problem je jer je ovo serverska strana pa neda hookove */}
-        <Image src={HeroImage} alt="Hero Image" className="absolute w-screen h-screen -z-10 inset-0" />
+        
 				{/* Mozda dinamicka velicina citanjem visine navbara */}
 				<div
-					className="flex justify-start w-screen relative"
-					style={{ height: 'calc(100% - 76.5px)' }}>
+					className="flex justify-start w-screen h-full relative">
 					<h1 className="font-latoBlack text-9xl w-52 md:w-[948px] text-white ml-20">
 						SPEND LESS, BUY MORE
 					</h1>
@@ -34,8 +34,7 @@ export default function Home() {
 					backgroundPosition: 'center',
 				}}>
 				<Image
-					height={815}
-					className="absolute w-screen -z-10"
+					className="absolute w-screen h-auto -z-10"
 					src={FirstSectionBG}
 					alt="First Section Background"
 				/>
@@ -46,9 +45,7 @@ export default function Home() {
 
 			<section className="w-screen md:h-screen relative">
 				<Image
-					width={1196}
-					height={704}
-					className="absolute right-0 -z-10"
+					className="absolute w-[1196px] h-[704px] right-0 -z-10"
 					src={SecondSectionBG}
 					alt="Second Section Background"
 				/>
@@ -59,9 +56,7 @@ export default function Home() {
 
 			<section className="w-screen md:h-screen relative">
 				<Image
-					width={964}
-					height={568}
-					className="absolute left-0 -z-10"
+					className="absolute w-[964px] h-[568] left-0 -z-10"
 					src={ThirdSectionBG}
 					alt="Third Section Background"
 				/>
