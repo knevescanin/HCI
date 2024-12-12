@@ -34,7 +34,8 @@ export default function Home() {
 					backgroundPosition: 'center',
 				}}>
 				<Image
-					className="absolute w-screen h-auto -z-10"
+					quality={100}
+					className="absolute w-screen h-4/5 -z-10"
 					src={FirstSectionBG}
 					alt="First Section Background"
 				/>
@@ -45,7 +46,8 @@ export default function Home() {
 
 			<section className="w-screen md:h-screen relative">
 				<Image
-					className="absolute w-[1196px] h-[704px] right-0 -z-10"
+					quality={100}
+					className="absolute w-3/5 h-4/5 right-0 -z-10"
 					src={SecondSectionBG}
 					alt="Second Section Background"
 				/>
@@ -56,7 +58,8 @@ export default function Home() {
 
 			<section className="w-screen md:h-screen relative">
 				<Image
-					className="absolute w-[964px] h-[568] left-0 -z-10"
+					quality={100}
+					className="absolute w-1/2 h-4/5 left-0 -z-10"
 					src={ThirdSectionBG}
 					alt="Third Section Background"
 				/>
@@ -65,13 +68,15 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="mx-auto md:w-[968px] flex flex-col justify-center items-center gap-16">
-				<span className="font-latoBlack text-9xl text-white text-center">
-					Want to try our app?
-				</span>
-				<button className="w-[376px] font-latoBlack text-white text-4xl bg-[#630BBD] px-3 py-2 rounded-xl drop-shadow-xl hover:scale-110 transition-all">
-					START SEARCHING
-				</button>
+			<section className='w-screen h-screen'>
+				<div className="mx-auto md:w-[968px] flex flex-col justify-center items-center gap-16">
+					<span className="font-latoBlack text-9xl text-white text-center">
+						Want to try our app?
+					</span>
+					<button className="w-[376px] font-latoBlack text-white text-4xl bg-[#630BBD] px-3 py-2 rounded-xl drop-shadow-xl hover:scale-110 transition-all">
+						START SEARCHING
+					</button>
+				</div>
 			</section>
 		</>
 	)
