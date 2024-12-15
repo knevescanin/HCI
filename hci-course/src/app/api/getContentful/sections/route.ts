@@ -6,9 +6,8 @@ export async function GET(){
         select: ['fields'],
         order: ['sys.createdAt']
     })
-
+    // imageUrl: entry.fields.sectionImage?.fields.file.url
     const section = entries.items.map(entry => new Object({sectionText: entry.fields.sectionText, header: entry.fields.header}))
-    
     
     return Response.json(section)
 }   
