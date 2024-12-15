@@ -1,5 +1,3 @@
-// import * as contentful from 'contentful'
-
 import Submenu from '../../components/Submenu/Submenu'
 
 import { submenuNavigations } from '@/app/components/Submenu/constants'
@@ -10,11 +8,6 @@ export default function DocsLayout({
 }: {
 	children: React.ReactNode
 }) {
-	//contentful client
-	// var client = contentful.createClient({
-	// 	space: process.env.CONTENTFUL_SPACE_ID as string,
-	// 	accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string,
-	// })
 
 	const navs = getSubmenuNavigations(submenuNavigations)
 
