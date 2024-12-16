@@ -10,7 +10,8 @@ export default function Home() {
 
 	// bi li nam trebala client componenta za sectione? vjv ne zbog brzine
 	async function getSections(): Promise<SectionResponse[]> {
-		const res = await fetch(process.env.IS_PROD ? `${process.env.NEXT_PUBLIC_API_URL_PROD}/getContentful/sections` : `${process.env.NEXT_PUBLIC_API_URL_DEV}/getContentful/sections`)
+		const isProd = false //env variable needed
+		const res = await fetch(isProd ? `${process.env.NEXT_PUBLIC_API_URL_PROD}/getContentful/sections` : `${process.env.NEXT_PUBLIC_API_URL_DEV}/getContentful/sections`)
 		
 		if(!res.ok) {
 			throw new Error(`HTTP error! status: ${res.status}`);
