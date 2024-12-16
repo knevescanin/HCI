@@ -22,6 +22,6 @@ declare namespace NodeJS {
         CONTENTFUL_ENVIRONMENT: string;
         NEXT_PUBLIC_API_URL_DEV: string;
         NEXT_PUBLIC_API_URL_PROD: string;
-        IS_PROD: boolean;
+        NEXT_PUBLIC_IS_PROD: string;
     }
 }
