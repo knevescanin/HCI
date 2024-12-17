@@ -10,6 +10,7 @@ export default function page() {
 	// 	await sql('INSERT INTO comments (comment) VALUES ($1)', [comment])
 	// }
 
+
 	return (
 		<div>
 			{/* <form action={create}>
@@ -20,7 +21,7 @@ export default function page() {
 				/>
 				<button type="submit">Submit</button>
 			</form> */}
-			<div className='text-center bg-orange-400'>Docs page</div>
+			<div className='text-center bg-orange-400'>Welcome to DOCS PAGE. Data will be fetched here and used later.</div>
 		</div>
 	)
 }

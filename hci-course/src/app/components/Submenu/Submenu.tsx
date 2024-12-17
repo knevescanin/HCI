@@ -11,7 +11,9 @@ export default function Submenu({ submenuNavigations }: SubmenuProps) {
 						<SubmenuList
 							key={index}
 							name={item.header.name}
-							navigations={item.navigations}/>
+							navigations={item.navigations}
+							route={item.header.route}
+							/>
 					)) || <SubmenuHeader key={index} name={item.header.name} route={item.header.route}/>
 			)}
 		</ul>

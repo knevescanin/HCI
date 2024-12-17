@@ -11,7 +11,7 @@ export default function Footer() {
 	return (
         
 		<footer className="w-screen font-latoRegular flex flex-col relative items-center h-fit mt-auto md:flex md:flex-row md:h-52 md:px-20 md:justify-between md:items-end">
-            <Image src={FooterShape} alt="Footer Shape" className="absolute w-screen h-full -z-10 inset-0" />
+            <Image priority src={FooterShape} alt="Footer Shape" className="absolute w-screen h-full -z-10 inset-0" />
 			<div className="max-md:pb-2">
 				<Link href="/">
 					<span className="font-latoBlack drop-shadow-lg">
