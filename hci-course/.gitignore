@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-hci-course/node_modules
+**/node_modules
 .pnp
 .pnp.*
 .yarn/*
@@ -11,14 +11,14 @@ hci-course/node_modules
 !.yarn/versions
 
 # testing
-hci-course/coverage
+**/coverage
 
 # next.js
 /.next/
 /out/
 
 # production
-hci-course/build
+**/build
 
 # misc
 .DS_Store
