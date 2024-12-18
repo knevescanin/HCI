@@ -2,25 +2,23 @@ import ProductCard from "@/app/components/ProductCard";
 
 export default function Page() {
 
-  async function fetchProducts() {
-    const res = await fetch("https://my-json-server.typicode.com/knevescanin/HCI/products")
-    const data = await res.json()
-    return data
-  }
+	async function fetchProducts() {
+		const res = await fetch("https://my-json-server.typicode.com/knevescanin/HCI/products")
+		const data = await res.json()
+		return data
+	}
 
- const products: Promise<ProductCard[]> = fetchProducts()
+	const products: Promise<ProductCard[]> = fetchProducts()
 
-  
+
 
 	return (
 		<div className="grid grid-cols-8 gap-11 w-[80%] h-max mx-auto p-4 text-white">
-			{/* Sidebar */}
 			<div className="col-span-2 bg-[#630BBD] flex flex-col p-4 rounded-lg">
 				<h2 className="text-xl font-semibold text-center mb-4">
 					Filter Products
 				</h2>
 
-				{/* Search Bar */}
 				<div className="mb-6">
 					<input
 						type="text"
@@ -29,7 +27,6 @@ export default function Page() {
 					/>
 				</div>
 
-				{/* Categories */}
 				<div className="mb-6">
 					<h3 className="font-bold mb-2">Categories</h3>
 					<ul>
@@ -56,7 +53,6 @@ export default function Page() {
 					</ul>
 				</div>
 
-				{/* Stores */}
 				<div className="mb-6">
 					<h3 className="font-bold mb-2">Stores</h3>
 					<ul>
@@ -83,7 +79,6 @@ export default function Page() {
 					</ul>
 				</div>
 
-				{/* Price Range Filter */}
 				<div className="mb-6">
 					<h3 className="font-bold mb-2">Price Range</h3>
 					<input
@@ -99,7 +94,6 @@ export default function Page() {
 					</div>
 				</div>
 
-				{/* Sort by Price */}
 				<div className="mb-6">
 					<h3 className="font-bold mb-2">Sort By</h3>
 					<select className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black">
@@ -109,12 +103,10 @@ export default function Page() {
 				</div>
 			</div>
 
-			{/* Product Section */}
 			<div className="col-span-6 bg-[#630BBD] p-4 grid grid-cols-4 gap-3 overflow-y-auto rounded-xl">
-				{/* Product Boxes */}
-				
-        {products.then(products => products.map((product) => <ProductCard key={product.id} name={product.name} imageUrl={product.imageUrl} store={product.store} price={product.price}/> ))}
-				
+
+				{products.then(products => products.map((product) => <ProductCard key={product.id} name={product.name} imageUrl={product.imageUrl} store={product.store} price={product.price} />))}
+
 			</div>
 		</div>
 	)
