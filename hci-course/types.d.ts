@@ -78,3 +78,11 @@ interface NavigationsContent {
     richTextString: string,
     path: string
 }
+
+interface ProductCard {
+    id: number,
+    name: string,
+    imageUrl: string,
+    store: string,
+    price: number
+}

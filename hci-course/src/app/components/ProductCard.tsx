@@ -1,0 +1,26 @@
+export default function ProductCard({
+	name,
+	imageUrl,
+	store,
+	price,
+}: {
+	name: string
+	imageUrl: string
+	store: string
+	price: number
+}) 
+{
+    
+	return (
+		<div className="bg-[#FFFFFF] rounded-xl p-4 flex flex-col items-center relative">
+			<img
+				src={imageUrl}
+				alt="Product"
+				className="w-full h-auto mb-2"
+			/>
+			<h2 className="text-black text-lg">{name}</h2>
+			<p className="text-gray-500">{store}</p>
+			<p className="text-[#FE7163]">{price}</p>
+		</div>
+	)
+}

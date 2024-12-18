@@ -1,0 +1,39 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Apple",
+            "image_url": "https://example.com/apple.jpg",
+            "store": "Konzum",
+            "price": 0.99
+        },
+        {
+            "id": 2,
+            "name": "Banana",
+            "image_url": "https://example.com/banana.jpg",
+            "store": "Lidl",
+            "price": 1.29
+        },
+        {
+            "id": 3,
+            "name": "Bread",
+            "image_url": "https://example.com/bread.jpg",
+            "store": "Spar",
+            "price": 1.49
+        },
+        {
+            "id": 4,
+            "name": "Milk",
+            "image_url": "https://example.com/milk.jpg",
+            "store": "Plodine",
+            "price": 0.89
+        },
+        {
+            "id": 5,
+            "name": "Cheese",
+            "image_url": "https://example.com/cheese.jpg",
+            "store": "Tommy",
+            "price": 2.99
+        }
+    ]
+}
