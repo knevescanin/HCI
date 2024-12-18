@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "Apple",
-            "imageUrl": "https://assets.clevelandclinic.org/transform/cd71f4bd-81d4-45d8-a450-74df78e4477a/Apples-184940975-770x533-1_jpg",
+            "imageUrl": "https://img.freepik.com/premium-photo/red-apple-fruit-with-green-leaf-isolated-white-with-clipping-path_252965-317.jpg",
             "store": "Konzum",
             "price": 0.99
         },
@@ -17,14 +17,14 @@
         {
             "id": 3,
             "name": "Bread",
-            "imageUrl": "https://www.melskitchencafe.com/wp-content/uploads/french-bread2.jpg",
+            "imageUrl": "https://img.freepik.com/premium-photo/white-bread-loaf-isolated-white-background_488220-8803.jpg",
             "store": "Spar",
             "price": 1.49
         },
         {
             "id": 4,
             "name": "Milk",
-            "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnyF3pJX7BJUJY2WTngh2IrvDZsLDLATNKUA&s",
+            "imageUrl": "https://img.freepik.com/premium-photo/glass-bottle-fresh-milk-isolated-white-background_252965-47.jpg",
             "store": "Plodine",
             "price": 0.89
         },
@@ -34,6 +34,41 @@
             "imageUrl": "https://cdn.usdairy.com/optimize/getmedia/b5108b6f-59c3-4cc4-b1d5-4b9b0d1e0c54/swiss.jpg.jpg.aspx?format=webp",
             "store": "Tommy",
             "price": 2.99
+        },
+        {
+            "id": 6,
+            "name": "Orange",
+            "imageUrl": "https://media.istockphoto.com/id/1231559990/photo/orange-fruit-with-drop-shadow-on-white-background-commercial-image-of-citrus-fruits-in.jpg?s=612x612&w=0&k=20&c=zEnUx_53uqE-GBCLar_fK4PwJBG3U2pV0vSu0amRFDE=",
+            "store": "Konzum",
+            "price": 1.10
+        },
+        {
+            "id": 7,
+            "name": "Tomato",
+            "imageUrl": "https://media.istockphoto.com/id/941825808/photo/tomato-isolated-tomato-on-white-background-with-clipping-path-full-depth-of-field.jpg?s=612x612&w=0&k=20&c=FOo7yfEpxmdTHYBHVr2og-nE_m4mib32rYxZQxUARbs=",
+            "store": "Lidl",
+            "price": 0.99
+        },
+        {
+            "id": 8,
+            "name": "Butter",
+            "imageUrl": "https://img.freepik.com/premium-photo/butter-white-background_1028857-4617.jpg",
+            "store": "Spar",
+            "price": 1.79
+        },
+        {
+            "id": 9,
+            "name": "Yogurt",
+            "imageUrl": "https://img.freepik.com/premium-photo/yogurt-with-white-background-high-quality-ultra-hd_670382-61581.jpg",
+            "store": "Plodine",
+            "price": 0.99
+        },
+        {
+            "id": 10,
+            "name": "Eggs",
+            "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx3k7o-hOvGyEr-67qbilx86l5V-xJPAOAOg&s",
+            "store": "Tommy",
+            "price": 2.49
         }
     ]
 }
