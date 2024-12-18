@@ -11,7 +11,8 @@ export default function Home() {
 	// bi li nam trebala client componenta za sectione? vjv ne zbog brzine
 	async function getSections(): Promise<SectionResponse[]> { 
 
-		const res = await fetch(process.env.NEXT_PUBLIC_IS_PROD === "true" ? `${process.env.NEXT_PUBLIC_API_URL_PROD}/getContentful/sections` : `${process.env.NEXT_PUBLIC_API_URL_DEV}/getContentful/sections`)
+		// const res = await fetch(process.env.NEXT_PUBLIC_IS_PROD === "true" ? `${process.env.NEXT_PUBLIC_API_URL_PROD}/getContentful/sections` : `${process.env.NEXT_PUBLIC_API_URL_DEV}/getContentful/sections`)
+		const res = await fetch("https://hci-bay.vercel.app/api/getContentful/sections")
 		if(!res.ok) {
 			throw new Error(`HTTP error! status: ${res.status}`);
 		}
