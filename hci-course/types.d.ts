@@ -72,3 +72,9 @@ interface SectionResponse {
     header: string,
     imageUrl: string
 }
+
+interface NavigationsContent {
+    header: string,
+    richTextString: string,
+    path: string
+}
