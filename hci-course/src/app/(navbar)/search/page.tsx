@@ -14,7 +14,7 @@ export default function Page() {
 
 	return (
 		<div className="grid grid-cols-8 gap-11 w-[80%] h-max mx-auto p-4 text-white">
-			<div className="col-span-2 bg-[#630BBD] flex flex-col p-4 rounded-lg">
+			<div className="col-span-2 bg-[#630BBD] h-max flex flex-col p-4 rounded-lg">
 				<h2 className="text-xl font-semibold text-center mb-4">
 					Filter Products
 				</h2>
