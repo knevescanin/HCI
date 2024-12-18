@@ -23,13 +23,14 @@ export default function Home() {
 	// }
 
 	// const sections = getSections()
+	// const sections = getSections()
 
-	return (
-		<>
-		<Image  priority src={HeroImage} alt="Hero Image" className="absolute w-screen h-screen -z-10 inset-0" />
-			<div style={{height: "calc(100vh - 76.5px)"}} className="w-screen relative">
-        {/* Treba bit Image jer bg-image stvara probleme zbog velicine??? */}
-        {/* Jedna ideja je provjerit o kojem se pathu radi pa kondicionalno ispisati komponentu, ali problem je jer je ovo serverska strana pa neda hookove */}
+	// return (
+	// 	<>
+	// 	<Image  priority src={HeroImage} alt="Hero Image" className="absolute w-screen h-screen -z-10 inset-0" />
+	// 		<div style={{height: "calc(100vh - 76.5px)"}} className="w-screen relative">
+    //     {/* Treba bit Image jer bg-image stvara probleme zbog velicine??? */}
+    //     {/* Jedna ideja je provjerit o kojem se pathu radi pa kondicionalno ispisati komponentu, ali problem je jer je ovo serverska strana pa neda hookove */}
         
 				{/* Mozda dinamicka velicina citanjem visine navbara */}
 				<div
@@ -83,16 +84,17 @@ export default function Home() {
 				{/* <HomeSection header={sections.then(section => section[2].header)} sectionText={sections.then(section => section[2].sectionText)} rightAligned/> */}
 			</section>
 
-			<section className='w-screen h-screen'>
-				<div className="mx-auto md:w-[968px] flex flex-col justify-center items-center gap-16">
-					<span className="font-latoBlack text-9xl text-white text-center">
-						Want to try our app?
-					</span>
-					<button className="w-[376px] font-latoBlack text-white text-4xl bg-[#630BBD] px-3 py-2 rounded-xl drop-shadow-xl hover:scale-110 transition-all">
-						START SEARCHING
-					</button>
-				</div>
-			</section>
-		</>
-	)
+	// 		<section className='w-screen h-screen'>
+	// 			<div className="mx-auto md:w-[968px] flex flex-col justify-center items-center gap-16">
+	// 				<span className="font-latoBlack text-9xl text-white text-center">
+	// 					Want to try our app?
+	// 				</span>
+	// 				<button className="w-[376px] font-latoBlack text-white text-4xl bg-[#630BBD] px-3 py-2 rounded-xl drop-shadow-xl hover:scale-110 transition-all">
+	// 					START SEARCHING
+	// 				</button>
+	// 			</div>
+	// 		</section>
+	// 	</>
+	// )
+	<div>HI</div>
 }
