@@ -1,4 +1,4 @@
-import LoadingUI from "../components/UI/LoadingUI";
+import LoadingUI from "../../components/UI/LoadingUI";
 
 export default function loading() {
     return (

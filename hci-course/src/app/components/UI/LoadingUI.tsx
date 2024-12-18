@@ -3,7 +3,7 @@
 
 export default function LoadingUI() {
     return (
-        <div>
+        <div className="text-white text-3xl font-bold">
             {/* <FontAwesomeIcon size="xs" icon={faSpinner} spin style={{color: "#ffffff",}} /> */}
             Loading...
         </div>
