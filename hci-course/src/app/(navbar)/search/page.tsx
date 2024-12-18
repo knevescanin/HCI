@@ -3,7 +3,7 @@ import ProductCard from "@/app/components/ProductCard";
 export default function Page() {
 
   async function fetchProducts() {
-    const res = await fetch("https://my-json-server.typicode.com/typicode/demo/posts")
+    const res = await fetch("https://my-json-server.typicode.com/knevescanin/HCI/products")
     const data = await res.json()
     return data
   }

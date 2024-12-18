@@ -3,35 +3,35 @@
         {
             "id": 1,
             "name": "Apple",
-            "image_url": "https://example.com/apple.jpg",
+            "imageUrl": "https://assets.clevelandclinic.org/transform/cd71f4bd-81d4-45d8-a450-74df78e4477a/Apples-184940975-770x533-1_jpg",
             "store": "Konzum",
             "price": 0.99
         },
         {
             "id": 2,
             "name": "Banana",
-            "image_url": "https://example.com/banana.jpg",
+            "imageUrl": "https://www.biobio.hr/upload/catalog/product/17352/7447.jpg",
             "store": "Lidl",
             "price": 1.29
         },
         {
             "id": 3,
             "name": "Bread",
-            "image_url": "https://example.com/bread.jpg",
+            "imageUrl": "https://www.melskitchencafe.com/wp-content/uploads/french-bread2.jpg",
             "store": "Spar",
             "price": 1.49
         },
         {
             "id": 4,
             "name": "Milk",
-            "image_url": "https://example.com/milk.jpg",
+            "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnyF3pJX7BJUJY2WTngh2IrvDZsLDLATNKUA&s",
             "store": "Plodine",
             "price": 0.89
         },
         {
             "id": 5,
             "name": "Cheese",
-            "image_url": "https://example.com/cheese.jpg",
+            "imageUrl": "https://cdn.usdairy.com/optimize/getmedia/b5108b6f-59c3-4cc4-b1d5-4b9b0d1e0c54/swiss.jpg.jpg.aspx?format=webp",
             "store": "Tommy",
             "price": 2.99
         }
