@@ -1,16 +1,16 @@
-import ProductCard from "@/app/components/ProductCard";
+import { unstable_cache } from 'next/cache'
+import ProductCard from '@/app/components/ProductCard'
+
+const fetchProducts = unstable_cache(async () => {
+	const res = await fetch(
+		'https://my-json-server.typicode.com/knevescanin/HCI/products'
+	)
+	const data = await res.json()
+	return data
+}, [""], { revalidate: 3600})
 
 export default function Page() {
-
-  async function fetchProducts() {
-    const res = await fetch("https://my-json-server.typicode.com/knevescanin/HCI/products")
-    const data = await res.json()
-    return data
-  }
-
- const products: Promise<ProductCard[]> = fetchProducts()
-
-  
+	const products: Promise<ProductCard[]> = fetchProducts()
 
 	return (
 		<div className="grid grid-cols-8 gap-11 w-[80%] h-max mx-auto p-4 text-white">
@@ -112,9 +112,18 @@ export default function Page() {
 			{/* Product Section */}
 			<div className="col-span-6 bg-[#630BBD] p-4 grid grid-cols-4 gap-3 overflow-y-auto rounded-xl">
 				{/* Product Boxes */}
-				
-        {products.then(products => products.map((product) => <ProductCard key={product.id} name={product.name} imageUrl={product.imageUrl} store={product.store} price={product.price}/> ))}
-				
+
+				{products.then((products) =>
+					products.map((product) => (
+						<ProductCard
+							key={product.id}
+							name={product.name}
+							imageUrl={product.imageUrl}
+							store={product.store}
+							price={product.price}
+						/>
+					))
+				)}
 			</div>
 		</div>
 	)
