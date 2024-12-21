@@ -4,6 +4,8 @@ import SecondSectionBG from '../../public/home-page-assets/Second Section BG.png
 import ThirdSectionBG from '../../public/home-page-assets/Third Section BG.png'
 import HeroIllustration from '../../public/home-page-assets/Hero Illustration.png'
 import HeroImage from '../../public/home-page-assets/hero-image.jpg'
+import ButtonUI from './components/UI/ButtonUI'
+import Link from 'next/link'
 // import HomeSection from './components/HomeSection'
 
 
@@ -88,9 +90,7 @@ export default function Home() {
 					<span className="font-latoBlack text-9xl text-white text-center">
 						Want to try our app?
 					</span>
-					<button className="w-[376px] font-latoBlack text-white text-4xl bg-[#630BBD] px-3 py-2 rounded-xl drop-shadow-xl hover:scale-110 transition-all">
-						START SEARCHING
-					</button>
+					<ButtonUI textSize='4xl'><Link href={"/search"}>START SEARCHING</Link></ButtonUI>
 				</div>
 			</section>
 		</>
