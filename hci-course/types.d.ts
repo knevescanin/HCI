@@ -70,7 +70,7 @@ interface NavigationItem {
 interface Section {
     sectionText: string,
     header: string,
-    imageUrl?: string
+    imageUrl: string
 }
 
 interface NavigationsContent {

@@ -17,10 +17,16 @@ export default async function Home() {
 			select: ['fields'],
 			order: ['sys.createdAt']
 		})
-		
-		const sections: Section[] = entries.items.map(entry => new Object({sectionText: entry.fields.sectionText, header: entry.fields.header}) as Section)
-		 
 
+		
+		
+		const sections: Section[] = entries.items.map(entry => {
+			
+			const imageUrlPath = (entry.fields.sectionImage as any)?.fields.file.url as string
+			return new Object({sectionText: entry.fields.sectionText, header: entry.fields.header, imageUrl: "https:" + imageUrlPath}) as Section
+		})
+		 
+		
 	return (
 		<>
 			<Image priority src={HeroImage} alt="Hero Image" className="absolute w-screen h-screen -z-10 inset-0" />
@@ -55,7 +61,7 @@ export default async function Home() {
 					src={FirstSectionBG}
 					alt="First Section Background"
 				/>
-				<HomeSection header={sections[0].header} sectionText={sections[0].sectionText} rightAligned/>
+				<HomeSection header={sections[0].header} sectionText={sections[0].sectionText} imageUrl={sections[0].imageUrl} rightAligned/>
 			</section>
 
 			<section className="w-screen md:h-screen flex md:justify-between relative">
@@ -66,7 +72,7 @@ export default async function Home() {
 					src={SecondSectionBG}
 					alt="Second Section Background"
 				/>
-				<HomeSection header={sections[1].header} sectionText={sections[1].sectionText}/>
+				<HomeSection header={sections[1].header} sectionText={sections[1].sectionText} imageUrl={sections[1].imageUrl}/>
 			</section>
 
 			<section className="w-screen md:h-screen flex md:justify-between relative">
@@ -77,7 +83,7 @@ export default async function Home() {
 					src={ThirdSectionBG}
 					alt="Third Section Background"
 				/>
-				<HomeSection header={sections[1].header} sectionText={sections[1].sectionText} rightAligned/>
+				<HomeSection header={sections[2].header} sectionText={sections[2].sectionText} imageUrl={sections[2].imageUrl} rightAligned/>
 			</section>
 
 			<section className='w-screen h-screen'>
