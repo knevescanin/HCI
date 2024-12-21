@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function ProductCard({
 	name,
 	imageUrl,
@@ -14,7 +16,7 @@ export default function ProductCard({
 	return (
         <div className="bg-[#FFFFFF] rounded-xl p-4 flex flex-col items-center relative">
             <div className="w-full h-2/3 mb-4">
-            <img
+            <Image
                 src={imageUrl}
                 alt="Product"
                 className="w-full h-full object-cover"
