@@ -17,9 +17,12 @@ export default function ProductCard({
         <div className="bg-[#FFFFFF] rounded-xl p-4 flex flex-col items-center relative">
             <div className="w-full h-2/3 mb-4">
             <Image
+				unoptimized
                 src={imageUrl}
                 alt="Product"
                 className="w-full h-full object-cover"
+				width={100}
+				height={100}
             />
             </div>
 			<h2 className="text-black text-lg">{name}</h2>
