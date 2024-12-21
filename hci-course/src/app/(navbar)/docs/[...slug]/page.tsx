@@ -1,4 +1,7 @@
 import { unstable_cache } from 'next/cache'
+import {client} from '../../../utils/contentfulClient'
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
 
 async function getCurrentLocation(params: Promise<{ slug: string[] }>) {
 	const locations = (await params).slug
@@ -9,17 +12,18 @@ async function getCurrentLocation(params: Promise<{ slug: string[] }>) {
 }
 
 const getNavigationsContent = unstable_cache(async () => {
-	const res = await fetch(
-		process.env.NEXT_PUBLIC_IS_PROD === 'true'
-			? `${process.env.NEXT_PUBLIC_API_URL_PROD}/getContentful/docs`
-			: `${process.env.NEXT_PUBLIC_API_URL_DEV}/getContentful/docs`
-	)
-	if (!res.ok) {
-		throw new Error(`HTTP error! status: ${res.status}`)
-	}
+	const entries = await client.getEntries({
+        content_type: "docsNavigationPages",
+        select: ['fields'],
+        order: ['sys.createdAt']
+    })
 
-	const data = await res.json()
-	return data
+    const navigationsContent = entries.items.map(entry => {
+        const path = (entry.fields.path as any)?.path;
+        return {header: entry.fields.header, richTextString: documentToHtmlString(entry.fields.content as any), path: path};
+    });
+
+	return navigationsContent
 })
 
 export default async function page({
@@ -29,8 +33,7 @@ export default async function page({
 }) {
 	const currentLocation = await getCurrentLocation(params)
 
-	const navigationsContent: Promise<NavigationsContent[]> =
-		getNavigationsContent()
+	const navigationsContent = await getNavigationsContent()
 
 	return (
 		<>

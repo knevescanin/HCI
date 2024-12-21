@@ -67,10 +67,10 @@ interface NavigationItem {
 }
 
 // Contentful sections response
-interface SectionResponse {
+interface Section {
     sectionText: string,
     header: string,
-    imageUrl: string
+    imageUrl?: string
 }
 
 interface NavigationsContent {

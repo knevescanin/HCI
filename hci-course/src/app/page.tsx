@@ -6,25 +6,20 @@ import HeroIllustration from '../../public/home-page-assets/Hero Illustration.pn
 import HeroImage from '../../public/home-page-assets/hero-image.jpg'
 import ButtonUI from './components/UI/ButtonUI'
 import Link from 'next/link'
-// import HomeSection from './components/HomeSection'
+import {client} from './utils/contentfulClient'
+import HomeSection from './components/HomeSection'
 
 
-export default function Home() {
+export default async function Home() {
 
-
-	//  async function getSections(): Promise<SectionResponse[]> { 
-
-	// const res = await fetch(process.env.NEXT_PUBLIC_IS_PROD === "true" ? `${process.env.NEXT_PUBLIC_API_URL_PROD}/getContentful/sections` : `${process.env.NEXT_PUBLIC_API_URL_DEV}/getContentful/sections`)
-	// if(!res.ok) {
-	// return []
-	// }
-
-	// const data = await res.json()
-
-	// return data;
-	// }
-
-	// const sections = getSections()
+	const entries = await client.getEntries({
+			content_type: 'homeSections',
+			select: ['fields'],
+			order: ['sys.createdAt']
+		})
+		
+		const sections: Section[] = entries.items.map(entry => new Object({sectionText: entry.fields.sectionText, header: entry.fields.header}) as Section)
+		 
 
 	return (
 		<>
@@ -60,7 +55,7 @@ export default function Home() {
 					src={FirstSectionBG}
 					alt="First Section Background"
 				/>
-				{/* <HomeSection header={sections.then(section => section[0].header)} sectionText={sections.then(section => section[0].sectionText)} rightAligned/> */}
+				<HomeSection header={sections[0].header} sectionText={sections[0].sectionText} rightAligned/>
 			</section>
 
 			<section className="w-screen md:h-screen flex md:justify-between relative">
@@ -71,7 +66,7 @@ export default function Home() {
 					src={SecondSectionBG}
 					alt="Second Section Background"
 				/>
-				{/* <HomeSection header={sections.then(section => section[1].header)} sectionText={sections.then(section => section[1].sectionText)}/> */}
+				<HomeSection header={sections[1].header} sectionText={sections[1].sectionText}/>
 			</section>
 
 			<section className="w-screen md:h-screen flex md:justify-between relative">
@@ -82,7 +77,7 @@ export default function Home() {
 					src={ThirdSectionBG}
 					alt="Third Section Background"
 				/>
-				{/* <HomeSection header={sections.then(section => section[2].header)} sectionText={sections.then(section => section[2].sectionText)} rightAligned/> */}
+				<HomeSection header={sections[1].header} sectionText={sections[1].sectionText} rightAligned/>
 			</section>
 
 			<section className='w-screen h-screen'>

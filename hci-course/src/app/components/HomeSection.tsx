@@ -5,8 +5,8 @@ export default function HomeSection({
 	header,
 	rightAligned = false,
 }: {
-	sectionText: Promise<string>
-	header: Promise<string>
+	sectionText: string
+	header: string
 	rightAligned?: boolean
 }) {
 	
@@ -14,18 +14,18 @@ export default function HomeSection({
 		<>
 			<div>Section image</div>
 			<div className="flex flex-col align-middle w-1/2">
-				<div className="font-latoBlack text-5xl text-white text-center">{header.then(h => h)}</div>
+				<div className="font-latoBlack text-5xl text-white text-center">{header}</div>
 				<div className="w-1/2 text-white font-latoRegular text-4xl text-justify">
-					{sectionText.then(s => s)}
+					{sectionText}
 				</div>
 			</div>
 		</>
 	) : (
 		<>
 			<div className="flex flex-col align-middle w-1/2">
-				<div className="font-latoBlack text-5xl text-white text-center">{header.then(h => h)}</div>
+				<div className="font-latoBlack text-5xl text-white text-center">{header}</div>
 				<div className="w-1/2 text-white font-latoRegular text-4xl text-justify">
-					{sectionText.then(s => s)}
+					{sectionText}
 				</div>
 			</div>
 			<div>Section image</div>
