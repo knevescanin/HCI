@@ -11,3 +11,7 @@ Current version of search page is just a simple, non-functional template, we foc
 One idea of implementing dynamic routes in the future is to create a product page for each product. This would allow us to display more detailed information about each product, but that idea is not set in stone because we are still trying to figure out the purpose of application.
 
 We hope you enjoy our application! 😊
+
+## Link to our page
+
+[App on Vercel](https://hci-bay.vercel.app)

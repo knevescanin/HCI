@@ -24,7 +24,7 @@ export default function ProductCard({
             </div>
 			<h2 className="text-black text-lg">{name}</h2>
 			<p className="text-gray-500">{store}</p>
-			<p className="text-[#FE7163]">{price}</p>
+			<p className="text-[#FE7163]">{price} €</p>
 		</div>
 	)
 }
