@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.0.0",
+    "@neondatabase/serverless": "^0.10.4",
     "contentful": "^11.3.3",
     "eslint-plugin-next": "^0.0.0",
     "lucide-react": "^0.468.0",

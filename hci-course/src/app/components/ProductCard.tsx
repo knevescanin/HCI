@@ -25,7 +25,7 @@ export default function ProductCard({
 				height={100}
             />
             </div>
-			<h2 className="text-black text-lg">{name}</h2>
+			<h2 className="text-black text-lg line-clamp-1">{name}</h2>
 			<p className="text-gray-500">{store}</p>
 			<p className="text-[#FE7163]">{price} €</p>
 		</div>
