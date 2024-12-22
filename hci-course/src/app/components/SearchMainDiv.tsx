@@ -12,7 +12,7 @@ export default function SearchMainDiv({
 	products: Record<string, any>[]
 }) {
 	const [currentPage, setCurrentPage] = useState(1)
-	const pageSize = 10
+	const pageSize = 12
     const [paginatedProducts, setPaginatedProducts] = useState(paginate(products, currentPage, pageSize))
 
 	const onPageChange = (page: number) => {
@@ -25,9 +25,9 @@ export default function SearchMainDiv({
         
 
 	return (
-		<div className="grid grid-cols-8 gap-11 w-[80%] h-max mx-auto p-4 text-white">
+		<div className="grid grid-cols-8 grid-rows-1 w-full h-max text-white relative bg-white">
 			<Sidebar />
-            <div className="col-span-6 bg-[#630BBD] p-4 grid grid-cols-4 gap-3 overflow-y-auto rounded-xl">
+            <div className="row-start-1 row-end-2 col-start-2 col-end-9 grid grid-cols-5 gap-3 overflow-y-auto mx-16">
 				{/* Product Boxes */}
 
 				{paginatedProducts.map((product) => (
@@ -35,7 +35,7 @@ export default function SearchMainDiv({
 						key={product.id}
 						name={product.name}
 						imageUrl={product.image_url}
-						store={product.store}
+						store={product.store_name}
 						price={product.price}
 					/>
 				))}

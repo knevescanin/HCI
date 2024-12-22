@@ -14,7 +14,7 @@ export default function ProductCard({
 {
     
 	return (
-        <div className="bg-[#FFFFFF] rounded-xl p-4 flex flex-col items-center relative">
+        <div className="bg-[#FFFFFF] rounded-xl p-4 flex flex-col items-center relative w-full h-max">
             <div className="w-full h-2/3 mb-4">
             <Image
 				unoptimized
@@ -25,9 +25,9 @@ export default function ProductCard({
 				height={100}
             />
             </div>
-			<h2 className="text-black text-lg line-clamp-1">{name}</h2>
+			<h2 className="text-textPrimary text-lg line-clamp-1">{name}</h2>
 			<p className="text-gray-500">{store}</p>
-			<p className="text-[#FE7163]">{price} €</p>
+			<p className="text-green-600">{price.toFixed(2)} €</p>
 		</div>
 	)
 }

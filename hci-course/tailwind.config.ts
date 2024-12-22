@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        textPrimary: "#333333",
+        themePrimary: "#32006E"
       },
       fontFamily: {
         latoRegular: ['var(--font-lato-regular)'],

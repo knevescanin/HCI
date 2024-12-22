@@ -2,7 +2,7 @@
 
 export default function Sidebar() {
     return (
-        <div className="col-span-2 bg-[#630BBD] h-max flex flex-col p-4 rounded-lg">
+        <div className="col-start-1 col-end-2 h-full w-max flex flex-col rounded-lg fixed text-textPrimary">
         <h2 className="text-xl font-semibold text-center mb-4">
             Filter Products
         </h2>
@@ -11,7 +11,7 @@ export default function Sidebar() {
             <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#630BBD] text-[#630BBD]"
+                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#630BBD]"
             />
         </div>
 

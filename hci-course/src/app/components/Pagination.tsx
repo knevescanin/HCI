@@ -1,6 +1,6 @@
-const pageItem = "flex justify-center items-center w-8 h-8 border border-gray-300 rounded cursor-pointer"
+const pageItem = "flex justify-center items-center w-8 h-8 border border-gray-300 rounded cursor-pointer mx-1"
 
-const pageItemActive = "flex justify-center items-center w-8 h-8 border border-gray-300 rounded cursor-pointer bg-gray-200"
+const pageItemActive = "flex justify-center items-center w-8 h-8 border border-gray-300 rounded cursor-pointer bg-gray-200 mx-1"
 
 const pageLink = "no-underline text-gray-800 w-full h-full flex justify-center items-center"
 
@@ -27,7 +27,7 @@ export default function Pagination({numOfProducts, currentPage, pageSize, onPage
     
 
     return (
-        <div>
+        <div className="w-full flex justify-center items-center col-start-3 col-end-9">
      <ul className={paginationContainer}>
        {pages.map((page) => (
          <li
