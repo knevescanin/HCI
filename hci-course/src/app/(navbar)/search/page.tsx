@@ -1,22 +1,14 @@
-import { unstable_cache } from 'next/cache'
-import { neon } from '@neondatabase/serverless'
-
+"use client"
 import ProductCard from '@/app/components/ProductCard'
 import Pagination from '@/app/components/Pagination'
 
-const fetchProducts = unstable_cache(
-	async () => {
-		const sql = neon(`${process.env.DATABASE_URL}`)
-		const products = await sql(`SELECT * FROM products LIMIT 100`)
+import { useContext } from 'react'
+import ProductContext from '@/app/contexts/ProductContext'
 
-		return products
-	},
-	[''],
-	{ revalidate: 3600 }
-)
 
-export default async function Page() {
-	const products = await fetchProducts()
+export default function Page() {
+	
+const products = useContext(ProductContext)
 
 	return (
 		<>	
