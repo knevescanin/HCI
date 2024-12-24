@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export default function ProductCard({
 	name,
@@ -14,7 +15,7 @@ export default function ProductCard({
 {
     
 	return (
-        <div className="bg-[#FFFFFF] rounded-xl p-4 flex flex-col items-center relative w-full h-max">
+        <Link href={""} className="bg-[#FFFFFF] rounded-xl p-4 m-1 flex flex-col items-center relative w-full h-max hover:shadow-lg transition duration-300 ease-in-out">
             <div className="w-full h-2/3 mb-4">
             <Image
 				unoptimized
@@ -25,9 +26,9 @@ export default function ProductCard({
 				height={100}
             />
             </div>
-			<h2 className="text-textPrimary text-lg line-clamp-1">{name}</h2>
+			<h2 className="text-textPrimary font-latoBlack text-lg line-clamp-1">{name}</h2>
 			<p className="text-gray-500">{store}</p>
-			<p className="text-green-600">{price.toFixed(2)} €</p>
-		</div>
+			<p className="text-textPrimary font-latoBlack">{price.toFixed(2)} €</p>
+		</Link>
 	)
 }
