@@ -19,8 +19,8 @@ export default async function Page() {
 	const products = await fetchProducts()
 
 	return (
-		<>
-			<div className="row-start-1 row-end-2 col-start-2 col-end-9 grid grid-cols-3 gap-3 mx-16 overflow-x-hidden">
+		<>	
+			<div className="col-start-2 col-end-9 grid grid-cols-3 gap-3 mx-16 overflow-x-hidden">
 				{products.map((product) => (
 					<ProductCard
 						key={product.id}
