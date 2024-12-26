@@ -2,6 +2,6 @@
 
 import { createContext } from "react"
 
-const ProductContext = createContext<Record<string, any>[]>([])
+const ProductContext = createContext<ProductContext>({products: [], setProductLimit: () => {}})
 
 export default ProductContext

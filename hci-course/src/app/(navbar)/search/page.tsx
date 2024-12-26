@@ -8,7 +8,7 @@ import ProductContext from '@/app/contexts/ProductContext'
 
 export default function Page() {
 	
-const products = useContext(ProductContext)
+const {products} = useContext(ProductContext)
 
 	return (
 		<>	

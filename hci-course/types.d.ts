@@ -86,3 +86,10 @@ interface ProductCard {
     store: string,
     price: number
 }
+
+// Context types
+interface ProductContext {
+    products: Record<string, any>[],
+    productLimit?: number,
+    setProductLimit: (value: SetStateAction<number>) => void
+}
