@@ -1,7 +1,6 @@
 'use client'
 
-import Sidebar from '@/app/components/SearchSidebar/Sidebar'
-import SortTopbar from './SortTopbar'
+import Sidebar from '@/app/components/Sidebar'
 import ProductContext from '../contexts/ProductContext'
 import { useEffect, useState } from 'react'
 
@@ -22,46 +21,6 @@ const handleProductFetch = async (productLimit: number, productFilter: string) =
 	}
 }
 
-const handleProductsFilter = (products: Record<string, any>[], productFilter: string) => {
-	
-	if(productFilter === 'price-asc') {
-	return products.sort((a, b) => {
-		if (a.price < b.price) {
-			return -1
-		}
-		if (a.price > b.price) {
-			return 1
-		}
-		return 0
-	})
-}
-else if(productFilter === 'price-desc') {
-	return products.sort((a, b) => {
-		if (a.price > b.price) {
-			return -1
-		}
-		if (a.price < b.price) {
-			return 1
-		}
-		return 0
-	})
-}
-else if(productFilter === 'name-asc') {
-	return products.sort((a, b) => {
-		if (a.name < b.name) {
-			return -1
-		}
-		if (a.name > b.name) {
-			return 1
-		}
-		return 0
-	})
-}
-else {
-	return products
-
-}
-}
 
 export default function SearchMainDiv({
 	children,
@@ -77,18 +36,13 @@ export default function SearchMainDiv({
 			setProducts(products)
 			console.log(products)
 		})
-	}, [productLimit])
+	}, [productLimit, productFilter])
 
-	useEffect(() => {
-		handleProductsFilter(products, productFilter)
-	}
-	, [productFilter])
 
 	return (
 		<div className="grid grid-cols-8 w-full h-max text-white relative bg-white">
 			<ProductContext.Provider value={{products: products, productLimit: productLimit, setProductLimit: setProductLimit, productFilter: productFilter, setProductFilter: setProductFilter}}>
 				<Sidebar />
-				<SortTopbar />
 				{children}
 			</ProductContext.Provider>
 		</div>
