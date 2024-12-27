@@ -7,7 +7,7 @@ export default function Sidebar() {
 		useContext(ProductContext)
 
 	return (
-		<div className="col-start-1 col-end-2 h-full w-max flex flex-col rounded-lg fixed text-textPrimary">
+		<div className="col-start-1 col-end-2 h-max w-max flex flex-col rounded-lg sticky top-0 text-textPrimary">
 			<h2 className="text-xl font-semibold text-center mb-4">
 				Filter Products
 			</h2>
