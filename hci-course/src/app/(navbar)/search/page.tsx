@@ -53,19 +53,21 @@ export default function Page() {
         <Sidebar />
 
         <div className="col-start-2 col-end-9 grid grid-cols-3 gap-3 mx-16 overflow-x-hidden">
-          {loading ? (
-            <CardSkeletonLoader />
-          ) : (
-            products.map((product) => (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                imageUrl={product.image_url}
-                store={product.store_name}
-                price={product.price}
-              />
-            ))
-          )}
+		  {loading ? (
+			Array.from({ length: productLimit }).map((_, index) => (
+			  <CardSkeletonLoader key={index} />
+			))
+		  ) : (
+			products.map((product) => (
+			  <ProductCard
+				key={product.id}
+				name={product.name}
+				imageUrl={product.image_url}
+				store={product.store_name}
+				price={product.price}
+			  />
+			))
+		  )}
         </div>
         <Pagination />
       </ProductContext.Provider>
