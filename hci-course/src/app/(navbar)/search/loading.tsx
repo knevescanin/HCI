@@ -1,9 +1,7 @@
-import LoadingUI from '@/app/components/UI/LoadingUI'
-
-export default function Loading() {
+export default function loading() {
     return (
-        <>
-            <LoadingUI />
-        </>
-    )
+        <div className="text-pink-900">
+            Loading...
+        </div>
+    );
 }
