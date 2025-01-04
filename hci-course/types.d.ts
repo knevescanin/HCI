@@ -94,5 +94,6 @@ interface ProductContext {
     setProductLimit: (value: SetStateAction<number>) => void,
     productFilter: string,
     setProductFilter: (value: SetStateAction<string>) => void
-
+    offset: number,
+    setOffset: (value: SetStateAction<number>) => void
 }

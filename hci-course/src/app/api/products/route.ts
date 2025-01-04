@@ -22,7 +22,7 @@ export async function GET(req: NextRequest){
     try {
         const sql = neon(`${process.env.DATABASE_URL}`)
         const products = await sql(`SELECT * FROM products ORDER BY ${sort} LIMIT $1 OFFSET $2`, [limit, offset])
-
+        
         return NextResponse.json(products)
     }
     catch (error) {
