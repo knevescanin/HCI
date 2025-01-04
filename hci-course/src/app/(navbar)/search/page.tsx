@@ -9,13 +9,14 @@ import CardSkeletonLoader from '@/app/components/UI/CardSkeletonLoader'
 const handleProductFetch = async (
 	productLimit: number,
 	productFilter: string,
-	offset?: number
+	offset?: number,
+  storeName?: string
 ) => {
 	console.log(offset)
 	try {
 		const res = await fetch(
 			process.env.NEXT_PUBLIC_API_URL_DEV +
-				`/products?limit=${productLimit}&offset=${offset}&sort=${productFilter}`
+				`/products?limit=${productLimit}&offset=${offset}&sort=${productFilter}&store-name=${storeName}`
 		)
 		const data = await res.json()
 		const products = data
@@ -32,13 +33,14 @@ export default function Page() {
 	const [productLimit, setProductLimit] = useState(10)
 	const [productFilter, setProductFilter] = useState('name-asc')
 	const [offset, setOffset] = useState(0)
+  const [storeFilter, setStoreFilter] = useState('store_name') // Defaults to showing every store
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		setLoading(true)
     setOffset(0)
     setProducts([])
-		handleProductFetch(productLimit, productFilter, offset).then((prods) => {
+		handleProductFetch(productLimit, productFilter, offset, storeFilter).then((prods) => {
       setProducts(prods)
 			setLoading(false)
 		})
@@ -46,7 +48,7 @@ export default function Page() {
 
 	useEffect(() => {
 		setLoading(true)
-		handleProductFetch(productLimit, productFilter, offset).then((prods) => {
+		handleProductFetch(productLimit, productFilter, offset, storeFilter).then((prods) => {
 			setProducts(products.concat(prods))
 			setLoading(false)
 		})
