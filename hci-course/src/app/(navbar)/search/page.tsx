@@ -37,6 +37,7 @@ export default function Page() {
 	useEffect(() => {
 		setLoading(true)
     setOffset(0)
+    setProducts([])
 		handleProductFetch(productLimit, productFilter, offset).then((prods) => {
       setProducts(prods)
 			setLoading(false)
