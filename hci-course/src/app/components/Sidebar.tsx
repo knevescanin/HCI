@@ -104,7 +104,7 @@ export default function Sidebar() {
 				<h3 className="font-bold mb-2">Items Per Page</h3>
 				<select
 					value={productLimit}
-					onChange={(e) => setProductLimit(e.target.value)}
+					onChange={(e) => setProductLimit(parseInt(e.target.value))}
 					className="px-2 py-1 rounded">
 					<option value="10">10</option>
 					<option value="20">20</option>

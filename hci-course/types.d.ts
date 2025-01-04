@@ -91,9 +91,9 @@ interface ProductCard {
 interface ProductContext {
     products: Record<string, any>[],
     productLimit: number,
-    setProductLimit: (value: SetStateAction<number>) => void,
+    setProductLimit: React.Dispatch<React.SetStateAction<number>>,
     productFilter: string,
-    setProductFilter: (value: SetStateAction<string>) => void
+    setProductFilter: React.Dispatch<React.SetStateAction<string>>,
     offset: number,
-    setOffset: (value: SetStateAction<number>) => void
+    setOffset: React.Dispatch<React.SetStateAction<number>>
 }
