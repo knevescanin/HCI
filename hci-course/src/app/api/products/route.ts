@@ -20,6 +20,7 @@ export async function GET(req: NextRequest){
         sort = 'name ASC'
     }
 
+    console.log(storeName)
     try {
         const sql = neon(`${process.env.DATABASE_URL}`)
         const products = await sql(`SELECT * FROM products WHERE store_name = ${storeName === 'store_name' ? 'store_name' : `'${storeName}'`} ORDER BY ${sort} LIMIT ${limit} OFFSET ${offset}`)

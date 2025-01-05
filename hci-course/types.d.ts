@@ -95,5 +95,7 @@ interface ProductContext {
     productFilter: string,
     setProductFilter: React.Dispatch<React.SetStateAction<string>>,
     offset: number,
-    setOffset: React.Dispatch<React.SetStateAction<number>>
+    setOffset: React.Dispatch<React.SetStateAction<number>>,
+    storeFilter: string,
+    setStoreFilter: React.Dispatch<React.SetStateAction<string>>
 }

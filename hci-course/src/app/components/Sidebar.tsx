@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import ProductContext from '../contexts/ProductContext'
 
 export default function Sidebar() {
-	const { productLimit, setProductLimit, productFilter, setProductFilter } =
+	const { productLimit, setProductLimit, productFilter, setProductFilter, setStoreFilter, storeFilter } =
 		useContext(ProductContext)
 
 	return (
@@ -49,26 +49,28 @@ export default function Sidebar() {
 			<div className="mb-6">
 				<h3 className="font-bold mb-2">Stores</h3>
 				<ul>
-					<li className="mb-1">
-						<button className="w-full text-left p-2 px-8 hover:bg-[#FFFFFF] hover:text-black rounded-md">
-							Konzum
-						</button>
-					</li>
-					<li className="mb-1">
-						<button className="w-full text-left p-2 px-8 hover:bg-[#FFFFFF] hover:text-black rounded-md">
-							Lidl
-						</button>
-					</li>
-					<li className="mb-1">
-						<button className="w-full text-left p-2 px-8 hover:bg-[#FFFFFF] hover:text-black rounded-md">
-							Spar
-						</button>
-					</li>
-					<li className="mb-1">
-						<button className="w-full text-left p-2 px-8 hover:bg-[#FFFFFF] hover:text-black rounded-md">
-							Plodine
-						</button>
-					</li>
+					{['Konzum', 'Lidl', 'Spar', 'Plodine'].map((store) => (
+						<li className="mb-1" key={store}>
+							<label className="flex items-center">
+								<input
+									type="checkbox"
+									className="mr-2"
+									checked={storeFilter.includes(store)}
+									onChange={(e) => {
+										console.log(e.target.checked)
+									}}
+								/>
+								<button
+									className={`w-full text-left p-2 px-8 rounded-md ${storeFilter.includes(store) ? 'bg-[#FFFFFF] text-black' : 'hover:bg-[#FFFFFF] hover:text-black'}`}
+									onClick={() => {
+										
+									}}
+								>
+									{store}
+								</button>
+							</label>
+						</li>
+					))}
 				</ul>
 			</div>
 

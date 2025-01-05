@@ -65,6 +65,8 @@ export default function Page() {
 					setProductFilter: setProductFilter,
 					offset: offset,
 					setOffset: setOffset,
+          storeFilter: storeFilter,
+          setStoreFilter: setStoreFilter
 				}}>
 				<Sidebar />
 
