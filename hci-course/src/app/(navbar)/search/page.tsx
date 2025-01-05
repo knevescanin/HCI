@@ -34,6 +34,7 @@ export default function Page() {
 	const [productFilter, setProductFilter] = useState('name-asc')
 	const [offset, setOffset] = useState(0)
   const [storeFilter, setStoreFilter] = useState('store_name') // Defaults to showing every store
+  // const [productName, setProductName] = useState('')
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {

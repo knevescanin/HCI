@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import ProductContext from '../contexts/ProductContext'
 
 export default function Sidebar() {
-	const { productLimit, setProductLimit, productFilter, setProductFilter, setStoreFilter, storeFilter } =
+	const { productLimit, setProductLimit, productFilter, setProductFilter, storeFilter} =
 		useContext(ProductContext)
 
 	return (
@@ -52,19 +52,19 @@ export default function Sidebar() {
 					{['Konzum', 'Lidl', 'Spar', 'Plodine'].map((store) => (
 						<li className="mb-1" key={store}>
 							<label className="flex items-center">
-								<input
+								{/* <input
 									type="checkbox"
 									className="mr-2"
 									checked={storeFilter.includes(store)}
 									onChange={(e) => {
 										console.log(e.target.checked)
 									}}
-								/>
+								/> */}
 								<button
 									className={`w-full text-left p-2 px-8 rounded-md ${storeFilter.includes(store) ? 'bg-[#FFFFFF] text-black' : 'hover:bg-[#FFFFFF] hover:text-black'}`}
-									onClick={() => {
+									// onClick={() => {
 										
-									}}
+									// }}
 								>
 									{store}
 								</button>
