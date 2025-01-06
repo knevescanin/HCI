@@ -41,7 +41,7 @@ export default async function page({
 	return (
 		<>
 			<div
-				className="w-full h-max text-white"
+				className="w-full h-max text-black"
 				dangerouslySetInnerHTML={{
 					__html:
 						navigationsContent.find(
