@@ -1,3 +1,4 @@
+"use client"
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -6,11 +7,26 @@ import FacebookIcon from '../../../public/facebook-icon.png'
 import YouTubeIcon from '../../../public/youtube-icon.png'
 import LinkedInIcon from '../../../public/linkedin-icon.png'
 import FooterShape from '../../../public/home-page-assets/Footer Shape.png'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function Footer() {
+
+const [footerBg, setFooterBg] = useState('bg-[#420081]')
+const pathname = usePathname()
+
+useEffect(() => {
+	if (pathname === '/') {
+		setFooterBg('bg-[#420081]')
+	}
+	else {
+		setFooterBg('bg-transparent')
+	}
+}, [pathname])
+
 	return (
         
-		<footer className="w-screen font-latoRegular flex flex-col relative items-center h-fit mt-auto md:flex md:flex-row md:h-52 md:px-20 md:justify-between md:items-end">
+		<footer className={"w-screen font-latoRegular flex flex-col relative items-center h-fit mt-auto md:flex md:flex-row md:h-52 md:px-20 md:justify-between md:items-end " + footerBg} style={{ zIndex: 10 }} >
             <Image priority src={FooterShape} alt="Footer Shape" className="absolute w-screen h-full -z-10 inset-0" />
 			<div className="max-md:pb-2">
 				<Link href="/">

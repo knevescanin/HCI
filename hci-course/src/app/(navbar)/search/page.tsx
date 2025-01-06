@@ -15,7 +15,7 @@ const handleProductFetch = async (
 	console.log(offset)
 	try {
 		const res = await fetch(
-			process.env.NEXT_PUBLIC_API_URL_PROD +
+			process.env.NEXT_PUBLIC_API_URL_DEV +
 				`/products?limit=${productLimit}&offset=${offset}&sort=${productFilter}&store-name=${storeName}`
 		)
 		const data = await res.json()

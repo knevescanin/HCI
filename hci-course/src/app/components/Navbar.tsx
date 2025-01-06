@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false)
+	const [navbarColor, setNavbarColor] = useState('bg-transparent')
 	const pathname = usePathname()
 
 	function getMenuClasses() {
@@ -28,8 +29,18 @@ export default function Navbar() {
 		return menuClasses.join(' ')
 	}
 
+	useEffect(() => {
+		if (pathname !== '/') {
+			setNavbarColor('bg-[#420081]')
+		}
+		else {
+			setNavbarColor('bg-transparent')
+		}
+	}, [pathname])
+
+
 	return (
-		<nav className="text-white font-latoRegular p-4 sm:pt-6 bg-transparent w-screen">
+		<nav className={"text-white font-latoRegular p-4 sm:pt-6 w-screen " + navbarColor}>
 			<div className="flex flex-1 justify-between items-center w-full md:px-20">
 				<Link
 					href="/"

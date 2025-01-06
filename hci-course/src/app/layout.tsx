@@ -32,19 +32,19 @@ export const metadata: Metadata = {
 	description: 'Andy and Karlo',
 }
 
-
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode
 }>) {
 
+
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased flex flex-col min-h-screen overflow-x-hidden bg-[#420081]`}>
+				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}>
 				<Navbar />
-				<main className="flex-grow flex flex-col">{children}</main>
+				<main className="flex-grow flex flex-col ">{children}</main>
 				<Footer />
 			</body>
 		</html>
