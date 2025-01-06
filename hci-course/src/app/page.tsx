@@ -47,7 +47,7 @@ export default async function Home() {
 					/>
 				</div>
 			</div>
-			<div className='-z-10 bg-[#420081]'>
+			<div className=' bg-[#420081]' style={{zIndex: 10}}>
 				<section
 					className="w-screen md:h-screen flex md:justify-between relative "
 					style={{

@@ -4,6 +4,8 @@ import './globals.css'
 
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
+import { Suspense } from 'react'
+import LoadingUI from './components/UI/LoadingUI'
 
 
 const geistSans = localFont({
@@ -43,9 +45,11 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}>
+			<Suspense fallback={<LoadingUI />}>
 				<Navbar />
-				<main className="flex-grow flex flex-col ">{children}</main>
+				<main className="flex-grow flex flex-col">{children}</main>
 				<Footer />
+			</Suspense>
 			</body>
 		</html>
 	)
