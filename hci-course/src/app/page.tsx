@@ -89,7 +89,7 @@ export default async function Home() {
 						<span className="font-latoBlack text-9xl text-white text-center">
 							Want to try our app?
 						</span>
-						<ButtonUI textSize='4xl'><Link href={"/search"}>START SEARCHING</Link></ButtonUI>
+						<ButtonUI className='text-4xl' textSize='4xl'><Link href={"/search"}>START SEARCHING</Link></ButtonUI>
 					</div>
 				</section>
 			</div>

@@ -29,6 +29,7 @@
 - Link to Assignment 3: [**NextJS App on Vercel**](https://hci-bay.vercel.app)
 - Link to Assignment 4: [**Low/High-fidelity prototype**](assignments/low-high-fidelity-prototype)
 - Link to Assignment 5: [**Dynamic routes/Data fetching**](assignments/dynamic-routes-data-fetching)
+- Link to Assignment 6: [**Responsive Page Coding**](assignments/full-responsive-page-coding)
 <!-- Add more assignments as necessary -->
 
 ## Project Requirements
