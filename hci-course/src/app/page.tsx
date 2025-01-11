@@ -49,7 +49,7 @@ export default async function Home() {
 			</div>
 			<div className=' bg-[#420081]' style={{zIndex: 10}}>
 				<section
-					className="w-screen md:h-screen flex md:justify-between relative "
+					className="w-screen md:h-screen flex md:justify-between relative"
 					style={{
 						backgroundImage: `url(${FirstSectionBG})`,
 						backgroundSize: 'cover',
@@ -68,7 +68,7 @@ export default async function Home() {
 					<Image
 						priority
 						quality={100}
-						className="absolute w-3/5 h-4/5 right-0 -z-10"
+						className="absolute h-auto w-auto right-0 -z-10"
 						src={SecondSectionBG}
 						alt="Second Section Background"
 					/>
@@ -78,7 +78,7 @@ export default async function Home() {
 					<Image
 						priority
 						quality={100}
-						className="absolute w-1/2 h-4/5 left-0 -z-10"
+						className="absolute w-1/2 h-5/6 left-0 -z-10"
 						src={ThirdSectionBG}
 						alt="Third Section Background"
 					/>

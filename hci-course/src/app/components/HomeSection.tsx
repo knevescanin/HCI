@@ -15,25 +15,18 @@ export default function HomeSection({
 }) {
 
 	
-	return rightAligned ? (
-		<>
-			<div><Image unoptimized src={imageUrl} alt="Slika" width={300} height={300}/></div>
-			<div className="flex flex-col align-middle w-1/2">
-				<div className="font-latoBlack text-5xl text-white text-center">{header}</div>
-				<div className="w-1/2 text-white font-latoRegular text-4xl text-justify">
-					{sectionText}
-				</div>
+	return (
+		<div className={"flex md:mt-40 w-screen md:h-screen md:justify-evenly relative" + `${rightAligned ? "" : " flex-row-reverse"}`}>
+			<div><Image unoptimized src={imageUrl} alt="Slika" width={400} height={400}/></div>
+			<div className={"flex flex-col items-center w-1/2" + `${rightAligned ? " md:ml-52" : " md:mr-96"}`}>
+				
+					
+					<div className="w-3/4 text-white font-latoRegular text-5xl text-justify">
+					<div className="font-latoBlack text-7xl text-white w-full text-left mb-5">{header}</div>
+						{sectionText}
+					</div>
+				
 			</div>
-		</>
-	) : (
-		<>
-			<div className="flex flex-col align-middle w-1/2">
-				<div className="font-latoBlack text-5xl text-white text-center">{header}</div>
-				<div className="w-1/2 text-white font-latoRegular text-4xl text-justify">
-					{sectionText}
-				</div>
-			</div>
-			<div><Image unoptimized src={imageUrl} alt="Slika" width={300} height={300}/></div>
-		</>
-	)
+		</div>
+	) 
 }
