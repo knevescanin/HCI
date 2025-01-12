@@ -29,7 +29,7 @@ export default async function Home() {
 		
 	return (
 		<>
-			<Image priority src={HeroImage} alt="Hero Image" className="absolute w-screen md:h-screen -z-10 inset-0" />
+			<Image priority src={HeroImage} alt="Hero Image" className="absolute w-screen h-2/5 md:h-screen -z-10 inset-0" />
 			<div className="w-screen relative h-[calc(100vh-72vh)] md:h-[calc(100vh-76.5px)]">
 
 				{/* Treba bit Image jer bg-image stvara probleme zbog velicine??? */}
@@ -69,7 +69,7 @@ export default async function Home() {
 					<Image
 						priority
 						quality={100}
-						className="absolute h-1/9 w-1/7 -z-10 bottom-48 left-36 md:h-9/12 md:w-screen md:bottom-0"
+						className="absolute h-auto w-100 -z-10 bottom-48 md:h-9/12 md:w-screen md:bottom-0"
 						src={SecondSectionBG}
 						alt="Second Section Background"
 					/>
@@ -79,7 +79,7 @@ export default async function Home() {
 					<Image
 						priority
 						quality={100}
-						className="absolute w-1/9 h-1/9 -z-10 right-28 bottom-36 md:w-screen md:h-fit md:left-0 md:-bottom-3/4"
+						className="absolute w-100 h-auto -z-10 right-28 bottom-36 md:w-screen md:h-fit md:left-0 md:-bottom-3/4"
 						src={ThirdSectionBG}
 						alt="Third Section Background"
 					/>
