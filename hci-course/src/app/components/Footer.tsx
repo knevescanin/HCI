@@ -8,21 +8,11 @@ import YouTubeIcon from '../../../public/youtube-icon.png'
 import LinkedInIcon from '../../../public/linkedin-icon.png'
 import FooterShape from '../../../public/home-page-assets/Footer Shape.png'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
 export default function Footer() {
 
-const [footerBg, setFooterBg] = useState('bg-[#420081]')
 const pathname = usePathname()
 
-useEffect(() => {
-	if (pathname === '/') {
-		setFooterBg('bg-[#420081]')
-	}
-	else {
-		setFooterBg('bg-transparent')
-	}
-}, [pathname])
 
 	return (
         
