@@ -69,7 +69,7 @@ export default async function Home() {
 					<Image
 						priority
 						quality={100}
-						className="absolute h-1/9 w-1/7 -z-10 bottom-48 left-36 md:h-fit md:w-screen"
+						className="absolute h-1/9 w-1/7 -z-10 bottom-48 left-36 md:h-9/12 md:w-screen md:bottom-0"
 						src={SecondSectionBG}
 						alt="Second Section Background"
 					/>
@@ -79,13 +79,13 @@ export default async function Home() {
 					<Image
 						priority
 						quality={100}
-						className="absolute w-1/9 h-1/9 -z-10 right-28 bottom-36 md:w-screen md:h-fit md:left-0 md:bottom-0 md:top-1/5"
+						className="absolute w-1/9 h-1/9 -z-10 right-28 bottom-36 md:w-screen md:h-fit md:left-0 md:-bottom-3/4"
 						src={ThirdSectionBG}
 						alt="Third Section Background"
 					/>
 					<HomeSection header={sections[2].header} sectionText={sections[2].sectionText} imageUrl={sections[2].imageUrl} rightAligned/>
 				</section>
-				<section className='w-screen mb-20 md:mb-0 md:h-screen'>
+				<section className='w-screen mb-20 md:mb-0 md:mt-40 md:h-screen'>
 					<div className="mx-auto md:w-[968px] flex flex-col justify-center items-center gap-16">
 						<span className="font-latoBlack text-6xl md:text-9xl text-white text-center">
 							Want to try our app?
