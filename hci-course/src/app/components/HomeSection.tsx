@@ -21,7 +21,7 @@ export default function HomeSection({
 			<div className={"flex flex-col items-center w-1/2" + `${rightAligned ? " md:ml-52" : " md:mr-52"}`}>
 				
 					
-					<div className=" md:w-3/4 text-white font-latoRegular text-3xl md:text-5xl text-center md:text-justify">
+					<div className=" md:w-3/4 text-white font-latoRegular text-xl md:text-5xl text-center md:text-justify">
 					<div className="font-latoBlack text-4xl md:text-7xl text-white w-full text-center md:text-left mb-5">{header}</div>
 						{sectionText}
 					</div>
