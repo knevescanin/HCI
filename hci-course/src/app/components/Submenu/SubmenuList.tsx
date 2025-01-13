@@ -18,26 +18,27 @@ export default function SubmenuList({
 	const pathname = usePathname()
 	const [open, setOpen] = useState(false)
 
-	useEffect(() => {
-		if (
-			navigations.some((nav) => nav.route === pathname) ||
-			pathname === route
-		) {
-			setOpen(true)
-		} else {
-			setOpen(false)
-		}
-	}, [pathname])
+	// useEffect(() => {
+	// 	if (
+	// 		navigations.some((nav) => nav.route === pathname) ||
+	// 		pathname === route
+	// 	) {
+	// 		setOpen(true)
+	// 	} else {
+	// 		setOpen(false)
+	// 	}
+	// }, [pathname])
+
 
 	return (
-		<li>
+		<li className='cursor-pointer' onClick={() => setOpen(!open)}>
+			{/* <Link href={route}></Link> */}
 			<details
-				open={open}
+				
 				>
 				<summary
-					
 					className="flex hover:bg-[#f0f0f0] hover:rounded-lg py-2 px-4 justify-between">
-					<Link href={route}>{name}</Link>
+					{name}
 					<Image
 						className={
 							open
