@@ -21,8 +21,8 @@ export default function DocsLayout({
 			<div className="col-span-8">{children}</div>
 			{/* Problem u vezi client komponente I think */}
 			<div className="col-span-2 text-black">
-				<Submenu submenuNavigations={navs}
-				/>
+				{/* <Submenu submenuNavigations={navs}
+				/> */}
 			</div>
 		</div>
 	)

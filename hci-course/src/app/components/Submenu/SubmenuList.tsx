@@ -1,12 +1,9 @@
 import { usePathname } from 'next/navigation'
 import SubmenuListItems from './SubmenuListItems'
 import { useState } from 'react'
-import Image from 'next/image'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
-
-import CollapseArrowImage from '@/../public/collapse-arrow.png'
 
 export default function SubmenuList({
 	navigations,
@@ -27,10 +24,11 @@ export default function SubmenuList({
 	return (
 		<li className="cursor-pointer">
 			<details
-				open={
-					navigations.some((nav) => nav.route === pathname) ||
-					pathname === route
-				}>
+				// open={
+				// 	navigations.some((nav) => nav.route === pathname) ||
+				// 	pathname === route
+				// }
+				>
 				<summary
 					onClick={() => setOpen(!open)}
 					className="grid grid-cols-[1fr,3fr,auto] hover:bg-[#f0f0f0] hover:rounded-lg py-2 px-4">
@@ -41,17 +39,15 @@ export default function SubmenuList({
 						size="lg"
 					/>
 					<p className="col-start-2 col-end-3 self-center">{name}</p>
-					<Image
+					<FontAwesomeIcon
 						className={
 							'col-start-3 col-end-4 self-center ' +
 							(open
 								? `rotate-180 transition-all ease-in-out`
 								: `rotate-0 transition-all ease-in-out`)
 						}
-						src={CollapseArrowImage}
-						alt="collapse-arrow"
-						width={20}
-						height={20}
+						icon={Icons.faChevronDown}
+						color="#333333"
 					/>
 				</summary>
 
