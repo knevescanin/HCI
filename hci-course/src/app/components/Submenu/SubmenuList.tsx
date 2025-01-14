@@ -3,43 +3,60 @@ import SubmenuListItems from './SubmenuListItems'
 import { useState } from 'react'
 import Image from 'next/image'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
+
 import CollapseArrowImage from '@/../public/collapse-arrow.png'
 
 export default function SubmenuList({
 	navigations,
 	name,
 	route,
+	iconName,
+	iconColor,
 }: {
 	navigations: NavigationItem[]
 	name: string
 	route: string
+	iconName: string
+	iconColor: string
 }) {
 	const pathname = usePathname()
 	const [open, setOpen] = useState(false)
 
 	return (
-		<li
-			className="cursor-pointer"
-			>
-				<details open={navigations.some(nav => nav.route === pathname) || pathname === route}>
-					<summary onClick={() => setOpen(!open)} className="flex hover:bg-[#f0f0f0] hover:rounded-lg py-2 px-4 justify-between">
-						{name}
-						<Image
-							className={
-								open
-									? `rotate-180 transition-all ease-in-out`
-									: `rotate-0 transition-all ease-in-out`
-							}
-							src={CollapseArrowImage}
-							alt="collapse-arrow"
-							width={20}
-							height={20}
-						/>
-					</summary>
+		<li className="cursor-pointer">
+			<details
+				open={
+					navigations.some((nav) => nav.route === pathname) ||
+					pathname === route
+				}>
+				<summary
+					onClick={() => setOpen(!open)}
+					className="grid grid-cols-[1fr,3fr,auto] hover:bg-[#f0f0f0] hover:rounded-lg py-2 px-4">
+					<FontAwesomeIcon
+						className="col-start-1 col-end-2 self-center justify-self-start pr-3"
+						icon={Icons[iconName as keyof typeof Icons] as Icons.IconDefinition}
+						color={iconColor}
+						size="lg"
+					/>
+					<p className="col-start-2 col-end-3 self-center">{name}</p>
+					<Image
+						className={
+							'col-start-3 col-end-4 self-center ' +
+							(open
+								? `rotate-180 transition-all ease-in-out`
+								: `rotate-0 transition-all ease-in-out`)
+						}
+						src={CollapseArrowImage}
+						alt="collapse-arrow"
+						width={20}
+						height={20}
+					/>
+				</summary>
 
-					<SubmenuListItems navigations={navigations} />
-				</details>
-		
+				<SubmenuListItems navigations={navigations} />
+			</details>
 		</li>
 	)
 }
