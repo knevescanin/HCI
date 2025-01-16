@@ -1,7 +1,7 @@
 import { unstable_cache } from 'next/cache'
 import {client} from '../../../utils/contentfulClient'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import {BLOCKS} from '@contentful/rich-text-types';
+// import {BLOCKS} from '@contentful/rich-text-types';
 
 
 const getCurrentLocation = unstable_cache(async (params: { slug: string[] }) => {

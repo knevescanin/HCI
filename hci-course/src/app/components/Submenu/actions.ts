@@ -1,3 +1,5 @@
+
+
 export function getSubmenuNavigations(submenuNavigations: SubmenuNavigation[]): SubmenuNavigation[] {
     const navigations = submenuNavigations.flatMap(nav => nav.navigations)
     const newNavigations: SubmenuNavigation[] = navigations.map(nav => {
@@ -7,7 +9,8 @@ export function getSubmenuNavigations(submenuNavigations: SubmenuNavigation[]): 
                 name: nav.name,
                 route: nav.route
             },
-            navigations: []
+            navigations: [],
+            icon: {name: '', color: ''}
         }
         
             return props

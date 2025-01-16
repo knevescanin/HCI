@@ -8,7 +8,7 @@ import * as Icons from '@fortawesome/free-solid-svg-icons'
 export default function SubmenuList({
 	navigations,
 	name,
-	route,
+	// route,
 	iconName,
 	iconColor,
 }: {
