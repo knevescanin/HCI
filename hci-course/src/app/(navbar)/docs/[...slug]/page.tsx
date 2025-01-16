@@ -21,7 +21,7 @@ const getNavigationsContent = unstable_cache(async () => {
 
     const navigationsContent = entries.items.map(entry => {
         const path = (entry.fields.path as any)?.path;
-        return {header: entry.fields.header, richTextString: documentToHtmlString(entry.fields.content as any, {preserveWhitespace: true}), path: path};
+        return {header: entry.fields.header, richTextString: documentToHtmlString(entry.fields.content as any, {preserveWhitespace: true}), path: path, media: entry.fields.media};
     });
 
 	return navigationsContent
@@ -48,7 +48,7 @@ export default async function page({
 							(nav) => nav.path === currentLocation
 						)?.richTextString || '',
 				}}></div>
-			{/* <div>Links to next and previous pages</div> */}
+			
 		</>
 	)
 }
