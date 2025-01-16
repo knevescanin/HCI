@@ -1,4 +1,4 @@
-import { usePathname } from 'next/navigation'
+// import { usePathname } from 'next/navigation'
 import SubmenuListItems from './SubmenuListItems'
 import { useState } from 'react'
 
@@ -18,7 +18,7 @@ export default function SubmenuList({
 	iconName: string
 	iconColor: string
 }) {
-	const pathname = usePathname()
+	// const pathname = usePathname()
 	const [open, setOpen] = useState(false)
 
 	return (

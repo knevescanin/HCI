@@ -1,6 +1,7 @@
 import { unstable_cache } from 'next/cache'
 import {client} from '../../../utils/contentfulClient'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import {BLOCKS} from '@contentful/rich-text-types';
 
 
 const getCurrentLocation = unstable_cache(async (params: { slug: string[] }) => {
@@ -20,10 +21,8 @@ const getNavigationsContent = unstable_cache(async () => {
 
     const navigationsContent = entries.items.map(entry => {
         const path = (entry.fields.path as any)?.path;
-        return {header: entry.fields.header, richTextString: documentToHtmlString(entry.fields.content as any), path: path};
+        return {header: entry.fields.header, richTextString: documentToHtmlString(entry.fields.content as any, {preserveWhitespace: true}), path: path};
     });
-
-	console.log(navigationsContent)
 
 	return navigationsContent
 })
@@ -40,6 +39,7 @@ export default async function page({
 
 	return (
 		<>
+		
 			<div
 				className="w-full h-max text-black"
 				dangerouslySetInnerHTML={{
@@ -48,7 +48,7 @@ export default async function page({
 							(nav) => nav.path === currentLocation
 						)?.richTextString || '',
 				}}></div>
-			<div>Links to next and previous pages</div>
+			{/* <div>Links to next and previous pages</div> */}
 		</>
 	)
 }

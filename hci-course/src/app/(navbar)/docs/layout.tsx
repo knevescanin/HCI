@@ -1,7 +1,7 @@
 import Submenu from '../../components/Submenu/Submenu'
 
 import { submenuNavigations } from '@/app/components/Submenu/constants'
-import { getSubmenuNavigations } from '@/app/components/Submenu/actions'
+// import { getSubmenuNavigations } from '@/app/components/Submenu/actions'
 
 export default function DocsLayout({
 	children,
@@ -10,7 +10,7 @@ export default function DocsLayout({
 }) {
 
 
-	const navs = getSubmenuNavigations(submenuNavigations)
+	// const navs = getSubmenuNavigations(submenuNavigations)
 
 	return (
 		<div className="grid grid-cols-12 gap-4">
