@@ -57,7 +57,7 @@ export default async function page({
 
 				</div>
 
-			<img src="" alt="" />
+			{/* <img src="" alt="" /> */}
 		</>
 	)
 }

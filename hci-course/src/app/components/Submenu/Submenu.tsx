@@ -4,7 +4,7 @@ import SubmenuList from './SubmenuList'
 
 export default function Submenu({ submenuNavigations }: SubmenuProps) {
 	return (
-		<ul className="w-full px-4 font-latoRegular">
+		<ul className="w-full min-h-max px-4 font-latoRegular sticky top-0">
 			{submenuNavigations.map(
 				(item, index) =>
 					(item.navigations.length > 0 && (

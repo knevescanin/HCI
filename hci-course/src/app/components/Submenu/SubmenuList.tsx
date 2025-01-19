@@ -1,6 +1,6 @@
-// import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import SubmenuListItems from './SubmenuListItems'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +8,7 @@ import * as Icons from '@fortawesome/free-solid-svg-icons'
 export default function SubmenuList({
 	navigations,
 	name,
-	// route,
+	route,
 	iconName,
 	iconColor,
 }: {
@@ -18,19 +18,31 @@ export default function SubmenuList({
 	iconName: string
 	iconColor: string
 }) {
-	// const pathname = usePathname()
+	const pathname = usePathname()
+	const detailsRef = useRef<HTMLDetailsElement>(null)
 	const [open, setOpen] = useState(false)
+
+	useEffect(() => {
+		if (detailsRef.current?.open) {
+			setOpen(true)
+		}
+		else {
+			setOpen(false)
+		}
+	
+	}, [])
 
 	return (
 		<li className="cursor-pointer">
 			<details
-				// open={
-				// 	navigations.some((nav) => nav.route === pathname) ||
-				// 	pathname === route
-				// }
+				ref={detailsRef}
+				open={
+					navigations.some((nav) => nav.route === pathname) ||
+					pathname === route
+				}
 				>
 				<summary
-					onClick={() => setOpen(!open)}
+					onClick={() => {setOpen(!open), console.log(open)}}
 					className="grid grid-cols-[1fr,3fr,auto] hover:bg-[#f0f0f0] hover:rounded-lg py-2 px-4">
 					<FontAwesomeIcon
 						className="col-start-1 col-end-2 self-center justify-self-start pr-3"

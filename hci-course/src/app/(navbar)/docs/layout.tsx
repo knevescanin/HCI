@@ -8,22 +8,20 @@ export default function DocsLayout({
 }: {
 	children: React.ReactNode
 }) {
-
-
 	// const navs = getSubmenuNavigations(submenuNavigations)
 
 	return (
-		<div className="grid grid-cols-12 gap-4">
-			<div className="col-span-2 text-black">
+		<div className="grid grid-cols-12 min-h-screen">
+			<div className="col-span-3 text-black relative overflow-y-auto" >
 				<Submenu submenuNavigations={submenuNavigations} />
 			</div>
 
-			<div className="col-span-8">{children}</div>
+			<div className="col-start-4 col-end-13">{children}</div>
 			{/* Problem u vezi client komponente I think */}
-			<div className="col-span-2 text-black">
-				{/* <Submenu submenuNavigations={navs}
-				/> */}
-			</div>
+			{/* <div className="col-span-2 text-black">
+				<Submenu submenuNavigations={navs}
+				/>
+			</div> */}
 		</div>
 	)
 }
