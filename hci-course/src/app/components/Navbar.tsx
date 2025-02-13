@@ -1,42 +1,34 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 export default function Navbar() {
     const [navbar, setNavbar] = useState(false)
-    const [navbarColor, setNavbarColor] = useState('bg-transparent')
+    // const [navbarColor, setNavbarColor] = useState('bg-transparent')
     const pathname = usePathname()
 
-    useEffect(() => {
-        if (pathname !== '/') {
-            setNavbarColor('bg-[#420081]')
-        } else {
-            setNavbarColor('bg-transparent')
-        }
-    }, [pathname])
+    // useEffect(() => {
+    //     if (pathname !== '/') {
+    //         setNavbarColor('bg-[#420081]')
+    //     } else {
+    //         setNavbarColor('bg-transparent')
+    //     }
+    // }, [pathname])
 
     const closeMenu = () => {
         setNavbar(false)
     }
 
     return (
-        <nav className={`w-full ${navbarColor} z-40`}>
-            <div className="justify-between px-4 mx-auto lg:max-w-full md:items-center md:flex md:px-8">
+        <nav className={`w-full z-40`}>
+            <div className="justify-between px-4 mx-auto lg:max-w-full md:items-center md:flex md:px-20">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
                         <Link href="/">
-                            <span className="font-latoBlack drop-shadow-lg">
-                                <span className="text-3xl drop text-[#FE7163]">pric</span>
-                                <span className="text-2xl text-[#FE7163]">€</span>
-                                <span className="text-3xl text-[#FFFFFF]">
-                                    sage
-                                    <span className="text-3xl text-[#FE7163] mv faqs ticket about-us services contact-us support resources footer/]">
-                                        .
-                                    </span>
-                                </span>
-                            </span>
+                            <Image src="/Logo-white.png" alt="Logo" width={230} height={163} />
                         </Link>
                         <div className="md:hidden">
                             <button
@@ -80,20 +72,6 @@ export default function Navbar() {
                         className={`absolute top-0 left-0 w-full h-1/3  flex flex-col items-center justify-center transition-transform transform ${navbar ? 'translate-y-0' : '-translate-y-full'} 
 						md:relative md:translate-y-0 md:flex md:flex-row md:h-auto md:items-center md:justify-center bg-[#420081] ${pathname === '/' ? 'md:bg-transparent' : 'md:bg-[#420081]'} z-40`}>
 						
-                        {navbar ? (
-                            <Link href="/" className='pb-4' onClick={closeMenu}>
-								<span className="font-latoBlack drop-shadow-lg">
-									<span className="text-3xl drop text-[#FE7163]">pric</span>
-									<span className="text-2xl text-[#FE7163]">€</span>
-									<span className="text-3xl text-[#FFFFFF]">
-										sage
-										<span className="text-3xl text-[#FE7163] mv faqs ticket about-us services contact-us support resources footer/]">
-											.
-										</span>
-									</span>
-								</span>
-                            </Link>
-                        ) : ('')}
 					
                         <ul className="flex flex-col items-center justify-center md:flex-row">
                             <li className="text-xl md:px-6">

@@ -6,74 +6,60 @@ import InstagramIcon from '../../../public/instagram-icon.png'
 import FacebookIcon from '../../../public/facebook-icon.png'
 import YouTubeIcon from '../../../public/youtube-icon.png'
 import LinkedInIcon from '../../../public/linkedin-icon.png'
-import FooterShape from '../../../public/home-page-assets/Footer Shape.png'
-import { usePathname } from 'next/navigation'
+
 
 
 export default function Footer() {
-
-
-const pathname = usePathname()
-
+const linkClass = "hover:shadow-md hover:shadow-white transition-all"
 
 	return (
         
-		<footer className={`w-100 font-latoRegular flex flex-col bg-[#630BBD] ${pathname === '/' ? 'md:bg-[#420081]' : ''}
-		${pathname === '/search' ? 'bg-[#630BBD] md:bg-white' : ''}
-		relative items-center h-fit mt-auto md:flex md:flex-row md:h-52 md:px-20 md:justify-between md:items-end `} style={{ zIndex: 10 }} >
-            <Image priority src={FooterShape} alt="Footer Shape" className="absolute hidden md:block md:w-screen md:h-full md:-z-10 md:inset-0" />
+		<footer className={`w-100 font-latoRegular flex flex-col relative items-center h-fit mt-auto md:flex md:flex-row md:h-52 md:px-20 md:justify-between md:items-center `} >
+            
 			<div className="max-md:pb-2">
 				<Link href="/">
-					<span className="font-latoBlack drop-shadow-lg">
-						<span className="text-3xl drop text-[#100672]">pric</span>
-						<span className="text-2xl text-[#100672]">€</span>
-						<span className="text-3xl text-[#C799F6]">
-							sage<span className="text-3xl text-[#100672]">.</span>
-						</span>
-					</span>
+					<Image src="/Logo-white-no-text.png" alt="Logo" width={120} height={72} />
 				</Link>
 			</div>
 
 			<div className="flex justify-center w-fit py-4 md:py-0 md:justify-around md:items-start md:w-fit">
 				<div className="flex flex-col mx-3 md:mx-10 text-[#C799F6]">
+					<p className='text-[background] font-normal text-lg pb-2'>Information</p>
 					<Link
 						className="hover:underline"
 						href="/faqs">
-						FAQS
+						<p>FAQs</p>
 					</Link>
-					<Link
-						className="hover:underline"
-						href="/ticket">
-						SUBMIT A TICKET
-					</Link>
-				</div>
-				<div className="flex flex-col mx-3 md:mx-10 text-[#C799F6]">
+					
 					<Link
 						className="hover:underline"
 						href="/about-us">
-						ABOUT US
+						<p>About us</p>
 					</Link>
 					<Link
 						className="hover:underline"
 						href="/services">
-						SERVICES
+						<p>Services</p>
 					</Link>
 				</div>
+				
 				<div className="flex flex-col mx-3 md:mx-10 text-[#C799F6]">
+					<p className='text-[background] font-normal text-lg pb-2'>Support</p>
 					<Link
 						className="hover:underline"
 						href="/contact-us">
-						CONTACT US
+						<p>Contact us</p>
 					</Link>
-					<Link
-						className="hover:underline"
-						href="/support">
-						SUPPORT
-					</Link>
+					
 					<Link
 						className="hover:underline"
 						href="/resources">
-						RESOURCES
+						<p>Resources</p>
+					</Link>
+					<Link
+						className="hover:underline"
+						href="/ticket">
+						<p>Submit a ticket</p>
 					</Link>
 				</div>
 			</div>
@@ -86,7 +72,7 @@ const pathname = usePathname()
 				/>
 				<div className="flex w-72 justify-between items-center">
 					<Link
-						className="hover:scale-125 transition-all"
+						className={linkClass}
 						href="https://www.linkedin.com">
 						<Image
 							src={LinkedInIcon}
@@ -95,7 +81,7 @@ const pathname = usePathname()
 							alt="LinkedIn"></Image>
 					</Link>
 					<Link
-						className="hover:scale-125 transition-all"
+						className={linkClass}
 						href="https://www.youtube.com">
 						<Image
 							src={YouTubeIcon}
@@ -104,7 +90,7 @@ const pathname = usePathname()
 							alt="YouTube"></Image>
 					</Link>
 					<Link
-						className="hover:scale-125 transition-all"
+						className={linkClass}
 						href="https://www.facebook.com">
 						<Image
 							src={FacebookIcon}
@@ -114,7 +100,7 @@ const pathname = usePathname()
 							className="rounded-md"></Image>
 					</Link>
 					<Link
-						className="hover:scale-125 transition-all"
+						className={linkClass}
 						href="https://www.instagram.com">
 						<Image
 							src={InstagramIcon}

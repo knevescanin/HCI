@@ -9,10 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#F9F9F9",
         textPrimary: "#333333",
-        themePrimary: "#32006E"
+        themePrimary: "#1A20AB"
       },
       fontFamily: {
         latoRegular: ['var(--font-lato-regular)'],

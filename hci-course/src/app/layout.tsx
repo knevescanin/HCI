@@ -44,12 +44,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}>
-			<Suspense fallback={<LoadingUI />}>
+				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} bg-themePrimary antialiased flex flex-col min-h-screen overflow-x-hidden`}>
+
 				<Navbar />
-				<main className="flex-grow flex flex-col">{children}</main>
+				<main className="flex-grow flex flex-col bg-background">{children}</main>
 				<Footer />
-			</Suspense>
+			
 			</body>
 		</html>
 	)
