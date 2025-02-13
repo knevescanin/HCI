@@ -28,7 +28,7 @@ export default function Navbar() {
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
                         <Link href="/">
-                            <Image src="/Logo-white.png" alt="Logo" width={230} height={163} />
+                            <Image src="/Logo-white.png" alt="Logo" width={113} height={80} />
                         </Link>
                         <div className="md:hidden">
                             <button
@@ -67,6 +67,13 @@ export default function Navbar() {
                         </div>
                     </div>
                 </div>
+                <div className="relative hidden md:block w-96">
+
+                    <form action="/" method='get' className='pl-6 pr-2 bg-background rounded-md'>
+                        <input type='text' placeholder='Search for product and rabbit will try to fetch it...' className='w-full h-12 pl-10 pt-1 pr-3 bg-background'/>
+                        <Image src="/search.png" alt="Search" width={16} height={16} className="absolute left-3 top-1/2 transform -translate-y-1/2"/>
+                    </form>
+                </div>
                 <div>
                     <div
                         className={`absolute top-0 left-0 w-full h-1/3  flex flex-col items-center justify-center transition-transform transform ${navbar ? 'translate-y-0' : '-translate-y-full'} 
@@ -74,24 +81,24 @@ export default function Navbar() {
 						
 					
                         <ul className="flex flex-col items-center justify-center md:flex-row">
-                            <li className="text-xl md:px-6">
+                            {/* <li className="text-xl md:px-6">
                                 <Link href="/search" className={`font-bold hover:underline  md:text-white ${pathname === '/search' ? 'underline' : ''} `} onClick={closeMenu}>
 									Search
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="text-xl md:px-6">
-                                <Link href="/compare" className={`font-bold hover:underline  md:text-white ${pathname === '/compare' ? 'underline' : ''}`} onClick={closeMenu}>
-                                    Compare
+                                <Link href="/favourites" className={`font-bold hover:underline  md:text-white ${pathname === '/compare' ? 'underline' : ''}`} onClick={closeMenu}>
+                                    <span className='flex items-center gap-1'><Image src="/heart-2.png" width={20} height={20} alt='heart' className='h-5 w-5'/><p>Favourites</p></span>
                                 </Link>
                             </li>
                             <li className="text-xl md:px-6">
                                 <Link href="/docs" className={`font-bold hover:underline  md:text-white ${pathname === '/docs' ? 'underline' : ''}`} onClick={closeMenu}>
-                                    Docs
+                                <span className='flex items-center gap-1'><Image src="/google-docs.png" width={20} height={20} alt='docs' className='h-5 w-5'/><p>Docs</p></span>
                                 </Link>
                             </li>
                             <li className="text-xl md:px-6">
                                 <Link href="/log-in" className={`font-bold hover:underline  md:text-white ${pathname === '/log-in' ? 'underline' : ''}`} onClick={closeMenu}>
-                                    Log In
+                                <span className='flex items-center gap-1'><Image src="/user-2.png" width={20} height={20} alt='login' className='h-5 w-5'/><p>Log In</p></span>
                                 </Link>
                             </li>
                         </ul>
