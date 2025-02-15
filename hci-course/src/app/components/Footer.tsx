@@ -4,13 +4,10 @@ import Image from 'next/image'
 
 import InstagramIcon from '../../../public/instagram-icon.png'
 import FacebookIcon from '../../../public/facebook-icon.png'
-import YouTubeIcon from '../../../public/youtube-icon.png'
 import LinkedInIcon from '../../../public/linkedin-icon.png'
 
-
-
 export default function Footer() {
-const linkClass = "hover:shadow-md hover:shadow-white transition-all"
+const linkClass = "hover:scale-110 transition-all"
 
 	return (
         
@@ -68,7 +65,7 @@ const linkClass = "hover:shadow-md hover:shadow-white transition-all"
 				<input
 					type="email"
 					placeholder="Get In Touch"
-					className="text-[#C799F6] w-72 h-12 rounded-[20px] pl-3 bg-[#420081] mb-2 hover:scale-110 transition-all"
+					className="w-72 h-12 rounded-md pl-3 bg-background mb-2 outline-none"
 				/>
 				<div className="flex w-72 justify-between items-center">
 					<Link
@@ -82,22 +79,13 @@ const linkClass = "hover:shadow-md hover:shadow-white transition-all"
 					</Link>
 					<Link
 						className={linkClass}
-						href="https://www.youtube.com">
-						<Image
-							src={YouTubeIcon}
-							width={32}
-							height={32}
-							alt="YouTube"></Image>
-					</Link>
-					<Link
-						className={linkClass}
 						href="https://www.facebook.com">
 						<Image
 							src={FacebookIcon}
-							width={28}
-							height={28}
+							width={32}
+							height={32}
 							alt="Facebook"
-							className="rounded-md"></Image>
+							></Image>
 					</Link>
 					<Link
 						className={linkClass}

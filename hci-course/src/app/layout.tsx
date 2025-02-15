@@ -30,7 +30,7 @@ const latoBlack = localFont({
 })
 
 export const metadata: Metadata = {
-	title: 'Pricesage',
+	title: 'Pricehare',
 	description: 'Andy and Karlo',
 }
 
