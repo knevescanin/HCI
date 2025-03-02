@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 import ProductContext from '@/app/contexts/ProductContext'
 import CardSkeletonLoader from '@/app/components/UI/CardSkeletonLoader'
 
+const baseURL = process.env.NEXT_PUBLIC_IS_PROD === "true" ?  process.env.NEXT_PUBLIC_API_URL_PROD : process.env.NEXT_PUBLIC_API_URL_DEV
+
 const handleProductFetch = async (
 	productLimit: number,
 	productFilter: string,
@@ -15,7 +17,7 @@ const handleProductFetch = async (
 	console.log(offset)
 	try {
 		const res = await fetch(
-			process.env.NEXT_PUBLIC_API_URL_PROD +
+			baseURL +
 				`/products?limit=${productLimit}&offset=${offset}&sort=${productFilter}&store-name=${storeName}`
 		)
 		const data = await res.json()

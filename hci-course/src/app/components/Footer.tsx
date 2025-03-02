@@ -61,7 +61,7 @@ const linkClass = "hover:scale-110 transition-all"
 				</div>
 			</div>
 
-			<div className="flex flex-col justify-center items-center md:items-start">
+			<div className="flex flex-col justify-center items-center md:items-start gap-4">
 				<input
 					type="email"
 					placeholder="Get In Touch"

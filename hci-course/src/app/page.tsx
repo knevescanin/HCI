@@ -12,19 +12,19 @@ import HomeSection from './components/HomeSection'
 
 export default async function Home() {
 
-	const entries = await client.getEntries({
-			content_type: 'homeSections',
-			select: ['fields'],
-			order: ['sys.createdAt']
-		})
+	// const entries = await client.getEntries({
+	// 		content_type: 'homeSections',
+	// 		select: ['fields'],
+	// 		order: ['sys.createdAt']
+	// 	})
 
 		
 		
-		const sections: Section[] = entries.items.map(entry => {
+	// 	const sections: Section[] = entries.items.map(entry => {
 			
-			const imageUrlPath = (entry.fields.sectionImage as any)?.fields.file.url as string
-			return new Object({sectionText: entry.fields.sectionText, header: entry.fields.header, imageUrl: "https:" + imageUrlPath}) as Section
-		})
+	// 		const imageUrlPath = (entry.fields.sectionImage as any)?.fields.file.url as string
+	// 		return new Object({sectionText: entry.fields.sectionText, header: entry.fields.header, imageUrl: "https:" + imageUrlPath}) as Section
+	// 	})
 		 
 		
 	return (

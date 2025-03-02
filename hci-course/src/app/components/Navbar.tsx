@@ -4,13 +4,12 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
+import SearchUI from './UI/SearchUI'
 
 export default function Navbar() {
     const [navbar, setNavbar] = useState(false)
     // const [navbarColor, setNavbarColor] = useState('bg-transparent')
     const pathname = usePathname()
-
-    const [searchString, setSearchString] = useState('')
 
     // useEffect(() => {
     //     if (pathname !== '/') {
@@ -30,7 +29,7 @@ export default function Navbar() {
                 
                     <div className="flex items-center justify-between">
                         <Link href="/">
-                            <Image src="/Logo-white.png" alt="Logo" width={113} height={80} />
+                            <Image src="/Logo-white.png" alt="Logo" width={120} height={80} />
                         </Link>
                         <div className="md:hidden">
                             <button
@@ -83,7 +82,7 @@ export default function Navbar() {
                                 </Link>
                             </li> */}
                             <li className="text-lg">
-                                <Link href="/favourites" className={`font-bold hover:underline  md:text-white ${pathname === '/compare' ? 'underline' : ''}`} onClick={closeMenu}>
+                                <Link href="/favourites" className={`font-bold hover:underline  md:text-white ${pathname === '/favourites' ? 'underline' : ''}`} onClick={closeMenu}>
                                     <span className='flex items-center gap-1'><Image src="/heart-2.png" width={20} height={20} alt='heart' className='h-5 w-5'/><p>Favourites</p></span>
                                 </Link>
                             </li>
@@ -106,10 +105,7 @@ export default function Navbar() {
                     <div className="fixed inset-0 backdrop-blur-sm z-30" onClick={closeMenu}></div>
                 </>
             )}
-             <form onSubmit={e => e.preventDefault()} action="/search" method='get' className='pr-2 py-2 mt-10 bg-background rounded-md w-3/5 relative'>
-                        <input onChange={e => setSearchString(e.target.value)} type='text' placeholder='Search for product and rabbit will try to fetch it...' className='w-full h-12 pl-16 pt-1 pr-3 bg-background outline-none font-bold' name='search-string' value={searchString}/>
-                        <Image src="/search.png" alt="Search" width={16} height={16} className="absolute left-7 top-1/2 transform -translate-y-1/2"/>
-            </form>
+             {!(pathname.includes("favourites") || pathname.includes("docs") || pathname.includes("log-in")) && <SearchUI />}
         </nav>
     )
 }

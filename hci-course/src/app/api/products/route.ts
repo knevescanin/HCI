@@ -5,6 +5,7 @@ export async function GET(req: NextRequest){
     const limit = parseInt(req.nextUrl.searchParams.get('limit') || '20')
     const offset = parseInt(req.nextUrl.searchParams.get('offset') || '0')
     const storeName = req.nextUrl.searchParams.get('store-name') || 'store_name'
+    const productName = req.nextUrl.searchParams.get('name') || 'name'
     let sort = req.nextUrl.searchParams.get('sort') || 'name-asc'
 
     if (sort === 'name-asc') {
@@ -20,10 +21,9 @@ export async function GET(req: NextRequest){
         sort = 'name ASC'
     }
 
-    console.log(storeName)
     try {
         const sql = neon(`${process.env.DATABASE_URL}`)
-        const products = await sql(`SELECT * FROM products WHERE store_name = ${storeName === 'store_name' ? 'store_name' : `'${storeName}'`} ORDER BY ${sort} LIMIT ${limit} OFFSET ${offset}`)
+        const products = await sql(`SELECT * FROM products WHERE name LIKE ${productName} AND store_name = ${storeName === 'store_name' ? 'store_name' : `'${storeName}'`} ORDER BY ${sort} LIMIT ${limit} OFFSET ${offset}`)
         
         return NextResponse.json(products)
     }
