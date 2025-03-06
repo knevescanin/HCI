@@ -12,7 +12,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         textPrimary: "#333333",
-        themePrimary: "#32006E"
+        themePrimary: "#1A20AB"
       },
       fontFamily: {
         latoRegular: ['var(--font-lato-regular)'],

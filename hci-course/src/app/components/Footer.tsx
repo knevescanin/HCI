@@ -18,10 +18,10 @@ const pathname = usePathname()
 
 	return (
         
-		<footer className={`w-100 font-latoRegular flex flex-col bg-[#630BBD] ${pathname === '/' ? 'md:bg-[#420081]' : ''}
-		${pathname === '/search' ? 'bg-[#630BBD] md:bg-white' : ''}
+		<footer className={`w-100 font-latoRegular flex flex-col bg-[#1A20AB] ${pathname === '/' ? 'md:bg-[#420081]' : ''}
+		${pathname === '/search' ? 'bg-[#1A20AB] md:bg-white' : ''}
 		relative items-center h-fit mt-auto md:flex md:flex-row md:h-52 md:px-20 md:justify-between md:items-end `} style={{ zIndex: 10 }} >
-            <Image priority src={FooterShape} alt="Footer Shape" className="absolute hidden md:block md:w-screen md:h-full md:-z-10 md:inset-0" />
+            {/* <Image priority src={FooterShape} alt="Footer Shape" className="absolute hidden md:block md:w-screen md:h-full md:-z-10 md:inset-0" /> */}
 			<div className="max-md:pb-2">
 				<Link href="/">
 					<span className="font-latoBlack drop-shadow-lg">
