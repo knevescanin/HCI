@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/core": "^0.34.2",
     "@auth/pg-adapter": "^1.7.4",
     "@contentful/rich-text-html-renderer": "^17.0.0",
     "@neondatabase/serverless": "^0.10.4",
@@ -21,14 +22,17 @@
     "lucide-react": "^0.468.0",
     "next": "15.0.2",
     "next-auth": "^4.24.11",
+    "pg": "^8.13.3",
+    "pg-hstore": "^2.3.4",
     "prisma": "^6.2.1",
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "resend": "^4.0.1",
     "shadcn-ui": "^0.9.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/json5": "^0.0.30",
     "@types/node": "^20.17.10",
     "@types/pg": "^8.11.10",

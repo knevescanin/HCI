@@ -1,14 +1,43 @@
+"use client";
+
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function SignIn() {
+
+    const router = useRouter();
+  const [form, setForm] = useState({ email: "", password: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: form.email,
+      password: form.password,
+    });
+
+    if (res?.error) {
+      alert("Invalid login credentials");
+    } else {
+    router.push("/"); // Redirect after successful login
+    }
+  };
     return (
         <div className="rounded-2xl flex flex-row mx-auto my-auto p-0 shadow-2xl max-w-7xl max-h-lvh">
-            <div className="bg-[#1A20AB] flex-1 text-left p-10 rounded-l-2xl flex flex-col justify-center items-center">
+            <form onSubmit={handleSubmit} className="bg-[#1A20AB] flex-1 text-left p-10 rounded-l-2xl flex flex-col justify-center items-center">
                 <div className="font-latoBlack text-5xl mt-12 mb-12 text-white text-center">
                     <p className="[text-shadow:_0_5px_0_rgb(0_0_0_/_90%)]">Sign In</p>
                 </div>
                 <div className="flex flex-col gap-1 mb-4 w-full max-w-sm">
                     <label className="block text-lg font-latoBlack text-white">E-mail</label>
                     <div className="relative">
-                        <input type="text" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" />
+                        <input type="email" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="email" onChange={handleChange} required/>
                         <div className="absolute inset-y-0 items-center flex pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -29,7 +58,7 @@ export default function SignIn() {
                 <div className="flex flex-col gap-1 mb-4 w-full max-w-sm">
                     <label className="block text-lg font-latoBlack text-white">Password</label>
                     <div className="relative">
-                        <input type="password" placeholder="Password" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" />
+                        <input type="password" placeholder="Password" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="password" onChange={handleChange} required />
                         <div className="absolute inset-y-0 items-center flex pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -46,13 +75,13 @@ export default function SignIn() {
 
 
 
-                <button className="mt-12 p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-xl w-1/2 max-w-md mb-12 shadow-lg shadow-black">Sign In</button>
+                <button type="submit" className="mt-12 p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-xl w-1/2 max-w-md mb-12 shadow-lg shadow-black">Sign In</button>
                 <div className="flex items-center my-2">
                     <div className="flex-grow border-t border-black"></div>
                     <span className="mx-4 text-white font-semibold">Or</span>
                     <div className="flex-grow border-t border-black"></div>
                 </div>
-            </div>
+            </form>
 
 
 
