@@ -6,7 +6,6 @@ import InstagramIcon from '../../../public/instagram-icon.png'
 import FacebookIcon from '../../../public/facebook-icon.png'
 import YouTubeIcon from '../../../public/youtube-icon.png'
 import LinkedInIcon from '../../../public/linkedin-icon.png'
-import FooterShape from '../../../public/home-page-assets/Footer Shape.png'
 import { usePathname } from 'next/navigation'
 
 
