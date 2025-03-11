@@ -119,7 +119,7 @@ export default function Navbar() {
                                             onClick={toggleDropdown}
                                             className="font-bold hover:underline  md:text-white "
                                         >
-                                            Hello, {session?.user.name}
+                                            Hello, {session?.user.name || session?.user.firstName}
                                         </button>
                                     </li>
                                     {dropdownOpen && (

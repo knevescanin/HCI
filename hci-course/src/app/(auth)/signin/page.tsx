@@ -9,6 +9,10 @@ export default function SignIn() {
     const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
 
+  const handleOAuthSignIn = async (provider: string) => {
+    await signIn(provider, { callbackUrl: "/" });
+};
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -75,12 +79,33 @@ export default function SignIn() {
 
 
 
-                <button type="submit" className="mt-12 p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-xl w-1/2 max-w-md mb-12 shadow-lg shadow-black">Sign In</button>
-                <div className="flex items-center my-2">
+                <button type="submit" className="mt-12 p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-xl w-1/2 max-w-md mb-8 shadow-lg shadow-black">Sign In</button>
+                <div className="flex items-center my-0 mb-8">
                     <div className="flex-grow border-t border-black"></div>
                     <span className="mx-4 text-white font-semibold">Or</span>
                     <div className="flex-grow border-t border-black"></div>
                 </div>
+
+                    {/* Email & Password Sign In */}
+                
+                <button
+  type="button"
+  onClick={() => handleOAuthSignIn("google")}
+  className="flex items-center justify-center w-72 bg-white mb-6 text-gray-700 border border-gray-300 rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-gray-300 py-2 px-4 font-semibold shadow-lg shadow-black"
+>
+  <img src="/google-icon.svg" alt="Google" className="w-6 h-6 mr-2" />
+  Sign in with Google
+</button>
+
+<button
+  type="button"
+  onClick={() => handleOAuthSignIn("facebook")}
+  className="flex items-center justify-center w-72 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-[#165BD4] py-2 px-4 font-semibol shadow-lg shadow-black"
+>
+  <img src="/facebook-icon.svg" alt="Facebook" className="w-6 h-6 mr-2" />
+  Sign in with Facebook
+</button>
+
             </form>
 
 
