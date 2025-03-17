@@ -8,13 +8,13 @@ function SearchUI() {
 
 	return (
 		<form
-			action="/search"
-			method="get"
+			action={`/api/search?name=${searchString}`}
+			method='GET'
 			className="pr-2 py-2 mt-10 bg-background rounded-md w-3/5 relative">
 			<input
 				onChange={(e) => setSearchString(e.target.value)}
 				type="text"
-				placeholder="Search for product and rabbit will try to fetch it..."
+				placeholder="Search for a product and rabbit will try to fetch it..."
 				className="w-full h-12 pl-16 pt-1 pr-3 bg-background outline-none font-bold"
 				name="name"
 				value={searchString}

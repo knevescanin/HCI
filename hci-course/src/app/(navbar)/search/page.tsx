@@ -18,7 +18,7 @@ const handleProductFetch = async (
 	try {
 		const res = await fetch(
 			baseURL +
-				`/products?limit=${productLimit}&offset=${offset}&sort=${productFilter}&store-name=${storeName}`
+				`/search`
 		)
 		const data = await res.json()
 		const products = data
