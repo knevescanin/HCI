@@ -1,28 +1,29 @@
 'use client'
 
+import { useSession, signOut } from "next-auth/react";
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import SearchUI from './UI/SearchUI'
 
 export default function Navbar() {
     const [navbar, setNavbar] = useState(false)
-    // const [navbarColor, setNavbarColor] = useState('bg-transparent')
     const pathname = usePathname()
-
-    // useEffect(() => {
-    //     if (pathname !== '/') {
-    //         setNavbarColor('bg-[#420081]')
-    //     } else {
-    //         setNavbarColor('bg-transparent')
-    //     }
-    // }, [pathname])
-
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const { data: session } = useSession();
     const closeMenu = () => {
         setNavbar(false)
     }
 
+    const toggleDropdown = () => {
+        setDropdownOpen((prev) => !prev);
+    };
+
+    const handleSignOut = () => {
+        signOut();
+        setDropdownOpen(false);
+    };
     return (
         <nav className={`w-full z-40 flex flex-col items-center pb-8`}>
             <div className="justify-between px-4 mx-auto lg:max-w-full md:items-start md:flex md:pt-4 md:pb-8 md:w-4/5">
@@ -78,7 +79,7 @@ export default function Navbar() {
                         <ul className="flex flex-col items-center justify-center md:flex-row gap-8">
                             {/* <li className="text-xl md:px-6">
                                 <Link href="/search" className={`font-bold hover:underline  md:text-white ${pathname === '/search' ? 'underline' : ''} `} onClick={closeMenu}>
-									Search
+                                    Search
                                 </Link>
                             </li> */}
                             <li className="text-lg">
@@ -91,11 +92,39 @@ export default function Navbar() {
                                 <span className='flex items-center gap-1'><Image src="/google-docs.png" width={20} height={20} alt='docs' className='h-5 w-5'/><p>Docs</p></span>
                                 </Link>
                             </li>
-                            <li className="text-lg">
-                                <Link href="/log-in" className={`font-bold hover:underline  md:text-white ${pathname === '/log-in' ? 'underline' : ''}`} onClick={closeMenu}>
-                                <span className='flex items-center gap-1'><Image src="/user-2.png" width={20} height={20} alt='login' className='h-5 w-5'/><p>Log In</p></span>
-                                </Link>
-                            </li>
+                            {session?.user ? (
+                                <>
+                                    <li className="text-xl md:px-6">
+                                        <button
+                                            onClick={toggleDropdown}
+                                            className="font-bold hover:underline  md:text-white "
+                                        >
+                                            Hello, {session?.user.name || session?.user.firstName}
+                                        </button>
+                                    </li>
+                                    {dropdownOpen && (
+                                        <div className="absolute top-full right-0 mt-2 bg-white rounded-md shadow-lg w-auto">
+                                        <ul className="text-gray-0 flex flex-col items-center">
+                                          <li className="px-4 py-2 font-bold text-lg">
+                                            <Link href="/profile-settings" className="hover:text-[#1A20AB]">Profile Settings</Link>
+                                          </li>
+                                          <li
+                                            className="px-4 py-2 font-bold text-lg text-red-600 hover:text-[#1A20AB] cursor-pointer"
+                                            onClick={handleSignOut}
+                                          >
+                                            Sign Out
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    )}
+                                </>
+                            ) : (
+                                <li className="text-lg md:px-6">
+                                    <Link href="/signin" className={`font-bold hover:underline  md:text-white ${pathname === '/log-in' ? 'underline' : ''}`} onClick={closeMenu}>
+                                    <span className='flex items-center gap-1'><Image src="/signin.png" width={20} height={20} alt='docs' className='h-5 w-5'/><p>LogIn</p></span>
+                                    </Link>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>
@@ -105,7 +134,7 @@ export default function Navbar() {
                     <div className="fixed inset-0 backdrop-blur-sm z-30" onClick={closeMenu}></div>
                 </>
             )}
-             {!(pathname.includes("favourites") || pathname.includes("docs") || pathname.includes("log-in")) && <SearchUI />}
+             {!(pathname.includes("favourites") || pathname.includes("docs") || pathname.includes("signin")) && <SearchUI />}
         </nav>
     )
 }

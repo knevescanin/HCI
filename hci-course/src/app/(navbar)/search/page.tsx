@@ -10,10 +10,10 @@ import { useSearchParams } from 'next/navigation'
 const baseURL = process.env.NEXT_PUBLIC_IS_PROD === "true" ?  process.env.NEXT_PUBLIC_API_URL_PROD : process.env.NEXT_PUBLIC_API_URL_DEV
 
 const handleProductFetch = async (
-	productLimit: number,
-	productFilter: string,
-	offset?: number,
-  storeName?: string,
+// 	productLimit: number,
+// 	productFilter: string,
+// 	offset?: number,
+//   storeName?: string,
   productName?: string | null
 ) => {
 	
@@ -46,7 +46,7 @@ export default function Page() {
 		setLoading(true)
 	setOffset(0)
 	setProducts([])
-		handleProductFetch(productLimit, productFilter, offset, storeFilter, productName).then((prods) => {
+		handleProductFetch(productName).then((prods) => {
 	  setProducts(prods)
 			setLoading(false)
 		})
@@ -54,7 +54,7 @@ export default function Page() {
 
 	useEffect(() => {
 		setLoading(true)
-		handleProductFetch(productLimit, productFilter, offset, storeFilter, productName).then((prods) => {
+		handleProductFetch(productName).then((prods) => {
 			setProducts(products.concat(prods))
 			setLoading(false)
 		})
