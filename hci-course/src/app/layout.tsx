@@ -46,7 +46,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}>
+				className={`${geistSans.variable} ${geistMono.variable} ${latoRegular.variable} ${latoBlack.variable} antialiased bg-themePrimary flex flex-col min-h-screen overflow-x-hidden`}>
         <ClientSessionProvider>
 				<Navbar />
 				<main className="flex-grow flex flex-col bg-background">{children}</main>
