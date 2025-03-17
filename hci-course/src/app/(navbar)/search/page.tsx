@@ -5,6 +5,7 @@ import Sidebar from '@/app/components/Sidebar'
 import { useEffect, useState } from 'react'
 import ProductContext from '@/app/contexts/ProductContext'
 import CardSkeletonLoader from '@/app/components/UI/CardSkeletonLoader'
+import { useSearchParams } from 'next/navigation'
 
 const baseURL = process.env.NEXT_PUBLIC_IS_PROD === "true" ?  process.env.NEXT_PUBLIC_API_URL_PROD : process.env.NEXT_PUBLIC_API_URL_DEV
 
@@ -12,13 +13,14 @@ const handleProductFetch = async (
 	productLimit: number,
 	productFilter: string,
 	offset?: number,
-  storeName?: string
+  storeName?: string,
+  productName?: string | null
 ) => {
-	console.log(offset)
+	
 	try {
 		const res = await fetch(
 			baseURL +
-				`/search`
+				`/search?name=${productName}`
 		)
 		const data = await res.json()
 		const products = data
@@ -38,20 +40,21 @@ export default function Page() {
   const [storeFilter, setStoreFilter] = useState('store_name') // Defaults to showing every store
   // const [productName, setProductName] = useState('')
 	const [loading, setLoading] = useState(true)
+	const productName = useSearchParams().get('name')
 
 	useEffect(() => {
 		setLoading(true)
-    setOffset(0)
-    setProducts([])
-		handleProductFetch(productLimit, productFilter, offset, storeFilter).then((prods) => {
-      setProducts(prods)
+	setOffset(0)
+	setProducts([])
+		handleProductFetch(productLimit, productFilter, offset, storeFilter, productName).then((prods) => {
+	  setProducts(prods)
 			setLoading(false)
 		})
 	}, [productLimit, productFilter])
 
 	useEffect(() => {
 		setLoading(true)
-		handleProductFetch(productLimit, productFilter, offset, storeFilter).then((prods) => {
+		handleProductFetch(productLimit, productFilter, offset, storeFilter, productName).then((prods) => {
 			setProducts(products.concat(prods))
 			setLoading(false)
 		})

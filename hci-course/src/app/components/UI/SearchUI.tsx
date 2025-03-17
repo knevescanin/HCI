@@ -8,7 +8,7 @@ function SearchUI() {
 
 	return (
 		<form
-			action={`/api/search?name=${searchString}`}
+			action={`/search?name=${searchString}`}
 			method='GET'
 			className="pr-2 py-2 mt-10 bg-background rounded-md w-3/5 relative">
 			<input
