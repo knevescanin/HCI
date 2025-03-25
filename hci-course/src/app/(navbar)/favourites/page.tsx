@@ -6,7 +6,7 @@ function page() {
     return (
         <div>
 
-            <h1>User's favourites</h1>
+            <h1>User&apos;s favourites</h1>
             
             <div className="grid grid-cols-8 w-full h-max text-white relative bg-white">
                 <ProductCard
