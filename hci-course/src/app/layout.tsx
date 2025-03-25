@@ -49,7 +49,7 @@ export default function RootLayout({
         <ClientSessionProvider>
           <Suspense fallback={<LoadingUI />}>
             <Navbar />
-            <main className="flex-grow flex flex-col bg-background">{children}</main>
+            <main className="flex-grow flex flex-col bg-background overflow-y-auto">{children}</main>
             <Footer />
           </Suspense>
         </ClientSessionProvider>

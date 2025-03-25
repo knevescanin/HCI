@@ -5,79 +5,79 @@ import { useRouter } from "next/navigation";
 
 
 export default function Page() {
-    
+
     const router = useRouter();
-const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
     const [form, setForm] = useState({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
-      });
-      const [error, setError] = useState("");
-    
-      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    });
+    const [error, setError] = useState("");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
-      };
-    
-      const handleSubmit = async (e: React.FormEvent) => {
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
-    
+
         // Validate email
         if (!emailRegex.test(form.email)) {
-          setError("Please enter a valid email address.");
-          return;
+            setError("Please enter a valid email address.");
+            return;
         }
-    
+
         // Validate password strength
         if (!passwordRegex.test(form.password)) {
-          setError(
-            "Password must be at least 8 characters long and contain both letters and numbers."
-          );
-          return;
+            setError(
+                "Password must be at least 8 characters long and contain both letters and numbers."
+            );
+            return;
         }
-    
+
         // Check if passwords match
         if (form.password !== form.confirmPassword) {
-          setError("Passwords do not match.");
-          return;
+            setError("Passwords do not match.");
+            return;
         }
-    
+
         console.log("Submitting form", form); // ✅ Log form data before sending
-    
+
         const response = await fetch("/api/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
         });
-    
+
         const data = await response.json();
         console.log("Response from API:", data); // ✅ Log the response data
-    
+
         if (!response.ok) {
-          setError(data.error || "Signup failed");
-          return;
+            setError(data.error || "Signup failed");
+            return;
         }
-    
+
         alert("Signup successful! You can now log in.");
 
         router.push("/signin");
-      };
+    };
 
     return (
 
-        <div className="rounded-2xl flex flex-row mx-auto  my-auto p-0 shadow-2xl max-w-7xl max-h-lvh">
-            <form onSubmit={handleSubmit} className="bg-[#1A20AB] flex-1 p-10  rounded-l-2xl flex flex-col items-center">
-                <div className="font-latoBlack text-5xl mt-4 mb-12 text-white text-center">
-                    <p className="[text-shadow:_0_5px_0_rgb(0_0_0_/_90%)]">Sign Up</p>
+        <div className="mx-auto my-10 w-11/12 max-w-4xl shadow-2xl rounded-b-lg md:rounded-none flex flex-col md:flex-row 2xl:my-auto">
+            <form onSubmit={handleSubmit} className="bg-[#1A20AB] flex-1 text-left p-6 md:p-10 rounded-t-lg md:rounded-l-2xl flex flex-col justify-center items-center">
+                <div className="font-latoBlack md:mt-12 md:mb-12 text-white text-center">
+                    <p className="text-3xl md:text-5xl [text-shadow:_0_5px_0_rgb(0_0_0_/_90%)]">Sign Up</p>
                 </div>
-                <div className="flex flex-col gap-1 mb-4 w-full max-w-sm">
-                    <label className="block text-lg font-latoBlack text-white">First Name</label>
+                <div className="flex flex-col gap-1 md:mb-4 w-full max-w-sm">
+                    <label className="block md:text-lg font-latoBlack text-white">First Name</label>
                     <div className="relative">
-                        <input type="text" placeholder="First Name" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="firstName" value={form.firstName} onChange={handleChange} required />
+                        <input type="text" placeholder="First Name" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="firstName" value={form.firstName} onChange={handleChange} required />
                         <div className="absolute inset-y-0 items-center flex pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -97,10 +97,10 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-
 
                 </div>
 
-                <div className="flex flex-col gap-1 mb-4 w-full max-w-sm">
-                    <label className="block text-lg font-latoBlack text-white">Last Name</label>
+                <div className="flex flex-col gap-1 mt-3 md:mt-0 md:mb-4 w-full max-w-sm">
+                    <label className="block md:text-lg font-latoBlack text-white">Last Name</label>
                     <div className="relative">
-                        <input type="text" placeholder="Last Name" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="lastName" value={form.lastName} onChange={handleChange} required />
+                        <input type="text" placeholder="Last Name" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="lastName" value={form.lastName} onChange={handleChange} required />
                         <div className="absolute inset-y-0 items-center flex pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -120,10 +120,10 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-1 mb-4 w-full max-w-sm">
-                    <label className="block text-lg font-latoBlack text-white">E-mail</label>
+                <div className="flex flex-col gap-1 mt-3 md:mt-0 md:mb-4 w-full max-w-sm">
+                    <label className="block md:text-lg font-latoBlack text-white">E-mail</label>
                     <div className="relative">
-                        <input type="email" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="email" value={form.email} onChange={handleChange} required />
+                        <input type="email" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="email" value={form.email} onChange={handleChange} required />
                         <div className="absolute inset-y-0 flex items-center pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -141,10 +141,10 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-1 mb-4 w-full max-w-sm">
-                    <label className="block text-lg font-latoBlack text-white">Password</label>
+                <div className="flex flex-col gap-1 mt-3 md:mt-0 md:mb-4 w-full max-w-sm">
+                    <label className="block md:text-lg font-latoBlack text-white">Password</label>
                     <div className="relative">
-                        <input type="password" placeholder="Password" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="password" value={form.password} onChange={handleChange} required />
+                        <input type="password" placeholder="Password" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="password" value={form.password} onChange={handleChange} required />
                         <div className="absolute inset-y-0 flex items-center pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -164,10 +164,10 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-1 mb-0 w-full max-w-sm">
-                    <label className="block text-lg font-latoBlack text-white">Confirm Password</label>
+                <div className="flex flex-col gap-1 mt-3 md:mt-0 md:mb-4 w-full max-w-sm">
+                    <label className="block md:text-lg font-latoBlack text-white">Confirm Password</label>
                     <div className="relative">
-                        <input type="password" placeholder="Confirm Password" className="border border-white rounded-2xl text-center font-semibold text-xl w-full placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="confirmPassword" value={form.confirmPassword} onChange={handleChange} required />
+                        <input type="password" placeholder="Confirm Password" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="confirmPassword" value={form.confirmPassword} onChange={handleChange} required />
                         <div className="absolute inset-y-0 flex items-center pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -182,18 +182,18 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-
                         </div>
                     </div>
 
- {error && <p className=" text-red-500 text-md">{error}</p>}
+                    {error && <p className=" text-red-500 text-md">{error}</p>}
                 </div>
-                <button type="submit" className="mt-14 p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-xl w-1/2 max-w-md mb-12 shadow-lg shadow-black">Sign Up</button>
+                <button type="submit" className="mt-8 md:mt-12 p-1 md:p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-lg md:text-xl w-full max-w-sm md:w-1/2 md:max-w-md md:mb-8 shadow-lg shadow-black">Sign Up</button>
             </form>
 
-            <div className="bg-white flex-1 text-center p-0 text-[#1A20AB] shadow-lg rounded-r-2xl flex flex-col justify-center">
-                <h1 className="text-5xl font-latoBlack mb-6 [text-shadow:_0_1.2px_0_rgb(0_0_0_/_90%)]">Ready To Save Big?</h1>
-                <p className="text-2xl mt-6 mb-6 mx-20">
-                    Then <span className="font-black">join us</span>, quickly <span className="font-black">compare prices</span> from various stores and <span className="font-black">find the best deals</span> available!
+            <div className="bg-white flex-1 text-center p-0 text-[#1A20AB] shadow-lg rounded-b-lg md:rounded-r-2xl flex flex-col justify-center">
+                <h1 className="text-xl md:text-5xl font-latoBlack mb-2 md:mb-6 md:[text-shadow:_0_1.2px_0_rgb(0_0_0_/_90%)]">Ready To Save Big?</h1>
+                <p className="md:text-2xl px-2 md:px-0 md:mt-6 md:mb-6 md:mx-20">
+                    Then <span className="font-black text-lg md:text-2xl">join us</span>, quickly <span className="font-black text-lg md:text-2xl">compare prices</span> from various stores and <span className="font-black text-lg md:text-2xl">find the best deals</span> available!
                 </p>
-                <p className="text-lg mt-10 text-black">
-                    Already have an account? <a href="../signin" className="no-underline text-[#1A20AB] font-black">Sign in here</a>.
+                <p className="md:text-lg mt-3 md:mt-10 text-black">
+                    Already have an account? <a href="../signin" className="no-underline text-[#1A20AB] font-black text-lg">Sign in here</a>.
                 </p>
             </div>
 
