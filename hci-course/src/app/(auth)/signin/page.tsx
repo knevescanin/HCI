@@ -101,7 +101,7 @@ export default function SignIn() {
 <button
   type="button"
   onClick={() => handleOAuthSignIn("facebook")}
-  className="flex items-center justify-center w-full max-w-sm md:w-72 mt-4 md:mt-0 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-[#165BD4] py-2 px-4 font-semibol shadow-lg shadow-black"
+  className="flex items-center justify-center w-full max-w-sm md:w-72 mt-4 md:mt-0 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-[#165BD4] py-2 px-4 font-semibold shadow-lg shadow-black"
 >
   <img src="/facebook-icon.svg" alt="Facebook" className="w-6 h-6 mr-2" />
   Sign in with Facebook
