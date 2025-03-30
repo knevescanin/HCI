@@ -41,7 +41,7 @@ export default function ProductCard({
             </div>
 			<h2 className="text-textPrimary font-latoBlack text-lg line-clamp-1">{name}</h2>
 			<p className="text-gray-500">{store}</p>
-			<p className="text-textPrimary font-latoBlack">{price.toFixed(2)} €</p>
+			<p className="text-[#1A20AB] font-latoBlack">{price} €</p>
 		</div>
 	)
 }

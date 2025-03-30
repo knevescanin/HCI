@@ -46,8 +46,6 @@ export default function Page() {
             return;
         }
 
-        console.log("Submitting form", form); // ✅ Log form data before sending
-
         const response = await fetch("/api/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -55,7 +53,6 @@ export default function Page() {
         });
 
         const data = await response.json();
-        console.log("Response from API:", data); // ✅ Log the response data
 
         if (!response.ok) {
             setError(data.error || "Signup failed");
@@ -69,7 +66,7 @@ export default function Page() {
 
     return (
 
-        <div className="mx-auto my-10 w-11/12 max-w-4xl shadow-2xl rounded-b-lg md:rounded-none flex flex-col md:flex-row 2xl:my-auto">
+        <div className="mx-auto my-10 w-11/12 max-w-4xl shadow-2xl rounded-b-lg md:rounded-none flex flex-col md:flex-row 3xl:my-auto">
             <form onSubmit={handleSubmit} className="bg-[#1A20AB] flex-1 text-left p-6 md:p-10 rounded-t-lg md:rounded-l-2xl flex flex-col justify-center items-center">
                 <div className="font-latoBlack md:mt-12 md:mb-12 text-white text-center">
                     <p className="text-3xl md:text-5xl [text-shadow:_0_5px_0_rgb(0_0_0_/_90%)]">Sign Up</p>
@@ -189,7 +186,7 @@ export default function Page() {
 
             <div className="bg-white flex-1 text-center p-0 text-[#1A20AB] shadow-lg rounded-b-lg md:rounded-r-2xl flex flex-col justify-center">
                 <h1 className="text-xl md:text-5xl font-latoBlack mb-2 md:mb-6 md:[text-shadow:_0_1.2px_0_rgb(0_0_0_/_90%)]">Ready To Save Big?</h1>
-                <p className="md:text-2xl px-2 md:px-0 md:mt-6 md:mb-6 md:mx-20">
+                <p className="md:text-2xl px-2 md:px-0 md:mt-6 md:mb-6 md:mx-8">
                     Then <span className="font-black text-lg md:text-2xl">join us</span>, quickly <span className="font-black text-lg md:text-2xl">compare prices</span> from various stores and <span className="font-black text-lg md:text-2xl">find the best deals</span> available!
                 </p>
                 <p className="md:text-lg mt-3 md:mt-10 text-black">

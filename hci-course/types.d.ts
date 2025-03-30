@@ -48,12 +48,19 @@ interface ProductCard {
 // Context types
 interface ProductContext {
 	products: Record<string, any>[]
+	productName : string
 	productLimit: number
 	setProductLimit: React.Dispatch<React.SetStateAction<number>>
-	productFilter: string
-	setProductFilter: React.Dispatch<React.SetStateAction<string>>
+	productSort: string
+	setproductSort: React.Dispatch<React.SetStateAction<string>>
 	offset: number
 	setOffset: React.Dispatch<React.SetStateAction<number>>
-	storeFilter: string
-	setStoreFilter: React.Dispatch<React.SetStateAction<string>>
+	selectedStores: string[]
+	setSelectedStores: React.Dispatch<React.SetStateAction<string[]>>
+	selectedCategories: string[];
+  	setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+	minPrice: string 
+	setMinPrice: React.Dispatch<React.SetStateAction<string>> 
+	maxPrice: string 
+	setMaxPrice: React.Dispatch<React.SetStateAction<string>>
 }

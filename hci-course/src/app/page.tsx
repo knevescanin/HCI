@@ -10,6 +10,8 @@
 // import HomeSection from './components/HomeSection'
 
 
+
+
 export default async function Home() {
 
 	// const entries = await client.getEntries({
@@ -29,9 +31,7 @@ export default async function Home() {
 		
 	return (
 		<>
-			
-			
-			
+		
 		</>
 	)
 }
