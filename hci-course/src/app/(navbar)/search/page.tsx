@@ -118,7 +118,7 @@ export default function Page() {
 							setMaxPrice: setMaxPrice
 						}}>
 						
-						<Sidebar />
+						<Sidebar searchQuery={productName} />
 
 						<div className="col-start-2 col-end-9 grid grid-cols-5 gap-3 mx-16 overflow-x-hidden">
 							{products.map((product, index) => (

@@ -3,6 +3,10 @@ interface SubmenuProps {
 	submenuNavigations: SubmenuNavigation[]
 }
 
+interface SidebarProps {
+    searchQuery: string;
+}
+
 interface SubmenuNavigation {
 	header: Header
 	navigations: NavigationItem[]

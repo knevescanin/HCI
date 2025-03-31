@@ -23,12 +23,16 @@ export async function GET(req: NextRequest) {
     const minPrice = parseFloat(req.nextUrl.searchParams.get("min_price") || "0");
     const maxPrice = parseFloat(req.nextUrl.searchParams.get("max_price") || "0");
 
+    if (!itemName) {
+        return NextResponse.json({ error: "Missing product name" }, { status: 400 });
+    }
+
     try {
         const sql = neon(`${process.env.DATABASE_URL}`);
         let query = `SELECT * FROM products WHERE 1=1`;
         const queryParams: any[] = [];
 
-        // Product Name
+        // Filter by Product Name
         if (itemName) {
             query += ` AND name ILIKE $${queryParams.length + 1}`;
             queryParams.push(`%${itemName}%`);
@@ -38,20 +42,44 @@ export async function GET(req: NextRequest) {
         // Categories filter
         if (categories.length > 0) {
             const categoryValues: string[] = [];
-
+        
             categories.forEach(category => {
-                const formattedCategory = category.replace(/\s+/g, "_").replace(/,/g, ""); // Ensure format matches categoryMap
+                const formattedCategory = category.replace(/\s+/g, "_").replace(/,/g, "");
                 if (categoryMap[formattedCategory]) {
                     categoryValues.push(...categoryMap[formattedCategory]);
                 }
             });
-
+        
+            const allMappedCategories = new Set<string>();
+            Object.values(categoryMap).forEach(subcategories => {
+                subcategories.forEach(subcategory => allMappedCategories.add(subcategory));
+            });
+        
+            let categoryConditions: string[] = [];
+            let localQueryParams: string[] = [];
+        
             if (categoryValues.length > 0) {
-                query += ` AND (${categoryValues.map((_, index) => `category = $${queryParams.length + index + 1}`).join(" OR ")})`;
-                queryParams.push(...categoryValues);
+                categoryConditions.push(
+                    `category IN (${categoryValues.map((_, index) => `$${queryParams.length + index + 1}`).join(", ")})`
+                );
+                localQueryParams.push(...categoryValues);
+            }
+        
+            if (categories.includes("Ostalo")) {
+                categoryConditions.push(
+                    `(category IS NULL OR category NOT IN (${[...allMappedCategories]
+                        .map((_, index) => `$${queryParams.length + localQueryParams.length + index + 1}`)
+                        .join(", ")}))`
+                );
+                localQueryParams.push(...allMappedCategories);
+            }
+        
+            if (categoryConditions.length > 0) {
+                query += ` AND (${categoryConditions.join(" OR ")})`;
+                queryParams.push(...localQueryParams);
             }
         }
-
+        
         if (categories.includes("Jaja_sirevi_i_namazi")) {
             query += ` AND NOT (category = 'Namazi' AND store_name = 'Konzum')`;
         }
@@ -90,6 +118,7 @@ export async function GET(req: NextRequest) {
             query += ` ORDER BY name COLLATE "und-x-icu" ${sortByName.toUpperCase()} LIMIT $${queryParams.length + 1} OFFSET $${queryParams.length + 2}`;
             queryParams.push(limit, offset);
         }
+
 
         const products = await sql(query, queryParams);
 

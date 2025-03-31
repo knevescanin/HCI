@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 
 import ProductContext from '../contexts/ProductContext'
 
-export default function Sidebar() {
+
+export default function Sidebar({ searchQuery }: SidebarProps) {
     const context = useContext(ProductContext);
 
     if (!context) {
@@ -22,28 +23,11 @@ export default function Sidebar() {
         maxPrice,
         setMaxPrice
     } = context;
-    const [stores, setStores] = useState<string[]>([]);
+    const [stores, setStores] = useState<{ store_name: string; product_count: number }[]>([]);
     const [localMinPrice, setLocalMinPrice] = useState(minPrice);
     const [localMaxPrice, setLocalMaxPrice] = useState(maxPrice);
     const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
-    const categories = [
-        { name: "Meso" },
-        { name: "Voće" },
-        { name: "Povrće" },
-        { name: "Pekarnica" },
-        { name: "Suhomesnati" },
-        { name: "Mliječni proizvodi" },
-        { name: "Jaja, sirevi i namazi" },
-        { name: "Riba" },
-        { name: "Bezalkoholna pića" },
-        { name: "Alkoholna pića" },
-        { name: "Umaci i začini" },
-        { name: "Tjestenina, riža i njoki" },
-        { name: "Njega i higijena" },
-        { name: "Kućni ljubimci" },
-        { name: "Konzervirana hrana, juhe, gotova jela" },
-        { name: "Zdravo" }
-    ];
+    const [categories, setCategories] = useState<Record<string, number>>({});
 
     const sortOptions = [
         { value: "name-asc", label: "Name A-Z" },
@@ -55,22 +39,64 @@ export default function Sidebar() {
     const itemsPerPageOptions = [10, 20, 50, 100];
 
 
+    useEffect(() => {
+        if (!searchQuery) return;
+        const queryParams = new URLSearchParams();
+
+        if (searchQuery)
+            queryParams.append("name", encodeURIComponent(searchQuery));
+
+        if (minPrice)
+            queryParams.append("min_price", minPrice);
+
+        if (maxPrice)
+            queryParams.append("max_price", maxPrice);
+
+        if (selectedStores.length > 0)
+            queryParams.append("stores", selectedStores.join(","));
+
+        const fetchCategories = async () => {
+            console.log("I'm here!")
+            const response = await fetch(`../api/categories?${queryParams.toString()}`);
+            const data = await response.json();
+            setCategories(data.categoryCounts);
+        };
+
+        fetchCategories();
+    }, [searchQuery, selectedStores, minPrice, maxPrice]);
+
+
 
     useEffect(() => {
         const fetchStores = async () => {
             try {
-                const response = await fetch('../api/stores'); // Use absolute path
+
+                const queryParams = new URLSearchParams();
+        
+                if (searchQuery)
+                    queryParams.append("name", searchQuery);
+
+                if (selectedCategories.length > 0)
+                    queryParams.append("categories", selectedCategories.join(";"));
+
+                if (minPrice)
+                    queryParams.append("min_price", minPrice);
+
+                if (maxPrice)
+                     queryParams.append("max_price", maxPrice);
+        
+                const response = await fetch(`/api/stores?${queryParams.toString()}`);
                 if (!response.ok) throw new Error('Failed to fetch stores');
 
                 const data = await response.json();
-                setStores(data.map((store: { store_name: string }) => store.store_name)); // Correct extraction
+                setStores(data);
             } catch (error) {
                 console.error('Error fetching stores:', error);
             }
         };
 
         fetchStores();
-    }, []);
+}, [searchQuery, selectedCategories, minPrice, maxPrice]);
 
 
     const handleStoreChange = (store: string) => {
@@ -99,15 +125,15 @@ export default function Sidebar() {
 
     const toggleSection = (section: string) => {
         setVisibleSections((prev) => {
-          const newVisibleSections = new Set(prev);
-          if (newVisibleSections.has(section)) {
-            newVisibleSections.delete(section); 
-          } else {
-            newVisibleSections.add(section); 
-          }
-          return newVisibleSections;
+            const newVisibleSections = new Set(prev);
+            if (newVisibleSections.has(section)) {
+                newVisibleSections.delete(section);
+            } else {
+                newVisibleSections.add(section);
+            }
+            return newVisibleSections;
         });
-      };
+    };
 
     return (
         <div className="fixed top-50 flex-row justify-center left-0 bg-white shadow-lg w-max p-4 rounded-lg text-textPrimary md:h-fit">
@@ -118,48 +144,47 @@ export default function Sidebar() {
             <div className="mb-6">
                 <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('categories')}>Categories</h3>
                 {visibleSections.has('categories') && (
-                <div className="space-y-2">
-                    {categories.map((category) => (
-                         <div key={category.name} className="flex items-center ml-5">
-                         <input
-                             type="checkbox"
-                             checked={selectedCategories.includes(category.name)}
-                             onChange={() => handleCategoryChange(category.name)}
-                             className="mr-2"
-                         />
-                         <label htmlFor={category.name}>{category.name}</label>
-                     </div>
-                    ))}
-                </div>
+                    <div className="space-y-2">
+                        {Object.entries(categories).map(([category, count]) => (
+                            <div key={category} className="flex items-center ml-5">
+                                <input
+                                    type="checkbox"
+                                    checked={selectedCategories.includes(category)}
+                                    onChange={() => handleCategoryChange(category)}
+                                    className="mr-2"
+                                />
+                                <label htmlFor={category}>{category.replace(/_/g, ' ')} ({count})</label>
+                            </div>
+                        ))}
+                    </div>
                 )}
             </div>
 
             <div className="mb-6">
                 <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('stores')}>Stores</h3>
-                    {visibleSections.has('stores') && (
-                        <ul>
+                {visibleSections.has('stores') && (
+                    <ul>
                         {stores.map((store) => (
-                            <li key={store} className="mb-1 ml-5">
+                            <li key={store.store_name} className="mb-1 ml-5">
                                 <label className="flex items-center">
                                     <input
                                         type="checkbox"
                                         className="mr-2"
-                                        checked={selectedStores.includes(store)}
-                                        onChange={() => handleStoreChange(store)}
+                                        checked={selectedStores.includes(store.store_name)}
+                                        onChange={() => handleStoreChange(store.store_name)}
                                     />
-                                    {store}
+                                    {store.store_name} ({store.product_count})
                                 </label>
                             </li>
                         ))}
                     </ul>
-                    )}
+                )}
             </div>
 
             <div className="mb-6">
-				<div className='flex-row justify-around items-center'>
-                <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('priceRange')}>Price Range</h3>
-				<h3 className='font-bold mb-2 cursor-pointer text-[#1A20AB]'>+</h3>
-				</div>
+                <div className='flex-row justify-around items-center'>
+                    <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('priceRange')}>Price Range</h3>
+                </div>
                 {visibleSections.has('priceRange') && (
                     <div>
                         <div className="flex items-center space-x-2 w-full mb-2">
@@ -202,33 +227,33 @@ export default function Sidebar() {
             <div className="mb-6">
                 <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('sortBy')}>Sort By</h3>
                 {visibleSections.has('sortBy') && (
-                <select
-                    value={productSort}
-                    onChange={(e) => setproductSort(e.target.value)}
-                    className="px-2 py-1 w-full rounded border"
-                >
-                    {sortOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
+                    <select
+                        value={productSort}
+                        onChange={(e) => setproductSort(e.target.value)}
+                        className="px-2 py-1 w-full rounded border"
+                    >
+                        {sortOptions.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
                 )}
             </div>
             <div className="mb-6">
                 <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('itemsPerPage')}>Items Per Page</h3>
                 {visibleSections.has('itemsPerPage') && (
-                <select
-                    value={productLimit}
-                    onChange={(e) => setProductLimit(parseInt(e.target.value))}
-                    className="px-2 py-1 rounded"
-                >
-                    {itemsPerPageOptions.map((limit) => (
-                        <option key={limit} value={limit}>
-                            {limit}
-                        </option>
-                    ))}
-                </select>
+                    <select
+                        value={productLimit}
+                        onChange={(e) => setProductLimit(parseInt(e.target.value))}
+                        className="px-2 py-1 rounded"
+                    >
+                        {itemsPerPageOptions.map((limit) => (
+                            <option key={limit} value={limit}>
+                                {limit}
+                            </option>
+                        ))}
+                    </select>
                 )}
             </div>
         </div>
