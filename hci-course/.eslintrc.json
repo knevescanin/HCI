@@ -1,7 +1,19 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:@typescript-eslint/recommended", // TypeScript recommended rules
+    "plugin:@typescript-eslint/recommended-requiring-type-checking" // Type-aware rules
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json" // Ensure TypeScript type-checking works
+  },
   "rules": {
-  "@typescript-eslint/no-explicit-any": "off"
-}
-  
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/react-in-jsx-scope": "off", // Next.js doesn't require React to be in scope
+    "react/jsx-key": "warn", // Warn if keys are missing in lists
+    "react/no-unescaped-entities": "off", // Allow unescaped entities in JSX
+    "react/display-name": "off", // Disable display name warnings
+    "import/no-anonymous-default-export": "off" // Allow anonymous default exports
+  }
 }
