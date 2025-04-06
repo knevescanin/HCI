@@ -174,7 +174,7 @@ export default function Page() {
 						</div>) : (
 						<div className='my-auto mx-auto px-10 flex flex-col justify-center items-center'>
 							<p className='text-[#1A20AB] text-5xl font-bold text-center'>
-								Oops! We couldn't find any products for "{productName}". Please try a different search!
+								Oops! We couldn&apos;t find any products for &quot;{productName}&quot;. Please try a different search!
 							</p>
 						</div>
 					)}

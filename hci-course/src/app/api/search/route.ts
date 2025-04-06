@@ -55,8 +55,8 @@ export async function GET(req: NextRequest) {
                 subcategories.forEach(subcategory => allMappedCategories.add(subcategory));
             });
         
-            let categoryConditions: string[] = [];
-            let localQueryParams: string[] = [];
+            const categoryConditions: string[] = [];
+            const localQueryParams: string[] = [];
         
             if (categoryValues.length > 0) {
                 categoryConditions.push(

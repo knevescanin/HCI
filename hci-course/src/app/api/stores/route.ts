@@ -22,8 +22,8 @@ export async function GET(req: NextRequest) {
 
 
         // Filter by categories
-        let categoryConditions: string[] = [];
-        let categoryValues: string[] = [];
+        const categoryConditions: string[] = [];
+        const categoryValues: string[] = [];
 
         selectedCategories.forEach(parentCategory => {
             if (categoryMap[parentCategory]) {

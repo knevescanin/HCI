@@ -1,11 +1,13 @@
 "use client"
 import ProductCard from "@/app/components/ProductCard";
+import { GridProvider } from "@/app/contexts/GridContext";
+
 
 
 function page() {
     return (
+        <GridProvider gridColumns={2}>
         <div>
-
             <h1>User&apos;s favourites</h1>
             
             <div className="grid grid-cols-8 w-full h-max text-white relative bg-white">
@@ -35,6 +37,7 @@ function page() {
                 />
             </div>
         </div>
+        </GridProvider>
     );
 }
 
