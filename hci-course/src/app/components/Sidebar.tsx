@@ -159,9 +159,9 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                 ></div>
             )}
 
-            <div className={`fixed top-0 left-0 w-3/5 h-full p-4 rounded-r-lg text-textPrimary z-50 overflow-y-auto transition-transform transform
+            <div className={`fixed top-0 left-0 w-3/5 h-full p-4 rounded-r-lg text-textPrimary z-50 transition-transform transform
             ${isSidebarOpen ? 'bg-[#1A20AB] text-white translate-x-0' : '-translate-x-full'} 
-            lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-[65vh]
+            lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-full
             2xl:min-w-[200px] 2xl:w-full`}>
                 <h2 className="text-4xl font-semibold text-center mb-4 text-white lg:text-[#1A20AB]">
                     Filters
