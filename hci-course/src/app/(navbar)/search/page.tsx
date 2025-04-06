@@ -4,6 +4,7 @@ import Pagination from '@/app/components/Pagination'
 import Sidebar from '@/app/components/Sidebar'
 import { useEffect, useState } from 'react'
 import ProductContext from '@/app/contexts/ProductContext'
+import { GridProvider } from "@/app/contexts/GridContext";
 import CardSkeletonLoader from '@/app/components/UI/CardSkeletonLoader'
 import { useSearchParams } from 'next/navigation'
 
@@ -71,6 +72,8 @@ export default function Page() {
 	const productName = useSearchParams().get('name') || '';
 	const [minPrice, setMinPrice] = useState<string>('0');
 	const [maxPrice, setMaxPrice] = useState<string>('0');
+	const [gridColumns, setGridColumns] = useState(2);
+
 
 	useEffect(() => {
 		setLoading(true)
@@ -93,47 +96,74 @@ export default function Page() {
 		);
 	}, [offset]);
 
+	const toggleGridColumns = () => {
+		setGridColumns((prev) => (prev === 1 ? 2 : 1));
+	};
+
 
 	return (
 		<>
 			{products.length > 0 ? (
-				<div className="h-full grid grid-cols-1 md:grid-cols-8 w-full text-white relative bg-white">
-					<ProductContext.Provider
-						value={{
-							products: products,
-							productName: productName,
-							productLimit: productLimit,
-							setProductLimit: setProductLimit,
-							productSort: productSort,
-							setproductSort: setproductSort,
-							offset: offset,
-							setOffset: setOffset,
-							selectedStores: selectedStores,
-							setSelectedStores: setSelectedStores,
-							selectedCategories: selectedCategories,
-							setSelectedCategories: setSelectedCategories,
-							minPrice: minPrice,
-							setMinPrice: setMinPrice,
-							maxPrice: maxPrice,
-							setMaxPrice: setMaxPrice
-						}}>
-						
-						<Sidebar searchQuery={productName} />
+				<GridProvider gridColumns={gridColumns}>
+					<div className="min-h-[75vh] 
+				md:grid md:grid-cols-8 w-full text-white relative bg-white">
+						<ProductContext.Provider
+							value={{
+								products: products,
+								productName: productName,
+								productLimit: productLimit,
+								setProductLimit: setProductLimit,
+								productSort: productSort,
+								setproductSort: setproductSort,
+								offset: offset,
+								setOffset: setOffset,
+								selectedStores: selectedStores,
+								setSelectedStores: setSelectedStores,
+								selectedCategories: selectedCategories,
+								setSelectedCategories: setSelectedCategories,
+								minPrice: minPrice,
+								setMinPrice: setMinPrice,
+								maxPrice: maxPrice,
+								setMaxPrice: setMaxPrice
+							}}>
 
-						<div className="col-start-2 col-end-9 grid grid-cols-5 gap-3 mx-16 overflow-x-hidden">
-							{products.map((product, index) => (
-								<ProductCard
-									key={index}
-									name={product.name}
-									imageUrl={product.image_url}
-									store={product.store_name}
-									price={product.price}
-								/>
-							))}
-						</div>
-						<Pagination />
-					</ProductContext.Provider>
-				</div>
+							<div className='w-[95vw] flex my-8 mx-auto 
+							md:w-[100vw] md:flex md:justify-center md:items-center md:my-8 
+							lg:block lg:my-0 lg:w-full'>
+								<div className='w-1/2 md:w-auto'>
+								<Sidebar searchQuery={productName} />
+							</div>
+
+							<button
+								className={`md:hidden w-1/2 px-4 py-2 bg-slate-600  rounded-r-lg shadow-xl text-white font-semibold hover:bg-slate-700 transition`}
+								onClick={toggleGridColumns}
+							>
+								{gridColumns === 1 ? '2 Columns' : '1 Column'}
+							</button>
+							</div>
+
+
+							<div className={`
+						 ${gridColumns === 1 ? 'mx-auto w-3/5' : 'col-start-2 col-end-9 grid sm:gap-0 overflow-x-hidden grid-cols-2'}
+						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:gap-1 md:ml-0 md:w-auto md:my-5
+						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-16
+						xl:grid-cols-5 xl:gap-0 xl:ml-3`}>
+								{products.map((product, index) => (
+									<ProductCard
+										key={index}
+										name={product.name}
+										imageUrl={product.image_url}
+										store={product.store_name}
+										price={product.price}
+									/>
+								))}
+								<div className='col-span-full w-full flex justify-center mb-5 lg:mb-0 lg:my-auto '>
+									<Pagination />
+								</div>
+							</div>
+						</ProductContext.Provider>
+					</div>
+				</GridProvider>
 			) : (
 				<div className='h-full my-auto' >
 					{loading ? (

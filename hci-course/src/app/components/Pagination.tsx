@@ -13,7 +13,7 @@ export default function Pagination() {
     const { offset, setOffset, productLimit } = context;
     
     return (
-        <ButtonUI onClick={() => setOffset(offset + productLimit)} textSize="lg" className= "col-start-2 col-end-9 justify-self-center" >
+        <ButtonUI onClick={() => setOffset(offset + productLimit)} textSize="lg" className= "col-start-2 col-end-9 justify-self-center my-auto" >
           Load more products
         </ButtonUI>
     );

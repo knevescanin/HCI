@@ -68,3 +68,8 @@ interface ProductContext {
 	maxPrice: string 
 	setMaxPrice: React.Dispatch<React.SetStateAction<string>>
 }
+
+
+interface GridContextType {
+    gridColumns: number;
+}

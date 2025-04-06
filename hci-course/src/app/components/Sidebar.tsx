@@ -28,6 +28,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
     const [localMaxPrice, setLocalMaxPrice] = useState(maxPrice);
     const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
     const [categories, setCategories] = useState<Record<string, number>>({});
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const sortOptions = [
         { value: "name-asc", label: "Name A-Z" },
@@ -72,7 +73,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
             try {
 
                 const queryParams = new URLSearchParams();
-        
+
                 if (searchQuery)
                     queryParams.append("name", searchQuery);
 
@@ -83,8 +84,8 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                     queryParams.append("min_price", minPrice);
 
                 if (maxPrice)
-                     queryParams.append("max_price", maxPrice);
-        
+                    queryParams.append("max_price", maxPrice);
+
                 const response = await fetch(`/api/stores?${queryParams.toString()}`);
                 if (!response.ok) throw new Error('Failed to fetch stores');
 
@@ -96,7 +97,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
         };
 
         fetchStores();
-}, [searchQuery, selectedCategories, minPrice, maxPrice]);
+    }, [searchQuery, selectedCategories, minPrice, maxPrice]);
 
 
     const handleStoreChange = (store: string) => {
@@ -123,6 +124,10 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
         setMaxPrice("0");
     };
 
+    const toggleSidebar = () => {
+        setIsSidebarOpen((prev) => !prev);
+    };
+
     const toggleSection = (section: string) => {
         setVisibleSections((prev) => {
             const newVisibleSections = new Set(prev);
@@ -136,127 +141,150 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
     };
 
     return (
-        <div className="fixed top-50 flex-row justify-center left-0 bg-white shadow-lg w-max p-4 rounded-lg text-textPrimary md:h-fit">
-            <h2 className="text-xl font-semibold text-center mb-4 text-[#1A20AB]">
-                Filter Products
-            </h2>
+        <>
+            <button
+                className="sticky w-full bg-[#1A20AB] text-white font-semibold px-4 py-2 rounded-l-lg shadow-xl
+                md:w-auto md:top-auto md:left-auto md:rounded-lg 
+                lg:hidden"
+                onClick={toggleSidebar}
+            >
+                {isSidebarOpen ? 'Close Filters' : 'Open Filters'}
+            </button>
 
-            <div className="mb-6">
-                <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('categories')}>Categories</h3>
-                {visibleSections.has('categories') && (
-                    <div className="space-y-2">
-                        {Object.entries(categories).map(([category, count]) => (
-                            <div key={category} className="flex items-center ml-5">
-                                <input
-                                    type="checkbox"
-                                    checked={selectedCategories.includes(category)}
-                                    onChange={() => handleCategoryChange(category)}
-                                    className="mr-2"
-                                />
-                                <label htmlFor={category}>{category.replace(/_/g, ' ')} ({count})</label>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
 
-            <div className="mb-6">
-                <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('stores')}>Stores</h3>
-                {visibleSections.has('stores') && (
-                    <ul>
-                        {stores.map((store) => (
-                            <li key={store.store_name} className="mb-1 ml-5">
-                                <label className="flex items-center">
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
+                    onClick={toggleSidebar} // Close sidebar when clicking outside
+                ></div>
+            )}
+
+            <div className={`fixed top-0 left-0 w-3/5 h-full p-4 rounded-r-lg text-textPrimary z-50 overflow-y-auto transition-transform transform
+            ${isSidebarOpen ? 'bg-[#1A20AB] text-white translate-x-0' : '-translate-x-full'} 
+            lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-[65vh]
+            2xl:min-w-[200px] 2xl:w-full`}>
+                <h2 className="text-4xl font-semibold text-center mb-4 text-white lg:text-[#1A20AB]">
+                    Filters
+                </h2>
+
+                <div className="mb-6">
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className=' transition duration-300 ease-in-out'>{visibleSections.has('categories') ? '-' : '+'}</span></h3>
+                    {visibleSections.has('categories') && (
+                        <div className="space-y-2">
+                            {Object.entries(categories).map(([category, count]) => (
+                                <div key={category} className="flex items-center ml-2 font-sans italic">
                                     <input
                                         type="checkbox"
+                                        checked={selectedCategories.includes(category)}
+                                        onChange={() => handleCategoryChange(category)}
                                         className="mr-2"
-                                        checked={selectedStores.includes(store.store_name)}
-                                        onChange={() => handleStoreChange(store.store_name)}
                                     />
-                                    {store.store_name} ({store.product_count})
-                                </label>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-
-            <div className="mb-6">
-                <div className='flex-row justify-around items-center'>
-                    <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('priceRange')}>Price Range</h3>
-                </div>
-                {visibleSections.has('priceRange') && (
-                    <div>
-                        <div className="flex items-center space-x-2 w-full mb-2">
-                            <input
-                                type="number"
-                                step="0.01"
-                                value={localMinPrice}
-                                onChange={(e) => setLocalMinPrice(e.target.value)}
-                                min="0"
-                                placeholder="Min"
-                                className="w-1/2 px-2 py-1 border rounded"
-                            />
-                            <span className="text-lg font-semibold">-</span>
-                            <input
-                                type="number"
-                                step="0.01"
-                                value={localMaxPrice}
-                                onChange={(e) => setLocalMaxPrice(e.target.value)}
-                                placeholder="Max"
-                                className="w-1/2 px-2 py-1 border rounded"
-                            />
+                                    <label htmlFor={category}>{category.replace(/_/g, ' ')} ({count})</label>
+                                </div>
+                            ))}
                         </div>
-                        <button
-                            onClick={applyFilters}
-                            className="mt-2 px-4 w-full py-2 bg-[#1A20AB] text-white rounded-lg hover:bg-blue-700 transition"
-                        >
-                            Apply
-                        </button>
+                    )}
+                </div>
 
-                        <button
-                            onClick={defaultPriceRange}
-                            className="mt-2 px-4 w-full py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
-                        >
-                            Reset
-                        </button>
+                <div className="mb-6">
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('stores')}>Stores <span className=' transition duration-300 ease-in-out'>{visibleSections.has('stores') ? '-' : '+'}</span></h3>
+                    {visibleSections.has('stores') && (
+                        <ul>
+                            {stores.map((store) => (
+                                <li key={store.store_name} className="mb-1 ml-2 font-san italic">
+                                    <label className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            className="mr-2"
+                                            checked={selectedStores.includes(store.store_name)}
+                                            onChange={() => handleStoreChange(store.store_name)}
+                                        />
+                                        {store.store_name} ({store.product_count})
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+
+                <div className="mb-6">
+                    <div className='flex-row justify-around items-center'>
+                        <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('priceRange')}>Price Range <span className=' transition duration-300 ease-in-out'>{visibleSections.has('priceRange') ? '-' : '+'}</span></h3>
                     </div>
-                )}
-            </div>
+                    {visibleSections.has('priceRange') && (
+                        <div>
+                            <div className="flex items-center space-x-2 w-full mb-2 font-sans">
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    value={localMinPrice}
+                                    onChange={(e) => setLocalMinPrice(e.target.value)}
+                                    min="0"
+                                    placeholder="Min"
+                                    className="w-1/2 px-2 py-1 border rounded text-black font-sans"
+                                />
+                                <span className="2xl:text-lg font-semibold">-</span>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    value={localMaxPrice}
+                                    onChange={(e) => setLocalMaxPrice(e.target.value)}
+                                    placeholder="Max"
+                                    className="w-1/2 px-2 py-1 border rounded text-black font-sans"
+                                />
+                            </div>
+                            <button
+                                onClick={applyFilters}
+                                className="mt-2 px-4 w-full py-2 bg-white lg:bg-[#1A20AB] text-black lg:text-white font-sans font-semibold rounded-lg hover:bg-blue-700 transition"
+                            >
+                                Apply
+                            </button>
 
-            <div className="mb-6">
-                <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('sortBy')}>Sort By</h3>
-                {visibleSections.has('sortBy') && (
-                    <select
-                        value={productSort}
-                        onChange={(e) => setproductSort(e.target.value)}
-                        className="px-2 py-1 w-full rounded border"
-                    >
-                        {sortOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                )}
+                            <button
+                                onClick={defaultPriceRange}
+                                className="mt-2 px-4 w-full py-2 bg-gray-500 text-white font-sans font-semibold rounded-lg hover:bg-gray-600 transition"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    )}
+                </div>
+
+                <div className="mb-6">
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('sortBy')}>Sort By <span className=' transition duration-300 ease-in-out'>{visibleSections.has('sortBy') ? '-' : '+' }</span></h3>
+                    {visibleSections.has('sortBy') && (
+                        <select
+                            value={productSort}
+                            onChange={(e) => setproductSort(e.target.value)}
+                            className="px-2 py-1 w-full rounded border text-black font-sans"
+                        >
+                            {sortOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+                    )}
+                </div>
+                <div className="mb-6">
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page <span className=' transition duration-300 ease-in-out'>{visibleSections.has('itemsPerPage') ? '-' : '+' }</span></h3>
+                    {visibleSections.has('itemsPerPage') && (
+                        <select
+                            value={productLimit}
+                            onChange={(e) => setProductLimit(parseInt(e.target.value))}
+                            className="px-2 py-1 rounded text-black font-sans"
+                        >
+                            {itemsPerPageOptions.map((limit) => (
+                                <option key={limit} value={limit}>
+                                    {limit}
+                                </option>
+                            ))}
+                        </select>
+                    )}
+
+                </div>
             </div>
-            <div className="mb-6">
-                <h3 className="font-bold mb-2 cursor-pointer text-[#1A20AB]" onClick={() => toggleSection('itemsPerPage')}>Items Per Page</h3>
-                {visibleSections.has('itemsPerPage') && (
-                    <select
-                        value={productLimit}
-                        onChange={(e) => setProductLimit(parseInt(e.target.value))}
-                        className="px-2 py-1 rounded"
-                    >
-                        {itemsPerPageOptions.map((limit) => (
-                            <option key={limit} value={limit}>
-                                {limit}
-                            </option>
-                        ))}
-                    </select>
-                )}
-            </div>
-        </div>
+        </>
     )
 }
 
