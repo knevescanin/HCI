@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 
         // Add store filter if provided
         if (stores.length > 0) {
-            query += ` AND store_name IN (${stores.map(() => `$${queryParams.length + 2}`).join(", ")})`;
+            query += ` AND store_name IN (${stores.map((_, index) => `$${queryParams.length + index + 1}::TEXT`).join(", ")})`;
             queryParams.push(...stores);
         }
 

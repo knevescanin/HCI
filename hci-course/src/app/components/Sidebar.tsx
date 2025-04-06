@@ -171,17 +171,21 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                     <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className=' transition duration-300 ease-in-out'>{visibleSections.has('categories') ? '-' : '+'}</span></h3>
                     {visibleSections.has('categories') && (
                         <div className="space-y-2">
-                            {Object.entries(categories).map(([category, count]) => (
-                                <div key={category} className="flex items-center ml-2 font-sans italic">
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedCategories.includes(category)}
-                                        onChange={() => handleCategoryChange(category)}
-                                        className="mr-2"
-                                    />
-                                    <label htmlFor={category}>{category.replace(/_/g, ' ')} ({count})</label>
-                                </div>
-                            ))}
+                            {categories && Object.entries(categories).length > 0 ? (
+                                Object.entries(categories).map(([category, count]) => (
+                                    <div key={category} className="flex items-center ml-2 font-sans italic">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedCategories.includes(category)}
+                                            onChange={() => handleCategoryChange(category)}
+                                            className="mr-2"
+                                        />
+                                        <label htmlFor={category}>
+                                            {category.replace(/_/g, ' ')} ({count})
+                                        </label>
+                                    </div>
+                                ))
+                            ) : ('')}
                         </div>
                     )}
                 </div>
@@ -251,7 +255,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                 </div>
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('sortBy')}>Sort By <span className=' transition duration-300 ease-in-out'>{visibleSections.has('sortBy') ? '-' : '+' }</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('sortBy')}>Sort By <span className=' transition duration-300 ease-in-out'>{visibleSections.has('sortBy') ? '-' : '+'}</span></h3>
                     {visibleSections.has('sortBy') && (
                         <select
                             value={productSort}
@@ -267,7 +271,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                     )}
                 </div>
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page <span className=' transition duration-300 ease-in-out'>{visibleSections.has('itemsPerPage') ? '-' : '+' }</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page <span className=' transition duration-300 ease-in-out'>{visibleSections.has('itemsPerPage') ? '-' : '+'}</span></h3>
                     {visibleSections.has('itemsPerPage') && (
                         <select
                             value={productLimit}
