@@ -144,7 +144,7 @@ export default function Page() {
 
 
 							<div className={`
-						 ${gridColumns === 1 ? 'mx-auto w-3/5' : 'col-start-2 col-end-9 grid sm:gap-0 overflow-x-hidden grid-cols-2'}
+						 ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-2 col-end-9 grid sm:gap-0 overflow-x-hidden grid-cols-2'}
 						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:gap-1 md:ml-0 md:w-auto md:my-5
 						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-16 lg:h-fit
 						xl:grid-cols-5 xl:gap-0 xl:ml-3`}>
