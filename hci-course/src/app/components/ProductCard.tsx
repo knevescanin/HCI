@@ -27,7 +27,7 @@ export default function ProductCard({
 	}
 
 	return (
-		<div className={`${gridColumns === 1 ? 'mb-10 shadow-md' : 'shadow-md mb-7'}
+		<div className={`${gridColumns === 1 ? 'mb-4 shadow-md' : 'shadow-md mb-7'}
 		group bg-[#FFFFFF] rounded-xl border shadow-lg mx-auto lg:mx-0  flex flex-col items-center justify-between relative w-11/12 h-[250px] sm:h-[400px] hover:shadow-xl transition duration-300 ease-in-out`}>
 			<div className="w-full aspect-[4/3] sm:aspect-[3/3] mb-0 relative overflow-hidden rounded-md">
 				{/* show favourite icon if user is logged in, else don't */}
