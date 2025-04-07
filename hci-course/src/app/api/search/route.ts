@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
         const queryParams: any[] = [];
 
         // Filter by Product Name
-        
+
         if (itemName) {
             query += ` AND unaccent(name) ILIKE unaccent($${queryParams.length + 1})`;
             countQuery += ` AND unaccent(name) ILIKE unaccent($${queryParams.length + 1})`;
@@ -45,29 +45,29 @@ export async function GET(req: NextRequest) {
         // Categories filter
         if (categories.length > 0) {
             const categoryValues: string[] = [];
-        
+
             categories.forEach(category => {
                 const formattedCategory = category.replace(/\s+/g, "_").replace(/,/g, "");
                 if (categoryMap[formattedCategory]) {
                     categoryValues.push(...categoryMap[formattedCategory]);
                 }
             });
-        
+
             const allMappedCategories = new Set<string>();
             Object.values(categoryMap).forEach(subcategories => {
                 subcategories.forEach(subcategory => allMappedCategories.add(subcategory));
             });
-        
+
             const categoryConditions: string[] = [];
             const localQueryParams: string[] = [];
-        
+
             if (categoryValues.length > 0) {
                 categoryConditions.push(
                     `category IN (${categoryValues.map((_, index) => `$${queryParams.length + index + 1}`).join(", ")})`
                 );
                 localQueryParams.push(...categoryValues);
             }
-        
+
             if (categories.includes("Ostalo")) {
                 categoryConditions.push(
                     `(category IS NULL OR category NOT IN (${[...allMappedCategories]
@@ -76,14 +76,14 @@ export async function GET(req: NextRequest) {
                 );
                 localQueryParams.push(...allMappedCategories);
             }
-        
+
             if (categoryConditions.length > 0) {
                 query += ` AND (${categoryConditions.join(" OR ")})`;
                 countQuery += ` AND (${categoryConditions.join(" OR ")})`;
                 queryParams.push(...localQueryParams);
             }
         }
-        
+
         if (categories.includes("Jaja_sirevi_i_namazi")) {
             query += ` AND NOT (category = 'Namazi' AND store_name = 'Konzum')`;
             countQuery += ` AND NOT (category = 'Namazi' AND store_name = 'Konzum')`;

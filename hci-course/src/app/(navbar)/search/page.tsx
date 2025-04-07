@@ -55,7 +55,7 @@ const handleProductFetch = async (
 		return data;
 	} catch (error) {
 		console.error("Error fetching products:", error);
-		return { products: [], totalProcuts: 0};
+		return { products: [], totalProcuts: 0 };
 	}
 };
 
@@ -74,8 +74,8 @@ export default function Page() {
 	const [maxPrice, setMaxPrice] = useState<string>('0');
 	const [gridColumns, setGridColumns] = useState(2);
 	const [totalProducts, setTotalProducts] = useState(0);
-	
-	
+
+
 
 
 	useEffect(() => {
@@ -135,15 +135,15 @@ export default function Page() {
 							md:w-[100vw] md:flex md:justify-center md:items-center md:my-8 
 							lg:block lg:my-0 lg:w-full'>
 								<div className='w-1/2 md:w-auto'>
-								<Sidebar searchQuery={productName} />
-							</div>
+									<Sidebar searchQuery={productName} />
+								</div>
 
-							<button
-								className={`md:hidden w-1/2 px-4 py-2 bg-slate-600  rounded-r-lg shadow-xl text-white font-semibold hover:bg-slate-700 transition`}
-								onClick={toggleGridColumns}
-							>
-								{gridColumns === 1 ? '2 Columns' : '1 Column'}
-							</button>
+								<button
+									className={`md:hidden w-1/2 px-4 py-2 bg-slate-600  rounded-r-lg shadow-xl text-white font-semibold hover:bg-slate-700 transition`}
+									onClick={toggleGridColumns}
+								>
+									{gridColumns === 1 ? '2 Columns' : '1 Column'}
+								</button>
 							</div>
 
 
@@ -162,11 +162,11 @@ export default function Page() {
 									/>
 								))}
 								{offset + productLimit < totalProducts && (
-								<div className='col-span-full w-full flex justify-center mb-5 lg:mb-0 lg:my-auto '>
-								
-									<Pagination />
-								
-								</div>
+									<div className='col-span-full w-full flex justify-center mb-5 lg:mb-0 lg:my-auto '>
+
+										<Pagination />
+
+									</div>
 								)}
 							</div>
 						</ProductContext.Provider>
