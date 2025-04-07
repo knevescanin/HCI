@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
         const sql = neon(`${process.env.DATABASE_URL}`);
 
         // Start with the base query to search for products by name
-        let query = `SELECT name, category, store_name, price FROM products WHERE name ILIKE $1`;
+        let query = `SELECT name, category, store_name, price FROM products WHERE unaccent(name) ILIKE unaccent($1)`;
         const queryParams: any[] = [`%${itemName}%`]; // Start with product name as the filter
 
         // Add store filter if provided

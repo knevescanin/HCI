@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
         // Filter by product name
         if (itemName) {
-            query += ` AND name ILIKE $${queryParams.length + 1}`;
+            query += ` AND unaccent(name) ILIKE unaccent($${queryParams.length + 1})`;
             queryParams.push(`%${itemName}%`);
         }
 
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
 
         selectedCategories.forEach(parentCategory => {
             if (categoryMap[parentCategory]) {
-                categoryValues.push(...categoryMap[parentCategory]); 
+                categoryValues.push(...categoryMap[parentCategory]);
             }
         });
 
@@ -38,19 +38,19 @@ export async function GET(req: NextRequest) {
         }
 
         if (selectedCategories.includes("Ostalo")) {
-            
+
             const allMappedCategories = new Set<string>();
             Object.values(categoryMap).forEach(subcategories => {
                 subcategories.forEach(subcategory => allMappedCategories.add(subcategory));
             });
 
-            
+
             const allCategoriesArray = [...allMappedCategories];
             const allCategoriesPlaceholders = allCategoriesArray
                 .map((_, index) => `$${queryParams.length + index + 1}`)
                 .join(", ");
 
-            
+
             categoryConditions.push(
                 `(category IS NULL OR category NOT IN (${allCategoriesPlaceholders}))`
             );
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
         }
 
 
-        
+
         // Filter by price range
         if (minPrice > 0) {
             query += ` AND price >= $${queryParams.length + 1}`;

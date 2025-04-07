@@ -26,6 +26,8 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
     const [stores, setStores] = useState<{ store_name: string; product_count: number }[]>([]);
     const [localMinPrice, setLocalMinPrice] = useState(minPrice);
     const [localMaxPrice, setLocalMaxPrice] = useState(maxPrice);
+    const [localSelectedCategories, setLocalSelectedCategories] = useState<string[]>(selectedCategories);
+    const [localSelectedStores, setLocalSelectedStores] = useState<string[]>(selectedStores);
     const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
     const [categories, setCategories] = useState<Record<string, number>>({});
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -45,7 +47,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
         const queryParams = new URLSearchParams();
 
         if (searchQuery)
-            queryParams.append("name", encodeURIComponent(searchQuery));
+            queryParams.append("name", searchQuery);
 
         if (minPrice)
             queryParams.append("min_price", minPrice);
@@ -101,13 +103,13 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
 
 
     const handleStoreChange = (store: string) => {
-        setSelectedStores((prev) =>
+        setLocalSelectedStores((prev) =>
             prev.includes(store) ? prev.filter(s => s !== store) : [...prev, store]
         );
     };
 
     const handleCategoryChange = (category: string) => {
-        setSelectedCategories((prev) =>
+        setLocalSelectedCategories((prev) =>
             prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]
         );
     };
@@ -115,13 +117,17 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
     const applyFilters = () => {
         setMinPrice(localMinPrice);
         setMaxPrice(localMaxPrice);
+        setSelectedCategories(localSelectedCategories);
+        setSelectedStores(localSelectedStores);
     };
 
-    const defaultPriceRange = () => {
+    const defaultFilters = () => {
         setLocalMinPrice("0");
         setLocalMaxPrice("0");
         setMinPrice("0");
         setMaxPrice("0");
+        setSelectedStores([]);
+        setSelectedCategories([]);
     };
 
     const toggleSidebar = () => {
@@ -176,7 +182,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                                     <div key={category} className="flex items-center ml-2 font-sans italic">
                                         <input
                                             type="checkbox"
-                                            checked={selectedCategories.includes(category)}
+                                            checked={localSelectedCategories.includes(category)}
                                             onChange={() => handleCategoryChange(category)}
                                             className="mr-2"
                                         />
@@ -200,7 +206,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                                         <input
                                             type="checkbox"
                                             className="mr-2"
-                                            checked={selectedStores.includes(store.store_name)}
+                                            checked={localSelectedStores.includes(store.store_name)}
                                             onChange={() => handleStoreChange(store.store_name)}
                                         />
                                         {store.store_name} ({store.product_count})
@@ -237,19 +243,6 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                                     className="w-1/2 px-2 py-1 border rounded text-black font-sans"
                                 />
                             </div>
-                            <button
-                                onClick={applyFilters}
-                                className="mt-2 px-4 w-full py-2 bg-[#1A20AB] text-white font-sans font-semibold rounded-lg hover:bg-blue-700 transition"
-                            >
-                                Apply
-                            </button>
-
-                            <button
-                                onClick={defaultPriceRange}
-                                className="mt-2 px-4 w-full py-2 bg-gray-500 text-white font-sans font-semibold rounded-lg hover:bg-gray-600 transition"
-                            >
-                                Reset
-                            </button>
                         </div>
                     )}
                 </div>
@@ -287,6 +280,20 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                     )}
 
                 </div>
+
+                <button
+                    onClick={applyFilters}
+                    className="mt-2 px-4 w-full py-2 bg-[#1A20AB] text-white font-sans font-semibold rounded-lg hover:bg-blue-700 transition"
+                >
+                    Apply
+                </button>
+
+                <button
+                    onClick={defaultFilters}
+                    className="mt-2 px-4 w-full py-2 bg-gray-500 text-white font-sans font-semibold rounded-lg hover:bg-gray-600 transition"
+                >
+                    Reset
+                </button>
             </div>
         </>
     )
