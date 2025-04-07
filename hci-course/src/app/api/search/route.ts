@@ -30,11 +30,14 @@ export async function GET(req: NextRequest) {
     try {
         const sql = neon(`${process.env.DATABASE_URL}`);
         let query = `SELECT * FROM products WHERE 1=1`;
+        let countQuery = `SELECT COUNT(*) AS total FROM products WHERE 1=1`;
         const queryParams: any[] = [];
 
         // Filter by Product Name
+        
         if (itemName) {
-            query += ` AND name ILIKE $${queryParams.length + 1}`;
+            query += ` AND unaccent(name) ILIKE unaccent($${queryParams.length + 1})`;
+            countQuery += ` AND unaccent(name) ILIKE unaccent($${queryParams.length + 1})`;
             queryParams.push(`%${itemName}%`);
         }
 
@@ -76,16 +79,19 @@ export async function GET(req: NextRequest) {
         
             if (categoryConditions.length > 0) {
                 query += ` AND (${categoryConditions.join(" OR ")})`;
+                countQuery += ` AND (${categoryConditions.join(" OR ")})`;
                 queryParams.push(...localQueryParams);
             }
         }
         
         if (categories.includes("Jaja_sirevi_i_namazi")) {
             query += ` AND NOT (category = 'Namazi' AND store_name = 'Konzum')`;
+            countQuery += ` AND NOT (category = 'Namazi' AND store_name = 'Konzum')`;
         }
 
         if (categories.includes("Kućni_ljubimci")) {
             query += ` AND NOT (category = 'Hrana' AND store_name = 'Wolt-Ribola')`;
+            countQuery += ` AND NOT (category = 'Hrana' AND store_name = 'Wolt-Ribola')`;
         }
 
 
@@ -93,6 +99,7 @@ export async function GET(req: NextRequest) {
         // Stores filter
         if (stores.length > 0) {
             query += ` AND store_name IN (${stores.map((_, index) => `$${index + queryParams.length + 1}`).join(", ")})`;
+            countQuery += ` AND store_name IN (${stores.map((_, index) => `$${index + queryParams.length + 1}`).join(", ")})`;
             queryParams.push(...stores);
         }
 
@@ -100,12 +107,15 @@ export async function GET(req: NextRequest) {
         // Price range filter
         if (minPrice > 0 && maxPrice === 0) {
             query += ` AND price > $${queryParams.length + 1}`;
+            countQuery += ` AND price > $${queryParams.length + 1}`;
             queryParams.push(minPrice);
         } else if (minPrice === 0 && maxPrice > 0) {
             query += ` AND price < $${queryParams.length + 1}`;
+            countQuery += ` AND price < $${queryParams.length + 1}`;
             queryParams.push(maxPrice);
         } else if (minPrice > 0 && maxPrice > 0) {
             query += ` AND price BETWEEN $${queryParams.length + 1} AND $${queryParams.length + 2}`;
+            countQuery += ` AND price BETWEEN $${queryParams.length + 1} AND $${queryParams.length + 2}`;
             queryParams.push(minPrice, maxPrice);
         }
 
@@ -120,9 +130,12 @@ export async function GET(req: NextRequest) {
         }
 
 
+        const totalProductsResult = await sql(countQuery, queryParams.slice(0, queryParams.length - 2));
+        const totalProducts = parseInt(totalProductsResult[0].total, 10);
+
         const products = await sql(query, queryParams);
 
-        return NextResponse.json(products);
+        return NextResponse.json({ products, totalProducts });
     } catch (error) {
         console.error(error);
         return NextResponse.error();

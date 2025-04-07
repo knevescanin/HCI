@@ -55,7 +55,7 @@ const handleProductFetch = async (
 		return data;
 	} catch (error) {
 		console.error("Error fetching products:", error);
-		return [];
+		return { products: [], totalProcuts: 0};
 	}
 };
 
@@ -73,14 +73,18 @@ export default function Page() {
 	const [minPrice, setMinPrice] = useState<string>('0');
 	const [maxPrice, setMaxPrice] = useState<string>('0');
 	const [gridColumns, setGridColumns] = useState(2);
+	const [totalProducts, setTotalProducts] = useState(0);
+	
+	
 
 
 	useEffect(() => {
 		setLoading(true)
 		setOffset(0)
 		setProducts([])
-		handleProductFetch(selectedStores, selectedCategories, productLimit, productSort, 0, productName, minPrice, maxPrice).then((prods) => {
-			setProducts(prods)
+		handleProductFetch(selectedStores, selectedCategories, productLimit, productSort, 0, productName, minPrice, maxPrice).then((data) => {
+			setProducts(data.products);
+			setTotalProducts(data.totalProducts);
 			setLoading(false)
 		})
 	}, [productName, selectedStores, selectedCategories, productLimit, productSort, minPrice, maxPrice])
@@ -89,8 +93,8 @@ export default function Page() {
 		if (offset === 0) return; // Prevent duplicate first fetch
 		setLoading(true);
 		handleProductFetch(selectedStores, selectedCategories, productLimit, productSort, offset, productName, minPrice, maxPrice).then(
-			(prods) => {
-				setProducts((prevProducts) => [...prevProducts, ...prods]); // Append new products
+			(data) => {
+				setProducts((prevProducts) => [...prevProducts, ...data.products]); // Append new products
 				setLoading(false);
 			}
 		);
@@ -157,9 +161,13 @@ export default function Page() {
 										price={product.price}
 									/>
 								))}
+								{offset + productLimit < totalProducts && (
 								<div className='col-span-full w-full flex justify-center mb-5 lg:mb-0 lg:my-auto '>
+								
 									<Pagination />
+								
 								</div>
+								)}
 							</div>
 						</ProductContext.Provider>
 					</div>
@@ -173,7 +181,7 @@ export default function Page() {
 							))}
 						</div>) : (
 						<div className='my-auto mx-auto px-10 flex flex-col justify-center items-center'>
-							<p className='text-[#1A20AB] text-5xl font-bold text-center'>
+							<p className='text-[#1A20AB] text-3xl sm:text-4xl md:text-5xl font-bold text-center'>
 								Oops! We couldn&apos;t find any products for &quot;{productName}&quot;. Please try a different search!
 							</p>
 						</div>

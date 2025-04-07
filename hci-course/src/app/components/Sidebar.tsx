@@ -155,20 +155,20 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
             {isSidebarOpen && (
                 <div
                     className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
-                    onClick={toggleSidebar} // Close sidebar when clicking outside
+                    onClick={toggleSidebar}
                 ></div>
             )}
 
             <div className={`fixed top-0 left-0 w-3/5 h-full p-4 rounded-r-lg text-textPrimary z-50 transition-transform transform
-            ${isSidebarOpen ? 'bg-[#1A20AB] text-white translate-x-0' : '-translate-x-full'} 
+            ${isSidebarOpen ? 'bg-white text-[#1A20AB] translate-x-0 overflow-y-auto' : '-translate-x-full'} 
             lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-full
             2xl:min-w-[200px] 2xl:w-full`}>
-                <h2 className="text-4xl font-semibold text-center mb-4 text-white lg:text-[#1A20AB]">
+                {/* <h2 className="text-4xl font-semibold text-center mb-4 text-white lg:text-[#1A20AB]">
                     Filters
-                </h2>
+                </h2> */}
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className=' transition duration-300 ease-in-out'>{visibleSections.has('categories') ? '-' : '+'}</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className=' transition duration-300 ease-in-out'>{visibleSections.has('categories') ? '-' : '+'}</span></h3>
                     {visibleSections.has('categories') && (
                         <div className="space-y-2">
                             {categories && Object.entries(categories).length > 0 ? (
@@ -191,7 +191,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                 </div>
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('stores')}>Stores <span className=' transition duration-300 ease-in-out'>{visibleSections.has('stores') ? '-' : '+'}</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('stores')}>Stores <span className=' transition duration-300 ease-in-out'>{visibleSections.has('stores') ? '-' : '+'}</span></h3>
                     {visibleSections.has('stores') && (
                         <ul>
                             {stores.map((store) => (
@@ -213,7 +213,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
 
                 <div className="mb-6">
                     <div className='flex-row justify-around items-center'>
-                        <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('priceRange')}>Price Range <span className=' transition duration-300 ease-in-out'>{visibleSections.has('priceRange') ? '-' : '+'}</span></h3>
+                        <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('priceRange')}>Price Range <span className=' transition duration-300 ease-in-out'>{visibleSections.has('priceRange') ? '-' : '+'}</span></h3>
                     </div>
                     {visibleSections.has('priceRange') && (
                         <div>
@@ -239,7 +239,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                             </div>
                             <button
                                 onClick={applyFilters}
-                                className="mt-2 px-4 w-full py-2 bg-white lg:bg-[#1A20AB] text-black lg:text-white font-sans font-semibold rounded-lg hover:bg-blue-700 transition"
+                                className="mt-2 px-4 w-full py-2 bg-[#1A20AB] text-white font-sans font-semibold rounded-lg hover:bg-blue-700 transition"
                             >
                                 Apply
                             </button>
@@ -255,7 +255,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                 </div>
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('sortBy')}>Sort By <span className=' transition duration-300 ease-in-out'>{visibleSections.has('sortBy') ? '-' : '+'}</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('sortBy')}>Sort By <span className=' transition duration-300 ease-in-out'>{visibleSections.has('sortBy') ? '-' : '+'}</span></h3>
                     {visibleSections.has('sortBy') && (
                         <select
                             value={productSort}
@@ -271,7 +271,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                     )}
                 </div>
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-white lg:text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page <span className=' transition duration-300 ease-in-out'>{visibleSections.has('itemsPerPage') ? '-' : '+'}</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page <span className=' transition duration-300 ease-in-out'>{visibleSections.has('itemsPerPage') ? '-' : '+'}</span></h3>
                     {visibleSections.has('itemsPerPage') && (
                         <select
                             value={productLimit}
