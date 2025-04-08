@@ -1,33 +1,41 @@
-import { useContext, useEffect, useState } from 'react'
-
-import ProductContext from '../contexts/ProductContext'
+import { useEffect, useState } from 'react'
 
 
-export default function Sidebar({ searchQuery }: SidebarProps) {
-    const context = useContext(ProductContext);
 
-    if (!context) {
-        throw new Error('ProductContext is not provided');
-    }
 
-    const { productLimit,
-        setProductLimit,
-        productSort,
-        setproductSort,
-        selectedStores,
-        setSelectedStores,
-        selectedCategories,
-        setSelectedCategories,
-        minPrice,
-        setMinPrice,
-        maxPrice,
-        setMaxPrice
-    } = context;
+export default function Sidebar({
+    searchQuery,
+    selectedStores,
+    setSelectedStores,
+    selectedCategories,
+    setSelectedCategories,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    productLimit,
+    setProductLimit,
+    productSort,
+    setproductSort,
+    resetFilters,
+}: {
+    searchQuery: string;
+    selectedStores: string[];
+    setSelectedStores: React.Dispatch<React.SetStateAction<string[]>>;
+    selectedCategories: string[];
+    setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+    minPrice: string;
+    setMinPrice: React.Dispatch<React.SetStateAction<string>>;
+    maxPrice: string;
+    setMaxPrice: React.Dispatch<React.SetStateAction<string>>;
+    productLimit: number;
+    setProductLimit: React.Dispatch<React.SetStateAction<number>>;
+    productSort: string;
+    setproductSort: React.Dispatch<React.SetStateAction<string>>;
+    resetFilters: () => void;
+}) {
+
     const [stores, setStores] = useState<{ store_name: string; product_count: number }[]>([]);
-    const [localMinPrice, setLocalMinPrice] = useState(minPrice);
-    const [localMaxPrice, setLocalMaxPrice] = useState(maxPrice);
-    const [localSelectedCategories, setLocalSelectedCategories] = useState<string[]>(selectedCategories);
-    const [localSelectedStores, setLocalSelectedStores] = useState<string[]>(selectedStores);
     const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
     const [categories, setCategories] = useState<Record<string, number>>({});
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -103,31 +111,15 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
 
 
     const handleStoreChange = (store: string) => {
-        setLocalSelectedStores((prev) =>
+        setSelectedStores((prev) =>
             prev.includes(store) ? prev.filter(s => s !== store) : [...prev, store]
         );
     };
 
     const handleCategoryChange = (category: string) => {
-        setLocalSelectedCategories((prev) =>
+        setSelectedCategories((prev) =>
             prev.includes(category) ? prev.filter(c => c !== category) : [...prev, category]
         );
-    };
-
-    const applyFilters = () => {
-        setMinPrice(localMinPrice);
-        setMaxPrice(localMaxPrice);
-        setSelectedCategories(localSelectedCategories);
-        setSelectedStores(localSelectedStores);
-    };
-
-    const defaultFilters = () => {
-        setLocalMinPrice("0");
-        setLocalMaxPrice("0");
-        setMinPrice("0");
-        setMaxPrice("0");
-        setSelectedStores([]);
-        setSelectedCategories([]);
     };
 
     const toggleSidebar = () => {
@@ -149,8 +141,8 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
     return (
         <>
             <button
-                className="sticky w-full bg-[#1A20AB] text-white font-semibold px-4 py-2 rounded-l-lg shadow-xl
-                md:w-auto md:top-auto md:left-auto md:rounded-lg 
+                className="sticky w-full bg-[#1A20AB] text-white font-semibold px-4 py-2 shadow-xl rounded-lg
+                md:w-auto md:top-auto md:left-auto  
                 lg:hidden"
                 onClick={toggleSidebar}
             >
@@ -182,7 +174,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                                     <div key={category} className="flex items-center ml-2 font-sans italic">
                                         <input
                                             type="checkbox"
-                                            checked={localSelectedCategories.includes(category)}
+                                            checked={selectedCategories.includes(category)}
                                             onChange={() => handleCategoryChange(category)}
                                             className="mr-2"
                                         />
@@ -206,7 +198,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                                         <input
                                             type="checkbox"
                                             className="mr-2"
-                                            checked={localSelectedStores.includes(store.store_name)}
+                                            checked={selectedStores.includes(store.store_name)}
                                             onChange={() => handleStoreChange(store.store_name)}
                                         />
                                         {store.store_name} ({store.product_count})
@@ -227,8 +219,8 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                                 <input
                                     type="number"
                                     step="0.01"
-                                    value={localMinPrice}
-                                    onChange={(e) => setLocalMinPrice(e.target.value)}
+                                    value={minPrice}
+                                    onChange={(e) => setMinPrice(e.target.value)}
                                     min="0"
                                     placeholder="Min"
                                     className="w-1/2 px-2 py-1 border rounded text-black font-sans"
@@ -237,8 +229,8 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                                 <input
                                     type="number"
                                     step="0.01"
-                                    value={localMaxPrice}
-                                    onChange={(e) => setLocalMaxPrice(e.target.value)}
+                                    value={maxPrice}
+                                    onChange={(e) => setMaxPrice(e.target.value)}
                                     placeholder="Max"
                                     className="w-1/2 px-2 py-1 border rounded text-black font-sans"
                                 />
@@ -282,14 +274,7 @@ export default function Sidebar({ searchQuery }: SidebarProps) {
                 </div>
 
                 <button
-                    onClick={applyFilters}
-                    className="mt-2 px-4 w-full py-2 bg-[#1A20AB] text-white font-sans font-semibold rounded-lg hover:bg-blue-700 transition"
-                >
-                    Apply
-                </button>
-
-                <button
-                    onClick={defaultFilters}
+                    onClick={resetFilters}
                     className="mt-2 px-4 w-full py-2 bg-gray-500 text-white font-sans font-semibold rounded-lg hover:bg-gray-600 transition"
                 >
                     Reset

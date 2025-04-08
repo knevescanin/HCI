@@ -1,20 +1,18 @@
-import { useContext } from "react";
 import ButtonUI from "./UI/ButtonUI";
-import ProductContext from "../contexts/ProductContext";
 
-export default function Pagination() {
+export default function Pagination({
+    offset,
+    productLimit,
+    setOffset
+}: {
+    offset: number;
+    productLimit: number;
+    setOffset: React.Dispatch<React.SetStateAction<number>>;
+}) {
 
-    const context = useContext(ProductContext);
-
-    if (!context) {
-        throw new Error("ProductContext is not provided");
-    }
-
-    const { offset, setOffset, productLimit } = context;
-    
     return (
-        <ButtonUI onClick={() => setOffset(offset + productLimit)} textSize="lg" className= "col-start-2 col-end-9 justify-self-center my-auto" >
-          Load more products
+        <ButtonUI onClick={() => setOffset(offset + productLimit)} textSize="lg" className="col-start-2 col-end-9 justify-self-center my-auto" >
+            Load more products
         </ButtonUI>
     );
 }

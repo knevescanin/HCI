@@ -2,23 +2,23 @@
 
 import { createContext } from "react"
 
-const ProductContext = createContext<ProductContext>({ 
+const ProductContext = createContext<ProductContext>({
     products: [],
     productName: '',
-    setProductLimit: () => {}, 
-    productLimit: 0, 
-    productSort: '', 
-    setproductSort: () => {},
+    setProductLimit: () => { },
+    productLimit: 0,
+    productSort: '',
+    setproductSort: () => { },
     offset: 0,
     setOffset: () => { },
     selectedStores: [],
-    setSelectedStores: () => {},
+    setSelectedStores: () => { },
     selectedCategories: [],
-    setSelectedCategories: () => {},
+    setSelectedCategories: () => { },
     minPrice: '',
-    setMinPrice: () => {},
+    setMinPrice: () => { },
     maxPrice: '',
-    setMaxPrice: () => {}
-    })
+    setMaxPrice: () => { },
+})
 
 export default ProductContext

@@ -4,7 +4,7 @@ interface SubmenuProps {
 }
 
 interface SidebarProps {
-    searchQuery: string;
+	searchQuery: string;
 }
 
 interface SubmenuNavigation {
@@ -24,8 +24,8 @@ interface NavigationItem {
 }
 
 interface Icon {
-    name: string
-    color: string
+	name: string
+	color: string
 }
 
 // Contentful sections response
@@ -52,7 +52,7 @@ interface ProductCard {
 // Context types
 interface ProductContext {
 	products: Record<string, any>[]
-	productName : string
+	productName: string
 	productLimit: number
 	setProductLimit: React.Dispatch<React.SetStateAction<number>>
 	productSort: string
@@ -62,14 +62,14 @@ interface ProductContext {
 	selectedStores: string[]
 	setSelectedStores: React.Dispatch<React.SetStateAction<string[]>>
 	selectedCategories: string[];
-  	setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
-	minPrice: string 
-	setMinPrice: React.Dispatch<React.SetStateAction<string>> 
-	maxPrice: string 
+	setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+	minPrice: string
+	setMinPrice: React.Dispatch<React.SetStateAction<string>>
+	maxPrice: string
 	setMaxPrice: React.Dispatch<React.SetStateAction<string>>
 }
 
 
 interface GridContextType {
-    gridColumns: number;
+	gridColumns: number;
 }
