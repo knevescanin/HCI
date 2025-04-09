@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-
-
-
+import FiltersIcon from '../../../public/Filters.png'
 
 export default function Sidebar({
     searchQuery,
@@ -140,15 +138,17 @@ export default function Sidebar({
 
     return (
         <>
-            <button
-                className="sticky w-full bg-[#1A20AB] text-white font-semibold px-4 py-2 shadow-xl rounded-lg
-                md:w-auto md:top-auto md:left-auto  
-                lg:hidden"
-                onClick={toggleSidebar}
-            >
-                {isSidebarOpen ? 'Close Filters' : 'Open Filters'}
-            </button>
-
+            <div className="lg:hidden flex flex-row items-center space-x-2 p-3 bg-gray-100 rounded-full shadow-md hover:scale-105 transition-all duration-200 cursor-pointer">
+                <div className="
+                lg:hidden">
+                    <img
+                        src={FiltersIcon.src}
+                        alt="Filters Icon"
+                        onClick={toggleSidebar}
+                    />
+                </div>
+                <p className='text-[#1A20AB] font-sans font-semibold lg:hidden'>Filters</p>
+            </div>
 
             {isSidebarOpen && (
                 <div
@@ -159,14 +159,19 @@ export default function Sidebar({
 
             <div className={`fixed top-0 left-0 w-3/5 h-full p-4 rounded-r-lg text-textPrimary z-50 transition-transform transform
             ${isSidebarOpen ? 'bg-white text-[#1A20AB] translate-x-0 overflow-y-auto' : '-translate-x-full'} 
-            lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-full
+            lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-full lg:mt-5
             2xl:min-w-[200px] 2xl:w-full`}>
                 {/* <h2 className="text-4xl font-semibold text-center mb-4 text-white lg:text-[#1A20AB]">
                     Filters
                 </h2> */}
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className=' transition duration-300 ease-in-out'>{visibleSections.has('categories') ? '-' : '+'}</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className="transition duration-300 ease-in-out my-auto">{visibleSections.has('categories') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+                    </svg>
+                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>}</span></h3>
                     {visibleSections.has('categories') && (
                         <div className="space-y-2">
                             {categories && Object.entries(categories).length > 0 ? (
@@ -189,7 +194,12 @@ export default function Sidebar({
                 </div>
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('stores')}>Stores <span className=' transition duration-300 ease-in-out'>{visibleSections.has('stores') ? '-' : '+'}</span></h3>
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('stores')}>Stores <span className="transition duration-300 ease-in-out my-auto">{visibleSections.has('stores') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+                    </svg>
+                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>}</span></h3>
                     {visibleSections.has('stores') && (
                         <ul>
                             {stores.map((store) => (
@@ -211,7 +221,12 @@ export default function Sidebar({
 
                 <div className="mb-6">
                     <div className='flex-row justify-around items-center'>
-                        <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('priceRange')}>Price Range <span className=' transition duration-300 ease-in-out'>{visibleSections.has('priceRange') ? '-' : '+'}</span></h3>
+                        <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('priceRange')}>Price Range <span className="transition duration-300 ease-in-out my-auto">{visibleSections.has('priceRange') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+                        </svg>
+                            : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>}</span></h3>
                     </div>
                     {visibleSections.has('priceRange') && (
                         <div>
@@ -240,37 +255,32 @@ export default function Sidebar({
                 </div>
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('sortBy')}>Sort By <span className=' transition duration-300 ease-in-out'>{visibleSections.has('sortBy') ? '-' : '+'}</span></h3>
-                    {visibleSections.has('sortBy') && (
-                        <select
-                            value={productSort}
-                            onChange={(e) => setproductSort(e.target.value)}
-                            className="px-2 py-1 w-full rounded border text-black font-sans"
-                        >
-                            {sortOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                    )}
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('sortBy')}>Sort By</h3>
+                    <select
+                        value={productSort}
+                        onChange={(e) => setproductSort(e.target.value)}
+                        className="px-2 py-1 w-full rounded border text-black font-sans"
+                    >
+                        {sortOptions.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page <span className=' transition duration-300 ease-in-out'>{visibleSections.has('itemsPerPage') ? '-' : '+'}</span></h3>
-                    {visibleSections.has('itemsPerPage') && (
-                        <select
-                            value={productLimit}
-                            onChange={(e) => setProductLimit(parseInt(e.target.value))}
-                            className="px-2 py-1 rounded text-black font-sans"
-                        >
-                            {itemsPerPageOptions.map((limit) => (
-                                <option key={limit} value={limit}>
-                                    {limit}
-                                </option>
-                            ))}
-                        </select>
-                    )}
-
+                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page</h3>
+                    <select
+                        value={productLimit}
+                        onChange={(e) => setProductLimit(parseInt(e.target.value))}
+                        className="px-2 py-1 rounded text-black font-sans"
+                    >
+                        {itemsPerPageOptions.map((limit) => (
+                            <option key={limit} value={limit}>
+                                {limit}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <button

@@ -40,7 +40,7 @@ export default function ProductCard({
 					unoptimized
 					src={imageUrl}
 					alt="Product"
-					className="object-scale-down lg:object-cover lg:p-5 group-hover:scale-105 transition-transform duration-300 ease-in-out"
+					className="object-scale-down lg:object-cover 2xl:object-scale-down lg:p-5 group-hover:scale-105 transition-transform duration-300 ease-in-out"
 					fill
 
 				/>

@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import { GridProvider } from "@/app/contexts/GridContext";
 import CardSkeletonLoader from '@/app/components/UI/CardSkeletonLoader'
 import { useSearchParams } from 'next/navigation'
+import Grid_1 from '../../../../public/grid.png'
+import Grid_2 from '../../../../public/grid-2.png'
 
 
 export default function Page() {
@@ -96,10 +98,6 @@ export default function Page() {
 		);
 	}, [offset]);
 
-	const toggleGridColumns = () => {
-		setGridColumns((prev) => (prev === 1 ? 2 : 1));
-	};
-
 	const resetFilters = () => {
 		setSelectedStores([]);
 		setSelectedCategories([]);
@@ -116,52 +114,55 @@ export default function Page() {
 			<div className="min-h-[75vh] 
 				flex flex-col lg:grid lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 w-full text-white relative bg-white">
 
-
-				{/* <div className='w-[95vw] flex my-8 mx-auto 
-							md:w-[100vw] md:flex md:justify-center md:items-center md:my-8 
-							lg:block lg:my-0 lg:w-full'>
-					<div className='w-1/2 md:w-auto'>
-						<Sidebar searchQuery={productName} />
-					</div>
-
-					<button
-						className={`md:hidden w-1/2 px-4 py-2 bg-slate-600  rounded-r-lg shadow-xl text-white font-semibold hover:bg-slate-700 transition`}
-						onClick={toggleGridColumns}
-					>
-						{gridColumns === 1 ? '2 Columns' : '1 Column'}
-					</button>
-				</div> */}
-
-				<div className='w-[95vw] flex my-8 mx-auto
-                md:w-[100vw] md:flex md:justify-center md:items-center md:my-8 
+				<div className='w-[95vw] flex my-5 mx-auto
+                md:w-[100vw] md:flex md:justify-center md:items-center
                 lg:block lg:my-0 lg:w-full'>
-					<div className={`${products.length > 0 ? 'w-1/2' : 'w-full'} md:w-auto`}>
-						<Sidebar
-							searchQuery={productName}
-							selectedStores={selectedStores}
-							setSelectedStores={setSelectedStores}
-							selectedCategories={selectedCategories}
-							setSelectedCategories={setSelectedCategories}
-							minPrice={minPrice}
-							setMinPrice={setMinPrice}
-							maxPrice={maxPrice}
-							setMaxPrice={setMaxPrice}
-							productLimit={productLimit}
-							setProductLimit={setProductLimit}
-							productSort={productSort}
-							setproductSort={setproductSort}
-							resetFilters={resetFilters}
-						/>
+					<div className='w-[100vw] flex flex-row justify-center relative 
+					lg:w-auto lg:flex-none lg:justify-normal lg:static'>
+						<div className={`${products.length > 0 ? '' : 'w-full'} lg:w-full`}>
+							<Sidebar
+								searchQuery={productName}
+								selectedStores={selectedStores}
+								setSelectedStores={setSelectedStores}
+								selectedCategories={selectedCategories}
+								setSelectedCategories={setSelectedCategories}
+								minPrice={minPrice}
+								setMinPrice={setMinPrice}
+								maxPrice={maxPrice}
+								setMaxPrice={setMaxPrice}
+								productLimit={productLimit}
+								setProductLimit={setProductLimit}
+								productSort={productSort}
+								setproductSort={setproductSort}
+								resetFilters={resetFilters}
+							/>
+						</div>
+						{products.length > 0 ? (
+							<div className="absolute top-11 right-0 md:hidden flex flex-row justify-end items-end mb-0 space-x-6 mr-2">
+								<div className='bg-gray-100 rounded-full shadow-md hover:shadow-md transition-all duration-200 cursor-pointer'
+									onClick={() => setGridColumns(2)}
+								>
+									<img
+										src={Grid_2.src}
+										alt="columns"
+										width={15}
+										className='hover:scale-110'
+
+									/>
+								</div>
+								<div className='bg-gray-100 rounded-full shadow-md hover:shadow-md transition-all duration-200 cursor-pointer'
+									onClick={() => setGridColumns(1)}>
+									<img
+										src={Grid_1.src}
+										alt="column"
+										width={15}
+										className='hover:scale-110'
+									/>
+								</div>
+							</div>
+						) : ('')
+						}
 					</div>
-					{products.length > 0 ? (
-						<button
-							className={`md:hidden w-1/2 px-4 py-2 bg-slate-600  rounded-r-lg shadow-xl text-white font-semibold hover:bg-slate-700 transition`}
-							onClick={toggleGridColumns}
-						>
-							{gridColumns === 1 ? '2 Columns' : '1 Column'}
-						</button>
-					) : ('')
-					}
 				</div>
 
 				{products.length > 0 ? (
@@ -188,8 +189,8 @@ export default function Page() {
 
 						<div className={`
 						 ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-1 col-end-9 grid gap-0 overflow-x-hidden grid-cols-2'}
-						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-5
-						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-3 lg:h-fit
+						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-0
+						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-3 lg:h-fit lg:my-5
 						xl:grid-cols-5 xl:gap-2 xl:ml-2`}>
 							{products.map((product, index) => (
 								<ProductCard
@@ -228,7 +229,6 @@ export default function Page() {
 							</div>
 						)}
 					</>
-
 				)}
 			</div >
 		</>
