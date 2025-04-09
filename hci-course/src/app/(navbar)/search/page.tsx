@@ -145,7 +145,7 @@ export default function Page() {
 									<img
 										src={Grid_2.src}
 										alt="columns"
-										width={15}
+										width={18}
 										className='hover:scale-110'
 
 									/>
@@ -155,7 +155,7 @@ export default function Page() {
 									<img
 										src={Grid_1.src}
 										alt="column"
-										width={15}
+										width={18}
 										className='hover:scale-110'
 									/>
 								</div>
