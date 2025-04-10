@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation' // Keep this
 import SubmenuListItems from './SubmenuListItems'
-import { useState, useEffect } from 'react' // <-- Import useEffect
+import { useState, useEffect } from 'react' // Keep useEffect
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 
@@ -24,30 +24,28 @@ export default function SubmenuList({
 }) {
     const pathname = usePathname(); // Get the current path
 
-    // Initialize state - can default to false, useEffect will correct it
+    // Initialize state - useEffect will set the correct initial state on load
     const [open, setOpen] = useState<boolean>(false);
 
-    // Effect hook to synchronize the open state with the current route
+    // Effect hook to synchronize the open state based *only* on route changes
     useEffect(() => {
-        // Determine if the component should be open based on the *current* pathname
+        // Determine if the component should be open based on the current pathname
         const startsWithRoute = route !== '/' && pathname.startsWith(route);
         const isChildRouteActive = navigations.some((nav) => nav.route === pathname);
         const shouldBeOpen = startsWithRoute || isChildRouteActive;
 
-        // Update the state if the calculated state is different from the current state
-        // This check is important to prevent potential infinite loops if 'open' is included
-        // in dependency array without careful consideration, though here it helps react
-        // if the state was somehow changed externally or needs reset based on route.
-        if (shouldBeOpen !== open) {
-           setOpen(shouldBeOpen);
-        }
-        // Dependencies: This effect should re-run if the pathname, base route, or navigations change.
-    }, [pathname, route, navigations, open]); // Adding `open` here ensures consistency if state is changed elsewhere and route dictates otherwise
+        // Set the state based on the route calculation.
+        // This will now correctly set the state on initial load and after navigation.
+        setOpen(shouldBeOpen);
+
+    // *** REMOVED 'open' FROM DEPENDENCY ARRAY ***
+    // Only run when the path or route/nav data changes.
+    }, [pathname, route, navigations]);
 
     // Manual toggle handler remains the same
     const handleToggle = (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      setOpen(!open);
+      setOpen(!open); // This now correctly toggles the state manually
     }
 
     return (
@@ -55,7 +53,6 @@ export default function SubmenuList({
             <details
                 className="group"
                 open={open} // Still controlled by React state
-                // No need for onToggle if we manage via state and onClick
             >
                 <summary
                     onClick={handleToggle}
