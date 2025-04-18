@@ -1,10 +1,36 @@
 import { redirect } from "next/navigation";
 
-export default function Page() {
-	// Redirect to /docs/introduction
-	redirect("/docs/project-information/introduction");
+import { TypeDocumentationPageSkeleton } from "../../../../types";
 
-	return null; // This will never render because of the redirect
+import { client } from '@/app/utils/contentfulClient'
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+
+async function getRichTextContentBySlug(){
+
+    try {
+        const entries = await client.getEntries<TypeDocumentationPageSkeleton>({
+            content_type: 'documentationPage',
+        })
+
+        if (entries.items.length === 0) {
+            return null
+        }
+
+		return entries.items[0]
+
+        
+        
+    } catch (error) {
+        console.error('Error fetching documentation page from Contentful:', error)
+        return null
+    }
+}
+
+export default async function Page() {
+	return <h1>await getRichTextContentBySlug()</h1>
+	
+	// redirect("/docs/project-information/introduction");
 }
 
 

@@ -13,6 +13,7 @@
     "@auth/core": "^0.34.2",
     "@auth/pg-adapter": "^1.7.4",
     "@contentful/rich-text-html-renderer": "^17.0.0",
+    "@contentful/rich-text-react-renderer": "^16.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
@@ -36,7 +37,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "resend": "^4.0.1",
-    "shadcn-ui": "^0.9.4"
+    "shadcn-ui": "^0.9.4",
+    "slugify": "^1.6.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

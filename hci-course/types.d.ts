@@ -1,3 +1,15 @@
+import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+
+export interface TypeDocumentationPageFields {
+    title: EntryFieldTypes.Symbol;
+    slug: EntryFieldTypes.Symbol;
+    subtitle?: EntryFieldTypes.Symbol;
+    mainContent?: EntryFieldTypes.RichText;
+}
+
+export type TypeDocumentationPageSkeleton = EntrySkeletonType<TypeDocumentationPageFields, "documentationPage">;
+export type TypeDocumentationPage<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeDocumentationPageSkeleton, Modifiers, Locales>;
+
 // Submenu component
 interface SubmenuProps {
 	submenuNavigations: SubmenuNavigation[]
