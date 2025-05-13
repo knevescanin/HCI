@@ -8,11 +8,14 @@ datasource db {
 }
 
 model products {
-  id         Int    @id @default(autoincrement())
+  id         Int          @id(map: "products_pkey1") @default(autoincrement())
   name       String
-  price      Float
+  price      Decimal?     @db.Decimal(10, 2)
   image_url  String
+  page_url   String
+  category   String
   store_name String
+  created_at DateTime?    @default(now()) @db.Timestamp(6)
 }
 
 model User {
@@ -62,4 +65,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model products_inital {
+  id         Int    @id(map: "products_pkey") @default(autoincrement())
+  name       String
+  price      Float
+  image_url  String
+  store_name String
 }

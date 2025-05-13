@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 const authHandler = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
@@ -33,24 +33,24 @@ const authHandler = NextAuth({
           console.log('Missing email or password');
           throw new Error('Missing email or password');
         }
-      
+
         // Find user by email
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-      
+
         if (!user || !user.password) {
           console.log('User not found or missing password');
           throw new Error('User not found');
         }
-      
+
         // Compare password
         const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) {
           console.log('Invalid password');
           throw new Error('Invalid password');
         }
-      
+
         console.log('User authenticated successfully:', user);
         return { id: user.id, name: `${user.firstName}`, email: user.email };
 
@@ -66,17 +66,17 @@ const authHandler = NextAuth({
 
     async signIn({ user, account, profile }) {
       console.log('Google Profile:', profile);
-    
+
       if (account?.provider === "google" || account?.provider === "facebook") {
         const fullName = profile?.name?.split(" ") || [];
         const firstName = fullName[0] || "";
         const lastName = fullName.slice(1).join(" ") || "";
-    
+
         // Check if user exists
         const existingUser = await prisma.user.findUnique({
           where: { email: user.email ?? "" },
         });
-    
+
         let currentUser;
         if (!existingUser) {
           // Create a new user and store user information
@@ -99,7 +99,7 @@ const authHandler = NextAuth({
             },
           });
         }
-    
+
         // Check if the OAuth account is already linked
         const accountExists = await prisma.account.findUnique({
           where: {
@@ -109,7 +109,7 @@ const authHandler = NextAuth({
             },
           },
         });
-    
+
         if (!accountExists) {
           // Create the new account and link it to the user
           await prisma.account.create({
@@ -121,17 +121,17 @@ const authHandler = NextAuth({
           });
         }
       }
-    
+
       return true;
     },
-    
-    
+
+
     async session({ session, token }: { session: any, token: any }) {
       if (token) {
         session.user.id = token.id;
         session.user.firstName = token.firstName;
         session.user.lastName = token.lastName;
-        session.user.email = token.email; 
+        session.user.email = token.email;
         session.user.image = token.image || "";
       }
       return session;
