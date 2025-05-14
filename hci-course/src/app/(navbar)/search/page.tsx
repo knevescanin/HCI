@@ -9,6 +9,7 @@ import CardSkeletonLoader from '@/app/components/UI/CardSkeletonLoader'
 import { useSearchParams } from 'next/navigation'
 import Grid_1 from '../../../../public/grid.png'
 import Grid_2 from '../../../../public/grid-2.png'
+import { useSession } from "next-auth/react";
 
 
 export default function Page() {
@@ -24,6 +25,10 @@ export default function Page() {
 	const [maxPrice, setMaxPrice] = useState<string>('0');
 	const [gridColumns, setGridColumns] = useState(2);
 	const [totalProducts, setTotalProducts] = useState(0);
+
+	const { data: session } = useSession();
+	const userId = session?.user?.id;
+	const [favourites, setFavourites] = useState<{ id: string; product: { name: string; image_url: string; store_name: string; price: number; }; productId: number; }[]>([]);
 
 	const baseURL = process.env.NEXT_PUBLIC_IS_PROD === "true" ? process.env.NEXT_PUBLIC_API_URL_PROD : process.env.NEXT_PUBLIC_API_URL_DEV
 
@@ -107,6 +112,65 @@ export default function Page() {
 		setproductSort('name-asc');
 		setOffset(0);
 	};
+
+	useEffect(() => {
+		if (userId) {
+			fetch(`/api/favourites?userId=${userId}`)
+				.then((res) => {
+					if (!res.ok) {
+						throw new Error(`HTTP error! status: ${res.status}`);
+					}
+					return res.json();
+				})
+				.then((data) => { // Debug API response
+					console.log("Fetched Favourites:", data);
+					setFavourites(data);
+				})
+				.catch((error) => console.error("Failed to fetch favourites:", error));
+		}
+	}, [userId]);
+
+	function handleToggleFavourite(productId: number, isFavourite: boolean) {
+
+		if (!userId) {
+			console.error("User is not logged in");
+			alert("Please log in to manage your favourites.");
+			return;
+		}
+
+		if (isFavourite) {
+			// Add to favourites
+			fetch("/api/favourites", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ userId, productId }),
+			})
+				.then((res) => {
+					if (!res.ok) {
+						throw new Error(`HTTP error! status: ${res.status}`);
+					}
+					return res.json();
+				})
+				.then((newFavourite) => {
+					console.log("Added to favourites:", newFavourite);
+					setFavourites((prev) => [...prev, newFavourite]);
+				})
+				.catch((error) => console.error("Failed to add to favourites:", error));
+		} else {
+			// Remove from favourites
+			fetch(`/api/favourites?userId=${userId}&productId=${productId}`, {
+				method: "DELETE",
+			})
+				.then((res) => {
+					if (!res.ok) {
+						throw new Error(`HTTP error! status: ${res.status}`);
+					}
+					setFavourites((prev) => prev.filter((fav) => fav.productId !== productId));
+					console.log("Removed from favourites");
+				})
+				.catch((error) => console.error("Failed to remove from favourites:", error));
+		}
+	}
 
 	return (
 		<>
@@ -192,15 +256,23 @@ export default function Page() {
 						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-0
 						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-3 lg:h-fit lg:my-5
 						xl:grid-cols-5 xl:gap-2 xl:ml-2`}>
-							{products.map((product, index) => (
-								<ProductCard
-									key={index}
-									name={product.name}
-									imageUrl={product.image_url}
-									store={product.store_name}
-									price={product.price}
-								/>
-							))}
+							{products.map((product, index) => {
+								const isFavourite = favourites.some((fav) => fav.productId === product.id);
+								console.log(`${product.name}, ${favourites.includes(product.id)}`);
+								return (
+									< ProductCard
+										key={index}
+										name={product.name}
+										imageUrl={product.image_url}
+										store={product.store_name}
+										price={product.price}
+										productId={product.id}
+										isFavourite={isFavourite}
+										onToggleFavourite={handleToggleFavourite}
+
+									/>
+								);
+							})}
 							{offset + productLimit < totalProducts && (
 								<div className='col-span-full w-full flex justify-center mb-5 lg:mb-0 lg:my-auto '>
 									<Pagination

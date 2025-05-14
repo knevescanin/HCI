@@ -16,6 +16,7 @@ model products {
   category   String
   store_name String
   created_at DateTime?    @default(now()) @db.Timestamp(6)
+  favourites Favourite[]
 }
 
 model User {
@@ -30,6 +31,7 @@ model User {
   updatedAt DateTime  @updatedAt
   accounts  Account[]
   sessions  Session[]
+  favourites Favourite[]
 }
 
 model Account {
@@ -73,4 +75,14 @@ model products_inital {
   price      Float
   image_url  String
   store_name String
+}
+
+model Favourite {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  productId Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   products @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId]) // Ensures a user can't favorite the same product multiple times
 }

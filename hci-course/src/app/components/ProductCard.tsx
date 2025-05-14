@@ -4,26 +4,38 @@ import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons"
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { useGridContext } from "@/app/contexts/GridContext";
+import { useSession } from "next-auth/react";
 
 export default function ProductCard({
 	name,
 	imageUrl,
 	store,
 	price,
+	productId,
+	isFavourite,
+	onToggleFavourite,
 }: {
 	name: string
 	imageUrl: string
 	store: string
 	price: number
+	productId: number
+	isFavourite: boolean
+	onToggleFavourite: (productId: number, isFavourite: boolean) => void;
 }) {
 
-	const [isFavourite, setIsFavourite] = useState(false)
 	const { gridColumns } = useGridContext();
+	const { data: session } = useSession();
+	const userId = session?.user?.id;
 
 	function handleOnClick() {
-		setIsFavourite(!isFavourite)
-		//send to backend
 
+		if (!userId) {
+			console.error("User is not logged in");
+			alert("Please log in to add this product to your favourites.");
+			return;
+		}
+		onToggleFavourite(productId, !isFavourite);
 	}
 
 	return (
