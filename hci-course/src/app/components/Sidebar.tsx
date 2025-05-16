@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import FiltersIcon from '../../../public/Filters.png'
 import { usePathname } from 'next/navigation';
 import { useSession } from "next-auth/react";

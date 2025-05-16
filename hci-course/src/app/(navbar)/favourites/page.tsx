@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import ProductCard from "@/app/components/ProductCard";
 import { GridProvider } from "@/app/contexts/GridContext";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import Grid_1 from '../../../../public/grid.png'
 import Grid_2 from '../../../../public/grid-2.png'
 
 
-function page() {
+export default function Page() {
 
     const [favourites, setFavourites] = useState<{ id: string; product: { name: string; image_url: string; store_name: string; price: number; }; productId: number; }[]>([]);
     const [total, setTotal] = useState(0);
@@ -219,5 +219,3 @@ function page() {
 
     );
 }
-
-export default page;

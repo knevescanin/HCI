@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
         else if (sort === "price-desc") orderBy = { product: { price: "desc" } };
 
         const orConditions: any[] = [];
-        let expandedCategories: string[] = [];
+        const expandedCategories: string[] = [];
         categories.forEach(cat => {
             if (categoryMap[cat]) {
                 expandedCategories.push(...categoryMap[cat]);
