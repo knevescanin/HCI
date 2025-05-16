@@ -11,7 +11,6 @@ import Grid_1 from '../../../../public/grid.png'
 import Grid_2 from '../../../../public/grid-2.png'
 import { useSession } from "next-auth/react";
 
-
 export default function Page() {
 	const [products, setProducts] = useState<Record<string, any>[]>([])
 	const [productLimit, setProductLimit] = useState(10)
@@ -70,7 +69,6 @@ export default function Page() {
 
 
 			const res = await fetch(`${baseURL}/search?${queryParams.toString()}`);
-			console.log(`${baseURL}/search?${queryParams.toString()}`)
 			if (!res.ok) throw new Error("Failed to fetch products");
 
 			const data = await res.json();
@@ -115,7 +113,7 @@ export default function Page() {
 
 	useEffect(() => {
 		if (userId) {
-			fetch(`/api/favourites?userId=${userId}`)
+			fetch(`/api/favourites?userId=${userId}&limit=undefined`)
 				.then((res) => {
 					if (!res.ok) {
 						throw new Error(`HTTP error! status: ${res.status}`);
@@ -123,12 +121,11 @@ export default function Page() {
 					return res.json();
 				})
 				.then((data) => { // Debug API response
-					console.log("Fetched Favourites:", data);
-					setFavourites(data);
+					setFavourites(data.favourites);
 				})
 				.catch((error) => console.error("Failed to fetch favourites:", error));
 		}
-	}, [userId]);
+	}, [products.length]);
 
 	function handleToggleFavourite(productId: number, isFavourite: boolean) {
 
@@ -152,7 +149,6 @@ export default function Page() {
 					return res.json();
 				})
 				.then((newFavourite) => {
-					console.log("Added to favourites:", newFavourite);
 					setFavourites((prev) => [...prev, newFavourite]);
 				})
 				.catch((error) => console.error("Failed to add to favourites:", error));
@@ -166,7 +162,6 @@ export default function Page() {
 						throw new Error(`HTTP error! status: ${res.status}`);
 					}
 					setFavourites((prev) => prev.filter((fav) => fav.productId !== productId));
-					console.log("Removed from favourites");
 				})
 				.catch((error) => console.error("Failed to remove from favourites:", error));
 		}
@@ -258,7 +253,6 @@ export default function Page() {
 						xl:grid-cols-5 xl:gap-2 xl:ml-2`}>
 							{products.map((product, index) => {
 								const isFavourite = favourites.some((fav) => fav.productId === product.id);
-								console.log(`${product.name}, ${favourites.includes(product.id)}`);
 								return (
 									< ProductCard
 										key={index}

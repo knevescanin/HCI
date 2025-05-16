@@ -30,7 +30,6 @@ const authHandler = NextAuth({
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          console.log('Missing email or password');
           throw new Error('Missing email or password');
         }
 
@@ -40,18 +39,16 @@ const authHandler = NextAuth({
         });
 
         if (!user || !user.password) {
-          console.log('User not found or missing password');
           throw new Error('User not found');
         }
 
         // Compare password
         const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) {
-          console.log('Invalid password');
           throw new Error('Invalid password');
         }
 
-        console.log('User authenticated successfully:', user);
+
         return { id: user.id, name: `${user.firstName}`, email: user.email };
 
       }
@@ -65,7 +62,6 @@ const authHandler = NextAuth({
   callbacks: {
 
     async signIn({ user, account, profile }) {
-      console.log('Google Profile:', profile);
 
       if (account?.provider === "google" || account?.provider === "facebook") {
         const fullName = profile?.name?.split(" ") || [];

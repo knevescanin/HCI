@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import FiltersIcon from '../../../public/Filters.png'
+import { usePathname } from 'next/navigation';
+import { useSession } from "next-auth/react";
 
 export default function Sidebar({
     searchQuery,
@@ -38,22 +40,31 @@ export default function Sidebar({
     const [categories, setCategories] = useState<Record<string, number>>({});
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+    const pathname = usePathname();
+    const isFavouritesPage = pathname.includes('favourites');
+    const { data: session } = useSession();
+    const userId = session?.user?.id;
+
     const sortOptions = [
         { value: "name-asc", label: "Name A-Z" },
         { value: "name-desc", label: "Name Z-A" },
         { value: "price-desc", label: "Price Descending" },
         { value: "price-asc", label: "Price Ascending" }
     ];
-
     const itemsPerPageOptions = [10, 20, 50, 100];
 
-
     useEffect(() => {
-        if (!searchQuery) return;
+        if (isFavouritesPage && !userId) return;
         const queryParams = new URLSearchParams();
+
+        if (isFavouritesPage && userId)
+            queryParams.append("user_id", userId);
 
         if (searchQuery)
             queryParams.append("name", searchQuery);
+
+        if (selectedCategories.length > 0)
+            queryParams.append("categories", selectedCategories.join(";"));
 
         if (minPrice)
             queryParams.append("min_price", minPrice);
@@ -65,28 +76,38 @@ export default function Sidebar({
             queryParams.append("stores", selectedStores.join(","));
 
         const fetchCategories = async () => {
-            console.log("I'm here!")
-            const response = await fetch(`../api/categories?${queryParams.toString()}`);
+            let endpoint = "../api/categories";
+            if (isFavouritesPage) {
+                endpoint = "../api/favourites_categories";
+            }
+            const response = await fetch(`${endpoint}?${queryParams.toString()}`);
             const data = await response.json();
             setCategories(data.categoryCounts);
+
         };
 
         fetchCategories();
-    }, [searchQuery, selectedStores, minPrice, maxPrice]);
+    }, [searchQuery, selectedStores, selectedCategories, minPrice, maxPrice, isFavouritesPage, userId]);
 
 
 
     useEffect(() => {
         const fetchStores = async () => {
             try {
-
+                if (isFavouritesPage && !userId) return;
                 const queryParams = new URLSearchParams();
 
                 if (searchQuery)
                     queryParams.append("name", searchQuery);
 
+                if (isFavouritesPage && userId)
+                    queryParams.append("user_id", userId);
+
                 if (selectedCategories.length > 0)
                     queryParams.append("categories", selectedCategories.join(";"));
+
+                if (selectedStores.length > 0)
+                    queryParams.append("stores", selectedStores.join(","));
 
                 if (minPrice)
                     queryParams.append("min_price", minPrice);
@@ -94,18 +115,24 @@ export default function Sidebar({
                 if (maxPrice)
                     queryParams.append("max_price", maxPrice);
 
-                const response = await fetch(`/api/stores?${queryParams.toString()}`);
+                let endpoint = "/api/stores";
+                if (isFavouritesPage) {
+                    endpoint = "/api/favourites_stores";
+                }
+
+                const response = await fetch(`${endpoint}?${queryParams.toString()}`);
                 if (!response.ok) throw new Error('Failed to fetch stores');
 
                 const data = await response.json();
                 setStores(data);
+
             } catch (error) {
                 console.error('Error fetching stores:', error);
             }
         };
 
         fetchStores();
-    }, [searchQuery, selectedCategories, minPrice, maxPrice]);
+    }, [searchQuery, selectedCategories, selectedStores, minPrice, maxPrice, isFavouritesPage, userId]);
 
 
     const handleStoreChange = (store: string) => {
@@ -161,9 +188,6 @@ export default function Sidebar({
             ${isSidebarOpen ? 'bg-white text-[#1A20AB] translate-x-0 overflow-y-auto' : '-translate-x-full'} 
             lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-full lg:mt-5
             2xl:min-w-[200px] 2xl:w-full`}>
-                {/* <h2 className="text-4xl font-semibold text-center mb-4 text-white lg:text-[#1A20AB]">
-                    Filters
-                </h2> */}
 
                 <div className="mb-6">
                     <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className="transition duration-200 ease-in-out my-auto">{visibleSections.has('categories') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">

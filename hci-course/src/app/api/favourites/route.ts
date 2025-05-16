@@ -1,31 +1,84 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { categoryMap } from "@/app/utils/categoryMap";
+
 
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
     try {
+        const itemName = req.nextUrl.searchParams.get("name");
         const userId = req.nextUrl.searchParams.get("userId");
+        const stores = req.nextUrl.searchParams.get("stores")?.split(",").filter(Boolean) || [];
+        const categories = req.nextUrl.searchParams.get("categories")?.split(",").filter(Boolean) || [];
+        const minPrice = req.nextUrl.searchParams.get("minPrice");
+        const maxPrice = req.nextUrl.searchParams.get("maxPrice");
+        const sort = req.nextUrl.searchParams.get("sort") || "name-asc";
+        const offset = parseInt(req.nextUrl.searchParams.get("offset") || "0", 10);
+        const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+
+        const allMappedSubcategories = new Set<string>();
+        Object.values(categoryMap).forEach(subs => subs.forEach(sub => allMappedSubcategories.add(sub)));
 
         if (!userId) {
             return NextResponse.json({ error: "Missing userId" }, { status: 400 });
         }
 
+        let orderBy: any = {};
+        if (sort === "name-asc") orderBy = { product: { name: "asc" } };
+        else if (sort === "name-desc") orderBy = { product: { name: "desc" } };
+        else if (sort === "price-asc") orderBy = { product: { price: "asc" } };
+        else if (sort === "price-desc") orderBy = { product: { price: "desc" } };
+
+        const orConditions: any[] = [];
+        let expandedCategories: string[] = [];
+        categories.forEach(cat => {
+            if (categoryMap[cat]) {
+                expandedCategories.push(...categoryMap[cat]);
+            } else if (cat !== "Ostalo") {
+                expandedCategories.push(cat);
+            }
+        });
+        if (expandedCategories.length > 0) {
+            orConditions.push({ category: { in: expandedCategories } });
+        }
+        if (categories.includes("Ostalo")) {
+            orConditions.push({ category: { notIn: Array.from(allMappedSubcategories) } });
+        }
+
+        const where: any = {
+            userId,
+            product: {
+                ...(stores.length > 0 && { store_name: { in: stores } }),
+                ...(orConditions.length > 0 ? { OR: orConditions } : {}),
+                ...(minPrice && { price: { gte: Number(minPrice) } }),
+                ...(maxPrice && { price: { lte: Number(maxPrice) } }),
+                ...(itemName && { name: { contains: itemName, mode: "insensitive" } }),
+            }
+        };
+
         const favourites = await prisma.favourite.findMany({
-            where: { userId },
+            where,
             include: {
                 product: {
                     select: {
                         name: true,
                         price: true,
                         image_url: true,
-                        store_name: true
+                        store_name: true,
+                        category: true,
                     }
                 }
-            }
+            },
+            orderBy,
+            skip: offset,
+            take: limit ? limit : undefined,
         });
 
-        return NextResponse.json(favourites, { status: 200 });
+        const total = await prisma.favourite.count({ where });
+
+
+        return NextResponse.json({ favourites, total }, { status: 200 });
     } catch (error) {
         console.error("Error fetching favourites:", error);
         return NextResponse.json({ error: "Failed to fetch favourites" }, { status: 500 });

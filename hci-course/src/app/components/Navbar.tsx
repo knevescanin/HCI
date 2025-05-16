@@ -83,12 +83,12 @@ export default function Navbar() {
                                     Search
                                 </Link>
                             </li> */}
-                            <li className={`text-lg ${pathname ==='/' ? 'py-2' : 'pt-6 pb-2'} md:py-0`}>
+                            <li className={`text-lg ${pathname === '/' ? 'py-2' : 'pt-6 pb-2'} md:py-0`}>
                                 <Link href="/favourites" className={`font-bold hover:underline  text-white ${pathname === '/favourites' ? 'underline' : ''}`} onClick={closeMenu}>
                                     <span className='flex items-center gap-1'><Image src="/heart-2.png" width={20} height={20} alt='heart' className='w-1/6 h-1/6 md:h-fit md:w-fit' /><p className="">Favourites</p></span>
                                 </Link>
                             </li>
-                            <li className={`text-lg ${pathname ==='/' ? 'pb-2' : 'pb-2'} md:pb-0`}>
+                            <li className={`text-lg ${pathname === '/' ? 'pb-2' : 'pb-2'} md:pb-0`}>
                                 <Link href="/docs" className={`font-bold hover:underline  text-white ${pathname === '/docs' ? 'underline' : ''}`} onClick={closeMenu}>
                                     <span className='flex items-center gap-1'><Image src="/google-docs.png" width={20} height={20} alt='docs' className='w-1/5 h-1/5 md:h-fit md:w-fit' /><p>Docs</p></span>
                                 </Link>
@@ -120,7 +120,7 @@ export default function Navbar() {
                                     )}
                                 </>
                             ) : (
-                                <li className={`text-lg ${pathname ==='/' ? 'pb-2' : 'pb-6'} md:pb-0`}>
+                                <li className={`text-lg ${pathname === '/' ? 'pb-2' : 'pb-6'} md:pb-0`}>
                                     <Link href="/signin" className={`font-bold hover:underline  text-white ${pathname === '/log-in' ? 'underline' : ''}`} onClick={closeMenu}>
                                         <span className='flex items-center gap-1'><Image src="/signin.png" width={20} height={20} alt='docs' className='w-1/5 h-1/5 md:h-fit md:w-fit' /><p>LogIn</p></span>
                                     </Link>
@@ -135,7 +135,7 @@ export default function Navbar() {
                     <div className="fixed inset-0 backdrop-blur-sm z-30" onClick={() => { closeMenu(); toggleDropdown(); }}></div>
                 </>
             )}
-            {!(pathname.includes("favourites") || pathname.includes("docs") || pathname.includes("signin") || pathname.includes("signup")) && <SearchUI />}
+            {!(pathname.includes("docs") || pathname.includes("signin") || pathname.includes("signup")) && <SearchUI />}
         </nav>
     )
 }
