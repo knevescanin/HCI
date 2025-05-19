@@ -4,11 +4,11 @@ import { GridProvider } from "@/app/contexts/GridContext";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from 'next/navigation'
-import Pagination from "@/app/components/Pagination";
 import Sidebar from "@/app/components/Sidebar";
 import CardSkeletonLoader from "@/app/components/UI/CardSkeletonLoader";
 import Grid_1 from '../../../../public/grid.png'
 import Grid_2 from '../../../../public/grid-2.png'
+import { useRouter } from 'next/navigation';
 
 
 export default function Page() {
@@ -20,16 +20,15 @@ export default function Page() {
     const [gridColumns, setGridColumns] = useState(2);
     const [loading, setLoading] = useState(true);
     const [refreshKey, setRefreshKey] = useState(0);
+    const router = useRouter();
 
     // Sidebar
     const [sort, setproductSort] = useState("name-asc");
-    const [offset, setOffset] = useState(0);
-    const [limit, setProductLimit] = useState(10);
     const [selectedStores, setSelectedStores] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [minPrice, setMinPrice] = useState<string>('');
     const [maxPrice, setMaxPrice] = useState<string>('');
-    const productName = useSearchParams().get('name') || '';
+    const [productName, setProductName] = useState<string>(useSearchParams().get('name') || '')
 
     useEffect(() => {
         if (userId) {
@@ -38,8 +37,6 @@ export default function Page() {
             if (productName) params.append("name", productName)
             if (userId) params.append("userId", userId);
             if (sort) params.append("sort", sort);
-            if (offset) params.append("offset", offset.toString());
-            if (limit) params.append("limit", limit.toString());
             if (selectedStores.length > 0) params.append("stores", selectedStores.join(","));
             if (selectedCategories.length > 0) params.append("categories", selectedCategories.join(","));
             if (minPrice) params.append("minPrice", minPrice);
@@ -53,17 +50,15 @@ export default function Page() {
                     return res.json();
                 })
                 .then((data) => {
-                    if (offset === 0) {
-                        setFavourites(data.favourites);
-                    } else {
-                        setFavourites(prev => [...prev, ...data.favourites]);
-                    }
+                    setFavourites(data.favourites);
                     setTotal(data.total);
+                    setLoading(false);
                 })
                 .catch((error) => console.error("Failed to fetch favourites:", error));
 
+
         }
-    }, [userId, productName, sort, offset, limit, selectedStores, selectedCategories, minPrice, maxPrice]);
+    }, [userId, productName, sort, selectedStores, selectedCategories, minPrice, maxPrice]);
 
     function handleToggleFavourite(productId: number, isFavourite: boolean) {
         if (isFavourite) {
@@ -96,39 +91,29 @@ export default function Page() {
                 .then((data) => {
                     setFavourites((prev) => prev.filter((fav) => fav.productId !== productId));
                     setTotal(data.total);
-
-                    if (favourites.length === 1 && offset > 0) {
-                        setOffset(offset - limit);
-                    } else {
-                        setRefreshKey(prev => prev + 1);
-                    }
-
+                    setRefreshKey(prev => prev + 1);
                 })
 
                 .catch((error) => console.error("Failed to remove from favourites:", error));
         }
     }
 
-    // useEffect(() => {
-    //     setLoading(true)
-    //     setOffset(0);
-    //     setFavourites([]);
-    // }, [sort, productName, selectedStores, selectedCategories, minPrice, maxPrice, limit]);
-
     const resetFilters = () => {
         setSelectedStores([]);
         setSelectedCategories([]);
         setMinPrice('');
         setMaxPrice('');
-        setProductLimit(10);
         setproductSort('name-asc');
-        setOffset(0);
         setFavourites([]);
+        if (productName) {
+            setProductName('');
+            router.push('/favourites');
+        }
     }
 
     return (
 
-        <div className="min-h-[75vh] flex flex-col lg:grid lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 w-full text-white relative bg-white">
+        <div className="min-h-[80vh] flex flex-col lg:grid lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 w-full text-white relative bg-white">
 
 
             <div className='w-[95vw] flex my-5 mx-auto
@@ -147,8 +132,8 @@ export default function Page() {
                             setMinPrice={setMinPrice}
                             maxPrice={maxPrice}
                             setMaxPrice={setMaxPrice}
-                            productLimit={limit}
-                            setProductLimit={setProductLimit}
+                            productLimit={0}
+                            setProductLimit={() => { }}
                             productSort={sort}
                             setproductSort={setproductSort}
                             resetFilters={resetFilters}
@@ -180,12 +165,13 @@ export default function Page() {
                         </div>
                     ) : ('')
                     }
+
                 </div>
             </div>
             {favourites.length === 0 ? (
                 loading ? (
                     <div className="col-start-2 col-end-9 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mx-4 sm:mx-8 md:mx-16 overflow-x-hidden">
-                        {Array.from({ length: limit }).map((_, index) => (
+                        {Array.from({ length: 10 }).map((_, index) => (
                             <CardSkeletonLoader key={index} />
                         ))}
                     </div>
@@ -196,35 +182,35 @@ export default function Page() {
                 )
             ) : (
                 <GridProvider gridColumns={gridColumns}>
-                    <div className={`
+                    <div className="flex flex-col items-center col-start-1 col-end-9 
+                    md:col-start-1 md:col-end-9
+                    lg:col-start-2">
+                        <h1 className="text-[#1A20AB] [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] text-3xl lg:text-4xl font-bold text-center my-3 lg:my-7 ">
+                            Things You've Hopped On
+                        </h1>
+                        <div className={`
                          ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-1 col-end-9 grid gap-0 overflow-x-hidden grid-cols-2'}
 						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-0
-						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-3 lg:h-fit lg:my-5
+						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-3 lg:h-fit
 						xl:grid-cols-5 xl:gap-2 xl:ml-2`}>
-                        {favourites.map((fav) => {
-                            return (
-                                <ProductCard
-                                    key={fav.id}
-                                    name={fav.product.name}
-                                    imageUrl={fav.product.image_url}
-                                    store={fav.product.store_name}
-                                    price={fav.product.price}
-                                    productId={fav.productId}
-                                    isFavourite={true}
-                                    onToggleFavourite={handleToggleFavourite}
-                                />
-                            );
-                        })}
-                        {offset + limit < total && (
-                            <div className='col-span-full w-full flex justify-center mb-5 lg:mb-0 lg:my-auto '>
-                                <Pagination
-                                    offset={offset}
-                                    productLimit={limit}
-                                    setOffset={setOffset} />
-                            </div>
-                        )}
+                            {favourites.map((fav) => {
+                                return (
+                                    <ProductCard
+                                        key={fav.id}
+                                        name={fav.product.name}
+                                        imageUrl={fav.product.image_url}
+                                        store={fav.product.store_name}
+                                        price={fav.product.price}
+                                        productId={fav.productId}
+                                        isFavourite={true}
+                                        onToggleFavourite={handleToggleFavourite}
+                                    />
+                                );
+                            })}
+                        </div>
                     </div>
                 </GridProvider >
+
             )
             }
         </div >

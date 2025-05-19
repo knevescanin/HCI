@@ -25,7 +25,10 @@ export default function Navbar() {
         setDropdownOpen(false);
     };
     return (
-        <nav className={`w-full sticky z-40 h-fit flex flex-col items-center  pb-14 md:pb-8`}>
+        <nav className={`w-full sticky z-40 h-fit flex flex-col items-center 
+        ${pathname === "/" || pathname.includes("search") ? 'pb-7' : ''}
+        ${(pathname.includes("docs") || pathname.includes("signin") || pathname.includes("favourites") || pathname.includes("signup")) ? 'pb-14' : ''}
+        md:pb-8`}>
             <div className="flex lg:max-w-full md:flex md:justify-between md:items-center md:w-full md:my-3 md:px-10">
 
                 <div className="">
@@ -83,7 +86,7 @@ export default function Navbar() {
                                     Search
                                 </Link>
                             </li> */}
-                            <li className={`text-lg ${pathname === '/' ? 'py-2' : 'pt-6 pb-2'} md:py-0`}>
+                            <li className={`text-lg ${pathname === '/' ? 'py-2' : 'pt-2 pb-2'} md:py-0`}>
                                 <Link href="/favourites" className={`font-bold hover:underline  text-white ${pathname === '/favourites' ? 'underline' : ''}`} onClick={closeMenu}>
                                     <span className='flex items-center gap-1'><Image src="/heart-2.png" width={20} height={20} alt='heart' className='w-1/6 h-1/6 md:h-fit md:w-fit' /><p className="">Favourites</p></span>
                                 </Link>
@@ -95,7 +98,7 @@ export default function Navbar() {
                             </li>
                             {session?.user ? (
                                 <>
-                                    <li className="text-lg ${pathname ==='/' ? 'pb-2' : 'pb-6'} md:pb-0">
+                                    <li className={`text-lg ${pathname === '/' ? 'pb-2' : 'pb-2'} md:pb-0`}>
                                         <button
                                             onClick={toggleDropdown}
                                             className="font-bold hover:underline text-white "
@@ -135,7 +138,7 @@ export default function Navbar() {
                     <div className="fixed inset-0 backdrop-blur-sm z-30" onClick={() => { closeMenu(); toggleDropdown(); }}></div>
                 </>
             )}
-            {!(pathname.includes("docs") || pathname.includes("signin") || pathname.includes("signup")) && <SearchUI />}
+            {!(pathname.includes("docs") || pathname.includes("signin") || pathname.includes("favourites") || pathname.includes("signup")) && <SearchUI />}
         </nav>
     )
 }

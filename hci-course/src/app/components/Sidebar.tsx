@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import FiltersIcon from '../../../public/Filters.png'
 import { usePathname } from 'next/navigation';
 import { useSession } from "next-auth/react";
+import SearchUI from './UI/SearchUI';
 
 export default function Sidebar({
     searchQuery,
@@ -191,6 +192,9 @@ export default function Sidebar({
             lg:bg-white lg:sticky lg:bg-transparent lg:translate-x-0 lg:min-w-[180px] lg:w-full lg:h-auto lg:max-h-full lg:mt-5
             2xl:min-w-[200px] 2xl:w-full`}>
 
+                {isFavouritesPage && (
+                    <SearchUI></SearchUI>
+                )}
                 <div className="mb-6">
                     <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className="transition duration-200 ease-in-out my-auto">{visibleSections.has('categories') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
@@ -294,20 +298,22 @@ export default function Sidebar({
                         ))}
                     </select>
                 </div>
-                <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page</h3>
-                    <select
-                        value={productLimit}
-                        onChange={(e) => setProductLimit(parseInt(e.target.value))}
-                        className="px-2 py-1 rounded text-black font-sans"
-                    >
-                        {itemsPerPageOptions.map((limit) => (
-                            <option key={limit} value={limit}>
-                                {limit}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                {!isFavouritesPage && (
+                    <div className="mb-6">
+                        <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('itemsPerPage')}>Items Per Page</h3>
+                        <select
+                            value={productLimit}
+                            onChange={(e) => setProductLimit(parseInt(e.target.value))}
+                            className="px-2 py-1 rounded text-black font-sans"
+                        >
+                            {itemsPerPageOptions.map((limit) => (
+                                <option key={limit} value={limit}>
+                                    {limit}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
 
                 <button
                     onClick={resetFilters}

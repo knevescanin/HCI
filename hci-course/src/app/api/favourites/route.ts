@@ -14,8 +14,6 @@ export async function GET(req: NextRequest) {
         const minPrice = req.nextUrl.searchParams.get("minPrice");
         const maxPrice = req.nextUrl.searchParams.get("maxPrice");
         const sort = req.nextUrl.searchParams.get("sort") || "name-asc";
-        const offset = parseInt(req.nextUrl.searchParams.get("offset") || "0", 10);
-        const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
 
         const allMappedSubcategories = new Set<string>();
         Object.values(categoryMap).forEach(subs => subs.forEach(sub => allMappedSubcategories.add(sub)));
@@ -71,8 +69,6 @@ export async function GET(req: NextRequest) {
                 }
             },
             orderBy,
-            skip: offset,
-            take: limit ? limit : undefined,
         });
 
         const total = await prisma.favourite.count({ where });
