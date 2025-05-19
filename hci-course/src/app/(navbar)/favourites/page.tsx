@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 export default function Page() {
 
     const [favourites, setFavourites] = useState<{ id: string; product: { name: string; image_url: string; store_name: string; price: number; }; productId: number; }[]>([]);
-    const [total, setTotal] = useState(0);
+    const [, setTotal] = useState(0);
     const { data: session } = useSession();
     const userId = session?.user?.id;
     const [gridColumns, setGridColumns] = useState(2);
@@ -186,7 +186,7 @@ export default function Page() {
                     md:col-start-1 md:col-end-9
                     lg:col-start-2">
                         <h1 className="text-[#1A20AB] [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] text-3xl lg:text-4xl font-bold text-center my-3 lg:my-7 ">
-                            Things You've Hopped On
+                            Things You&apos;ve Hopped On
                         </h1>
                         <div className={`
                          ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-1 col-end-9 grid gap-0 overflow-x-hidden grid-cols-2'}
