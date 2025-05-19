@@ -19,6 +19,7 @@ export default function Page() {
     const userId = session?.user?.id;
     const [gridColumns, setGridColumns] = useState(2);
     const [loading, setLoading] = useState(true);
+    const [refreshKey, setRefreshKey] = useState(0);
 
     // Sidebar
     const [sort, setproductSort] = useState("name-asc");
@@ -61,7 +62,6 @@ export default function Page() {
                 })
                 .catch((error) => console.error("Failed to fetch favourites:", error));
 
-            setLoading(false)
         }
     }, [userId, productName, sort, offset, limit, selectedStores, selectedCategories, minPrice, maxPrice]);
 
@@ -79,7 +79,7 @@ export default function Page() {
                     return res.json();
                 })
                 .then((newFavourite) => {
-                    setFavourites((prev) => [...prev, newFavourite]); // Add new favorite to state
+                    setFavourites((prev) => [...prev, newFavourite]);
                 })
                 .catch((error) => console.error("Failed to add to favourites:", error));
         } else {
@@ -91,18 +91,29 @@ export default function Page() {
                     if (!res.ok) {
                         throw new Error(`HTTP error! status: ${res.status}`);
                     }
-                    setFavourites((prev) => prev.filter((fav) => fav.productId !== productId)); // Remove favorite from state
+                    return res.json();
                 })
+                .then((data) => {
+                    setFavourites((prev) => prev.filter((fav) => fav.productId !== productId));
+                    setTotal(data.total);
+
+                    if (favourites.length === 1 && offset > 0) {
+                        setOffset(offset - limit);
+                    } else {
+                        setRefreshKey(prev => prev + 1);
+                    }
+
+                })
+
                 .catch((error) => console.error("Failed to remove from favourites:", error));
         }
     }
 
-    useEffect(() => {
-        setLoading(true)
-        setOffset(0);
-        setFavourites([]);
-        setLoading(false)
-    }, [sort, productName, selectedStores, selectedCategories, minPrice, maxPrice, limit]);
+    // useEffect(() => {
+    //     setLoading(true)
+    //     setOffset(0);
+    //     setFavourites([]);
+    // }, [sort, productName, selectedStores, selectedCategories, minPrice, maxPrice, limit]);
 
     const resetFilters = () => {
         setSelectedStores([]);
@@ -141,6 +152,7 @@ export default function Page() {
                             productSort={sort}
                             setproductSort={setproductSort}
                             resetFilters={resetFilters}
+                            refreshKey={refreshKey}
                         />
                     </div>
                     {favourites.length > 0 ? (

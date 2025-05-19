@@ -120,7 +120,9 @@ export async function DELETE(req: NextRequest) {
             where: { userId, productId: Number(productId) },
         });
 
-        return NextResponse.json({ message: "Favourite removed" }, { status: 200 });
+        const total = await prisma.favourite.count({ where: { userId } });
+
+        return NextResponse.json({ total }, { status: 200 });
     } catch (error) {
         console.error("Error removing favourite:", error);
         return NextResponse.json({ error: "Failed to remove favourite" }, { status: 500 });

@@ -18,6 +18,7 @@ export default function Sidebar({
     productSort,
     setproductSort,
     resetFilters,
+    refreshKey,
 }: {
     searchQuery: string;
     selectedStores: string[];
@@ -33,6 +34,7 @@ export default function Sidebar({
     productSort: string;
     setproductSort: React.Dispatch<React.SetStateAction<string>>;
     resetFilters: () => void;
+    refreshKey?: number;
 }) {
 
     const [stores, setStores] = useState<{ store_name: string; product_count: number }[]>([]);
@@ -87,7 +89,7 @@ export default function Sidebar({
         };
 
         fetchCategories();
-    }, [searchQuery, selectedStores, selectedCategories, minPrice, maxPrice, isFavouritesPage, userId]);
+    }, [searchQuery, selectedStores, selectedCategories, minPrice, maxPrice, isFavouritesPage, userId, refreshKey]);
 
 
 
@@ -132,7 +134,7 @@ export default function Sidebar({
         };
 
         fetchStores();
-    }, [searchQuery, selectedCategories, selectedStores, minPrice, maxPrice, isFavouritesPage, userId]);
+    }, [searchQuery, selectedCategories, selectedStores, minPrice, maxPrice, isFavouritesPage, userId, refreshKey]);
 
 
     const handleStoreChange = (store: string) => {

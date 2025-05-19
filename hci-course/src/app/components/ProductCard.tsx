@@ -30,7 +30,6 @@ export default function ProductCard({
 	function handleOnClick() {
 
 		if (!userId) {
-			console.error("User is not logged in");
 			alert("Please log in to add this product to your favourites.");
 			return;
 		}
