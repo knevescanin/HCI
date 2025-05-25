@@ -5,7 +5,7 @@ export const categoryMap: Record<string, string[]> = {
     Voće: ['Voće', 'Konzervirano voće'],
     Povrće: ['Povrće', 'Konzervirano povrće'],
     Pekarnica: ['Pakirani kruh', 'Dvopek i toast', 'Svježi kruh', 'Tost i dvopek', 'Dvopek i tost', 'Tijesta i kvasci', 'Mlinci i mrvice', 'Kolači i torte', 'Kruh i peciva', 'Kroasani i kolači', 'Mlinci i krušne mrvice', 'Kolači'],
-    Suhomesnati: ['Mesni naresci', 'Mesne delikatese', 'Mesna delikatesa', 'Salame', 'Hrenovke, kobasice i salame', 'Kobasice i hrenovke', 'Hrenovke i kobasice'],
+    Suhomesnato: ['Mesni naresci', 'Mesne delikatese', 'Mesna delikatesa', 'Salame', 'Hrenovke, kobasice i salame', 'Kobasice i hrenovke', 'Hrenovke i kobasice'],
     Mliječni_proizvodi: ['Mlijeko', 'Jogurt', 'Vrhnje', 'Maslac', 'Mliječni deserti', 'Jogurt i ostalo', 'Jogurti i ostalo', 'Vrhnja i pripravci', 'Margarin, maslac, mast', 'Alternativna mlijeka', 'Maslac i margarin', 'Napitci', 'Ledena kava'],
     Jaja_sirevi_i_namazi: ['Sirevi i pripravci', 'Jaja', 'Namazi', 'Meki sirevi', 'Polutvrdi sirevi', 'Tvrdi sirevi', 'Rezani, topljivi i svježi', 'Sirni namazi', 'Sirevi', 'Sir'],
     Riba: ['Riba', 'Smrznuta riba i plodovi mora', 'Riba i plodovi mora'],

@@ -9,16 +9,17 @@ export async function GET(req: NextRequest) {
     const maxPrice = parseFloat(req.nextUrl.searchParams.get("max_price") || "0");
     const filterCategory = req.nextUrl.searchParams.get("category"); // New: Get the category filter
 
-    if (!itemName) {
-        return NextResponse.json({ error: "Missing product name" }, { status: 400 });
-    }
-
     try {
         const sql = neon(`${process.env.DATABASE_URL}`);
 
         // Start with the base query to search for products by name
-        let query = `SELECT name, category, store_name, price FROM products WHERE unaccent(name) ILIKE unaccent($1)`;
-        const queryParams: any[] = [`%${itemName}%`]; // Start with product name as the filter
+        let query = `SELECT name, category, store_name, price FROM products WHERE 1=1`;
+        const queryParams: any[] = [];
+
+        if (itemName) {
+            query += ` AND unaccent(name) ILIKE unaccent($${queryParams.length + 1})`;
+            queryParams.push(`%${itemName}%`);
+        }
 
         // Add store filter if provided
         if (stores.length > 0) {

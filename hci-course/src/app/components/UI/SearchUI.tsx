@@ -25,7 +25,7 @@ function SearchUI() {
 				type="text"
 				placeholder={
 					isFavouritesPage
-						? 'Search your favourites'
+						? 'Search favourites'
 						: (pathname === "/" || pathname.includes("search"))
 							? (productName.trim() !== '' ? productName : 'Search for a product and rabbit will try to fetch it...')
 							: ''

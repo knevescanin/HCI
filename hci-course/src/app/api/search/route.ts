@@ -23,10 +23,6 @@ export async function GET(req: NextRequest) {
     const minPrice = parseFloat(req.nextUrl.searchParams.get("min_price") || "0");
     const maxPrice = parseFloat(req.nextUrl.searchParams.get("max_price") || "0");
 
-    if (!itemName) {
-        return NextResponse.json({ error: "Missing product name" }, { status: 400 });
-    }
-
     try {
         const sql = neon(`${process.env.DATABASE_URL}`);
         let query = `SELECT * FROM products WHERE 1=1`;

@@ -12,12 +12,14 @@ import Grid_2 from '../../../../public/grid-2.png'
 import { useSession } from "next-auth/react";
 
 export default function Page() {
+	const searchParams = useSearchParams();
+
 	const [products, setProducts] = useState<Record<string, any>[]>([])
 	const [productLimit, setProductLimit] = useState(10)
 	const [productSort, setproductSort] = useState('name-asc')
 	const [offset, setOffset] = useState(0)
-	const [selectedStores, setSelectedStores] = useState<string[]>([])
-	const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+	const [selectedStores, setSelectedStores] = useState<string[]>(searchParams.get('stores')?.split(',').filter(Boolean) || [])
+	const [selectedCategories, setSelectedCategories] = useState<string[]>(searchParams.get('categories')?.split(';').filter(Boolean) || []);
 	const [loading, setLoading] = useState(true)
 	const productName = useSearchParams().get('name') || '';
 	const [minPrice, setMinPrice] = useState<string>('0');
