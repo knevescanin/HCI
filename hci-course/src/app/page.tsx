@@ -4,6 +4,7 @@ import { categoryMap } from './utils/categoryMap'
 import { categoryImages } from './utils/categoryImages'
 import { storeImages } from './utils/storeImages'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function Home() {
 	const categories = Object.keys(categoryMap)
@@ -49,8 +50,10 @@ export default function Home() {
 						md:min-w-[220px] md:px-8 md:py-5 md:text-xl
 						lg:min-w-[270px] lg:px-8 lg:py-5 rounded-2xl border border-[#1A20AB]/30 bg-white shadow-md text-[#1A20AB] font-semibold text-xl flex flex-col items-center justify-between transition-all duration-200 hover:bg-[#1A20AB] hover:text-white hover:scale-105 active:scale-95`}
 					>
-						<img
+						<Image
 							src={categoryImages[cat] || '/images/categories/default.png'}
+							width={100}
+							height={100}
 							alt={cat}
 							className="my-auto lg:my-0 lg:mb-3 w-16 h-12 sm:w-24 sm:h-16 md:w-36 md:h-24 lg:w-52 lg:h-32 object-contain"
 						/>
@@ -92,8 +95,10 @@ export default function Home() {
 						lg:min-w-[270px] lg:px-8 lg:py-5
 						rounded-2xl border border-[#1A20AB]/30 bg-white shadow-md text-[#1A20AB] font-semibold text-lg flex flex-col items-center justify-center transition-all duration-200 hover:bg-[#1A20AB] hover:text-white hover:scale-105 active:scale-95`}
 						>
-							<img
+							<Image
 								src={storeImages[store.store_name] || '/images/stores/default.png'}
+								width={100}
+								height={100}
 								alt={store.store_name}
 								className="my-auto lg:my-0 lg:mb-3 w-18 h-16 sm:w-24 sm:h-16 md:w-36 md:h-24 lg:w-52 lg:h-32 object-contain"
 							/>

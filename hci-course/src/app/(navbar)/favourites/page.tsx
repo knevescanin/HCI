@@ -9,6 +9,7 @@ import CardSkeletonLoader from "@/app/components/UI/CardSkeletonLoader";
 import Grid_1 from '../../../../public/grid.png'
 import Grid_2 from '../../../../public/grid-2.png'
 import { useRouter } from 'next/navigation';
+import Image from "next/image";
 
 
 export default function Page() {
@@ -142,23 +143,25 @@ export default function Page() {
                     </div>
                     {favourites.length > 0 ? (
                         <div className="absolute top-11 right-0 md:hidden flex flex-row justify-end items-end mb-0 space-x-6 mr-2">
-                            <div className='bg-gray-100 rounded-full shadow-md hover:shadow-md transition-all duration-200 cursor-pointer'
+                            <div className={`${gridColumns == 2 ? 'hidden' : ''} bg-gray-100 rounded-full shadow-md hover:shadow-md transition-all duration-200 cursor-pointer`}
                                 onClick={() => setGridColumns(2)}
                             >
-                                <img
+                                <Image
                                     src={Grid_2.src}
                                     alt="columns"
                                     width={18}
-                                    className='hover:scale-110'
+                                    height={18}
+                                    className={`hover:scale-110`}
 
                                 />
                             </div>
-                            <div className='bg-gray-100 rounded-full shadow-md hover:shadow-md transition-all duration-200 cursor-pointer'
+                            <div className={`${gridColumns == 1 ? 'hidden' : ''} bg-gray-100 rounded-full shadow-md hover:shadow-md transition-all duration-200 cursor-pointer`}
                                 onClick={() => setGridColumns(1)}>
-                                <img
+                                <Image
                                     src={Grid_1.src}
                                     alt="column"
                                     width={18}
+                                    height={18}
                                     className='hover:scale-110'
                                 />
                             </div>

@@ -3,37 +3,38 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from 'next/image'
 
 export default function SignIn() {
 
     const router = useRouter();
-  const [form, setForm] = useState({ email: "", password: "" });
+    const [form, setForm] = useState({ email: "", password: "" });
 
-  const handleOAuthSignIn = async (provider: string) => {
-    await signIn(provider, { callbackUrl: "/" });
-};
+    const handleOAuthSignIn = async (provider: string) => {
+        await signIn(provider, { callbackUrl: "/" });
+    };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      email: form.email,
-      password: form.password,
-    });
+        const res = await signIn("credentials", {
+            redirect: false,
+            email: form.email,
+            password: form.password,
+        });
 
-    if (res?.error) {
-      alert("Invalid login credentials");
-    } else {
-    router.push("/"); // Redirect after successful login
-    }
-  };
+        if (res?.error) {
+            alert("Invalid login credentials");
+        } else {
+            router.push("/"); // Redirect after successful login
+        }
+    };
     return (
-        
+
         <div className="mx-auto my-10 w-11/12 max-w-4xl shadow-2xl rounded-b-lg md:rounded-none flex flex-col md:flex-row 3xl:my-auto">
             <form onSubmit={handleSubmit} className="bg-[#1A20AB] flex-1 text-left p-6 md:p-10 rounded-t-lg md:rounded-l-2xl flex flex-col justify-center items-center">
                 <div className="font-latoBlack md:mt-12 md:mb-12 text-white text-center">
@@ -42,7 +43,7 @@ export default function SignIn() {
                 <div className="flex flex-col gap-1 md:mb-4 w-full max-w-sm">
                     <label className="block md:text-lg font-latoBlack text-white">E-mail</label>
                     <div className="relative">
-                        <input type="email" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="email" onChange={handleChange} required/>
+                        <input type="email" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="email" onChange={handleChange} required />
                         <div className="absolute inset-y-0 items-center flex pl-3 pointer-events-none">
                             <svg
                                 width="24"
@@ -87,25 +88,25 @@ export default function SignIn() {
                     <div className="flex-grow border-t border-white"></div>
                 </div>
 
-                    {/* Email & Password Sign In */}
-                
-                <button
-  type="button"
-  onClick={() => handleOAuthSignIn("google")}
-  className="flex items-center justify-center w-full max-w-sm md:w-72 bg-white md:mb-6 text-gray-700 border border-gray-300 rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-gray-300 py-2 px-4 font-semibold shadow-lg shadow-black"
->
-  <img src="/google-icon.svg" alt="Google" className="w-6 h-6 mr-2" />
-  Sign in with Google
-</button>
+                {/* Email & Password Sign In */}
 
-<button
-  type="button"
-  onClick={() => handleOAuthSignIn("facebook")}
-  className="flex items-center justify-center w-full max-w-sm md:w-72 mt-4 md:mt-0 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-[#165BD4] py-2 px-4 font-semibold shadow-lg shadow-black"
->
-  <img src="/facebook-icon.svg" alt="Facebook" className="w-6 h-6 mr-2" />
-  Sign in with Facebook
-</button>
+                <button
+                    type="button"
+                    onClick={() => handleOAuthSignIn("google")}
+                    className="flex items-center justify-center w-full max-w-sm md:w-72 bg-white md:mb-6 text-gray-700 border border-gray-300 rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-gray-300 py-2 px-4 font-semibold shadow-lg shadow-black"
+                >
+                    <Image src="/google-icon.svg" width={100} height={100} alt="Google" className="w-6 h-6 mr-2" />
+                    Sign in with Google
+                </button>
+
+                <button
+                    type="button"
+                    onClick={() => handleOAuthSignIn("facebook")}
+                    className="flex items-center justify-center w-full max-w-sm md:w-72 mt-4 md:mt-0 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-[#165BD4] py-2 px-4 font-semibold shadow-lg shadow-black"
+                >
+                    <Image src="/facebook-icon.svg" width={100} height={100} alt="Facebook" className="w-6 h-6 mr-2" />
+                    Sign in with Facebook
+                </button>
 
             </form>
 
