@@ -279,8 +279,9 @@ export default function Page() {
 									<Pagination
 										offset={offset}
 										productLimit={productLimit}
-										setOffset={setOffset} />
-									loading={paginationLoading}
+										setOffset={setOffset}
+										loading={paginationLoading}
+									/>
 								</div>
 							)}
 						</div>
