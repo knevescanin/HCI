@@ -21,12 +21,14 @@ export default function Page() {
 	const [offset, setOffset] = useState(0)
 	const [selectedStores, setSelectedStores] = useState<string[]>(searchParams.get('stores')?.split(',').filter(Boolean) || [])
 	const [selectedCategories, setSelectedCategories] = useState<string[]>(searchParams.get('categories')?.split(';').filter(Boolean) || []);
-	const [loading, setLoading] = useState(true)
 	const productName = useSearchParams().get('name') || '';
 	const [minPrice, setMinPrice] = useState<string>('0');
 	const [maxPrice, setMaxPrice] = useState<string>('0');
 	const [gridColumns, setGridColumns] = useState(2);
 	const [totalProducts, setTotalProducts] = useState(0);
+
+	const [loading, setLoading] = useState(true)
+	const [paginationLoading, setPaginationLoading] = useState(false);
 
 	const { data: session } = useSession();
 	const userId = session?.user?.id;
@@ -95,11 +97,11 @@ export default function Page() {
 
 	useEffect(() => {
 		if (offset === 0) return; // Prevent duplicate first fetch
-		setLoading(true);
+		setPaginationLoading(true);
 		handleProductFetch(selectedStores, selectedCategories, productLimit, productSort, offset, productName, minPrice, maxPrice).then(
 			(data) => {
 				setProducts((prevProducts) => [...prevProducts, ...data.products]); // Append new products
-				setLoading(false);
+				setPaginationLoading(false);
 			}
 		);
 	}, [offset]);
@@ -278,6 +280,7 @@ export default function Page() {
 										offset={offset}
 										productLimit={productLimit}
 										setOffset={setOffset} />
+									loading={paginationLoading}
 								</div>
 							)}
 						</div>
