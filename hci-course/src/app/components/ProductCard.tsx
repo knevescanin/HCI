@@ -57,7 +57,7 @@ export default function ProductCard({
 			</div>
 
 
-			<div className="flex flex-col justify-between items-center w-full px-3 py-3 transition-all duration-200 group-hover:bg-[#1A20AB] group-hover:opacity-85 hover:text-white active:scale-95 group-hover:rounded-b-xl flex-grow">
+			<div className="flex flex-col justify-between items-center w-full px-3 py-3 transition-all duration-200 group-hover:bg-[#1A20AB] group-hover:opacity-85 hover:text-white group-hover:rounded-b-xl flex-grow">
 
 				<h2 className={`${gridColumns === 1 ? 'text-md' : 'text-sm'}
 				text-gray-800 group-hover:text-white font-sans font-semibold sm:text-lg md:text-xl lg:text-lg xl:text-lg 2xl:text-lg flex flex-wrap text-center px-1`}>{name}</h2>
