@@ -44,7 +44,7 @@ export default function ProductCard({
 				<FontAwesomeIcon
 					onClick={handleOnClick}
 					icon={isFavourite ? faHeartSolid : faHeartRegular}
-					className="absolute top-2 right-2 text-textPrimary hover:scale-110 hover:cursor-pointer z-10"
+					className="absolute top-2 right-2 text-pink-500 transition-transform duration-300 ease-in-out hover:scale-105 hover:cursor-pointer z-10 text-lg md:text-xl"
 				/>
 				<Image
 					unoptimized
@@ -57,13 +57,13 @@ export default function ProductCard({
 			</div>
 
 
-			<div className="flex flex-col justify-between items-center w-full px-3 py-3 transition duration-300 ease-in-out group-hover:bg-slate-100 group-hover:rounded-b-xl flex-grow">
+			<div className="flex flex-col justify-between items-center w-full px-3 py-3 transition-all duration-200 group-hover:bg-[#1A20AB] group-hover:opacity-85 hover:text-white active:scale-95 group-hover:rounded-b-xl flex-grow">
 
 				<h2 className={`${gridColumns === 1 ? 'text-md' : 'text-sm'}
-				text-textPrimary font-sans font-bold sm:text-lg md:text-xl lg:text-lg xl:text-lg 2xl:text-lg flex flex-wrap text-center px-1`}>{name}</h2>
+				text-gray-800 group-hover:text-white font-sans font-semibold sm:text-lg md:text-xl lg:text-lg xl:text-lg 2xl:text-lg flex flex-wrap text-center px-1`}>{name}</h2>
 				<div className="flex flex-col items-center justify-end ">
-					<p className="text-gray-500 font-sans font-semibold font italic">{store}</p>
-					<p className="text-[#1A20AB] font-sans font-bold">{price} €</p>
+					<p className="text-gray-500 group-hover:text-gray-300 font-sans font-medium font italic">{store}</p>
+					<p className="text-[#1A20AB] group-hover:text-white group-hover:scale-105 group-hover:shadow-2xl font-sans font-extrabold sm:text-lg md:text-xl lg:text-lg xl:text-lg 2xl:text-lg mt-3">{price} €</p>
 				</div>
 			</div>
 		</div>
