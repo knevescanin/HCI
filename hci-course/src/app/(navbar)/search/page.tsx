@@ -5,11 +5,13 @@ import Sidebar from '@/app/components/Sidebar'
 import { useEffect, useState } from 'react'
 // import ProductContext from '@/app/contexts/ProductContext'
 import { GridProvider } from "@/app/contexts/GridContext";
+import ButtonUI from "@/app/components/UI/ButtonUI";
 import CardSkeletonLoader from '@/app/components/UI/CardSkeletonLoader'
 import { useSearchParams } from 'next/navigation'
 import Grid_1 from '../../../../public/grid.png'
 import Grid_2 from '../../../../public/grid-2.png'
 import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 
 export default function Page() {
@@ -32,6 +34,7 @@ export default function Page() {
 
 	const { data: session } = useSession();
 	const userId = session?.user?.id;
+	const router = useRouter();
 	const [favourites, setFavourites] = useState<{ id: string; product: { name: string; image_url: string; store_name: string; price: number; }; productId: number; }[]>([]);
 
 	const baseURL = process.env.NEXT_PUBLIC_IS_PROD === "true" ? process.env.NEXT_PUBLIC_API_URL_PROD : process.env.NEXT_PUBLIC_API_URL_DEV
@@ -297,10 +300,20 @@ export default function Page() {
 								))}
 							</div>
 						) : (
-							<div className='col-start-1 lg:col-start-2 col-end-9 my-auto lg:mx-auto px-8 sm:px-8 md:px-16'>
-								<p className='text-[#1A20AB] font-sans text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center'>
-									Oops! We couldn&apos;t find any products for &quot;{productName}&quot;. Please try a different search!
+							<div className="col-start-1 lg:col-start-2 col-end-9 my-auto lg:mx-auto px-8 sm:px-8 md:px-16 flex flex-col items-center">
+								<h2 className="text-[#1A20AB] text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-3 sm:mb-4 text-center">
+									We couldn&apos;t find any results for &quot;{productName}&quot;.
+								</h2>
+								<p className="text-[#1A20AB] mb-4 sm:mb-4 text-base sm:text-xl text-center">
+									Try checking your spelling or using a different filter.
 								</p>
+								<ButtonUI
+									onClick={() => router.push('/')}
+									textSize="lg"
+									className="mt-1"
+								>
+									Back to Home
+								</ButtonUI>
 							</div>
 						)}
 					</>
