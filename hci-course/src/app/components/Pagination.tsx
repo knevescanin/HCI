@@ -30,7 +30,7 @@ export default function Pagination({
     }
 
     return (
-        <ButtonUI onClick={() => setOffset(offset + productLimit)} textSize="lg" className="col-start-2 col-end-9 justify-self-center my-auto" >
+        <ButtonUI onClick={() => setOffset(offset + productLimit)} textSize="lg" className="col-start-2 col-end-9 justify-self-center lg:my-3" >
             Load more products
         </ButtonUI>
     );

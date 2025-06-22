@@ -256,8 +256,8 @@ export default function Page() {
 						<div className={`
 						 ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-1 col-end-9 grid gap-0 overflow-x-hidden grid-cols-2'}
 						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-0
-						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:ml-3 lg:h-fit lg:my-5
-						xl:grid-cols-5 xl:gap-2 xl:ml-2`}>
+						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:h-fit lg:my-5
+						xl:grid-cols-5 xl:gap-2`}>
 							{products.map((product, index) => {
 								const isFavourite = favourites.some((fav) => fav.productId === product.id);
 								return (
