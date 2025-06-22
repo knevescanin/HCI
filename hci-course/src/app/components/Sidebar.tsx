@@ -196,12 +196,20 @@ export default function Sidebar({
                     <SearchUI></SearchUI>
                 )}
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('categories')}>Categories <span className="transition duration-200 ease-in-out my-auto">{visibleSections.has('categories') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
-                    </svg>
-                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>}</span></h3>
+                    <h3
+                        className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between"
+                        onClick={() => toggleSection('categories')}
+                    >
+                        Categories
+                        <span
+                            className={`transition-transform duration-300 ease-in-out my-auto ${visibleSections.has('categories') ? 'rotate-180' : 'rotate-0'
+                                }`}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                    </h3>
                     {visibleSections.has('categories') && (
                         <div className="space-y-2">
                             {categories && Object.entries(categories).length > 0 ? (
@@ -224,12 +232,19 @@ export default function Sidebar({
                 </div>
 
                 <div className="mb-6">
-                    <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('stores')}>Stores <span className="transition duration-200 ease-in-out my-auto">{visibleSections.has('stores') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
-                    </svg>
-                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>}</span></h3>
+                    <h3
+                        className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between"
+                        onClick={() => toggleSection('stores')}
+                    >
+                        Stores
+                        <span
+                            className={`transition-transform duration-300 ease-in-out my-auto ${visibleSections.has('stores') ? 'rotate-180' : 'rotate-0'}`}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                    </h3>
                     {visibleSections.has('stores') && (
                         <ul>
                             {stores.map((store) => (
@@ -251,12 +266,19 @@ export default function Sidebar({
 
                 <div className="mb-6">
                     <div className='flex-row justify-around items-center'>
-                        <h3 className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between" onClick={() => toggleSection('priceRange')}>Price Range <span className="transition duration-200 ease-in-out my-auto">{visibleSections.has('priceRange') ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
-                        </svg>
-                            : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                            </svg>}</span></h3>
+                        <h3
+                            className="font-bold 2xl:text-lg mb-2 cursor-pointer text-[#1A20AB] font-sans flex justify-between"
+                            onClick={() => toggleSection('priceRange')}
+                        >
+                            Price Range
+                            <span
+                                className={`transition-transform duration-300 ease-in-out my-auto ${visibleSections.has('priceRange') ? 'rotate-180' : 'rotate-0'}`}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#1A20AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </h3>
                     </div>
                     {visibleSections.has('priceRange') && (
                         <div>
@@ -304,7 +326,7 @@ export default function Sidebar({
                         <select
                             value={productLimit}
                             onChange={(e) => setProductLimit(parseInt(e.target.value))}
-                            className="px-2 py-1 rounded text-black font-sans"
+                            className="px-2 py-1 border rounded text-black font-sans"
                         >
                             {itemsPerPageOptions.map((limit) => (
                                 <option key={limit} value={limit}>
