@@ -213,7 +213,7 @@ export default function Home() {
 					</div>
 					{storeCanScrollRight && !storesCentered && (
 						<button
-							className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/70 backdrop-blur border border-[#1A20AB]/20 shadow-lg hover:bg-[#e6eaff] hover:shadow-lg hover:border-[#1A20AB] hover:scale-125 active:scale-95 transition-all duration-150 rounded-full w-9 h-9 md:w-12 md:h-12 flex items-center justify-center"
+							className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/70 backdrop-blur border border-[#1A20AB]/20 shadow-lg lg:hover:bg-[#e6eaff] lg:hover:shadow-lg lg:hover:border-[#1A20AB] lg:hover:scale-125 active:scale-95 transition-all duration-150 rounded-full w-9 h-9 md:w-12 md:h-12 flex items-center justify-center"
 							onClick={() => scrollStores('right')}
 							aria-label="Scroll right"
 						>
