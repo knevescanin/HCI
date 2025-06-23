@@ -256,7 +256,7 @@ export default function Page() {
                         textSize="lg"
                         className="mt-1"
                     >
-                        Back to Home
+                        Take me home
                     </ButtonUI>
                     <button
                         className={`w-fit font-latoBlack text-[#1A20AB] text-lg bg-white border border-[#1A20AB] px-3 py-2 mb-1 mt-1 rounded-xl drop-shadow-xl hover:scale-110 transition-all`}

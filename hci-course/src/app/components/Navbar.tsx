@@ -119,7 +119,7 @@ export default function Navbar() {
                             ) : (
                                 <li className={`text-lg ${pathname === '/' ? 'pb-2' : 'pb-6'} md:pb-0`}>
                                     <Link href="/signin" className={`font-bold hover:underline  text-white ${pathname === '/log-in' ? 'underline' : ''}`} onClick={closeMenu}>
-                                        <span className='flex items-center gap-1'><Image src="/signin.png" width={20} height={20} alt='docs' className='w-1/5 h-1/5 md:h-fit md:w-fit' /><p>LogIn</p></span>
+                                        <span className='flex items-center gap-1'><Image src="/signin.png" width={20} height={20} alt='docs' className='w-1/5 h-1/5 md:h-fit md:w-fit' /><p>Log In</p></span>
                                     </Link>
                                 </li>
                             )}
