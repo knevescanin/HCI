@@ -26,8 +26,7 @@ export default function Navbar() {
     };
     return (
         <nav className={`w-full sticky z-40 h-fit flex flex-col items-center 
-        ${pathname === "/" || pathname.includes("search") ? 'pb-7' : ''}
-        ${(pathname.includes("docs") || pathname.includes("signin") || pathname.includes("favourites") || pathname.includes("signup")) ? 'pb-14' : ''}
+        ${pathname === "/" || pathname.includes("search") ? 'pb-7' : 'pb-14'}
         md:pb-8`}>
             <div className="flex lg:max-w-full md:flex md:justify-between md:items-center md:w-full md:my-3 md:px-10">
 
@@ -81,11 +80,6 @@ export default function Navbar() {
 
 
                         <ul className="flex flex-col items-center justify-center md:flex-row md:gap-12">
-                            {/* <li className="text-xl md:px-6">
-                                <Link href="/search" className={`font-bold hover:underline  md:text-white ${pathname === '/search' ? 'underline' : ''} `} onClick={closeMenu}>
-                                    Search
-                                </Link>
-                            </li> */}
                             <li className={`text-lg ${pathname === '/' ? 'py-2' : 'pt-2 pb-2'} md:py-0`}>
                                 <Link href="/favourites" className={`font-bold hover:underline  text-white ${pathname === '/favourites' ? 'underline' : ''}`} onClick={closeMenu}>
                                     <span className='flex items-center gap-1'><Image src="/heart-2.png" width={20} height={20} alt='heart' className='w-1/6 h-1/6 md:h-fit md:w-fit' /><p className="">Favourites</p></span>
@@ -138,7 +132,7 @@ export default function Navbar() {
                     <div className="fixed inset-0 backdrop-blur-sm z-30" onClick={() => { closeMenu(); toggleDropdown(); }}></div>
                 </>
             )}
-            {!(pathname.includes("docs") || pathname.includes("signin") || pathname.includes("favourites") || pathname.includes("signup")) && <SearchUI />}
+            {(pathname === "/" || pathname.includes("search")) && <SearchUI />}
         </nav>
     )
 }

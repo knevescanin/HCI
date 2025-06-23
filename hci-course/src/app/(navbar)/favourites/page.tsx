@@ -175,11 +175,17 @@ export default function Page() {
                 </div>
                 {favourites.length === 0 ? (
                     loading ? (
-                        <div className="col-start-2 col-end-9 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mx-4 sm:mx-8 md:mx-16 overflow-x-hidden">
-                            {Array.from({ length: 10 }).map((_, index) => (
-                                <CardSkeletonLoader key={index} />
-                            ))}
-                        </div>
+                        <GridProvider gridColumns={gridColumns}>
+                            <div className={`
+						 ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-1 col-end-9 grid gap-0 overflow-x-hidden grid-cols-2'}
+						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-0
+						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:h-fit lg:my-5
+						xl:grid-cols-5 xl:gap-2`}>
+                                {Array.from({ length: 10 }).map((_, index) => (
+                                    <CardSkeletonLoader key={index} />
+                                ))}
+                            </div>
+                        </GridProvider>
                     ) : (
                         <div className='col-start-1 lg:col-start-2 col-end-9 my-auto lg:mx-auto px-8 sm:px-8 md:px-16 flex flex-col items-center'>
                             <p className='text-[#1A20AB] font-sans text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-4'>
