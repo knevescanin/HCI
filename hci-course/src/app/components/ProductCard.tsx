@@ -58,14 +58,13 @@ export default function ProductCard({
 			</div>
 
 
-			<div className="flex flex-col justify-between items-center w-full px-3 py-3 transition-all duration-200 lg:group-hover:bg-[#e6eaff] lg:group-hover:text-[#1A20AB] group-hover:rounded-b-xl flex-grow">
+			<div className="flex flex-col justify-evenly items-center w-full px-3 py-3 transition-all duration-200 lg:group-hover:bg-[#e6eaff] lg:group-hover:text-[#1A20AB] group-hover:rounded-b-xl flex-grow">
 
 				<h2 className={`${gridColumns === 1 ? 'text-md' : 'text-sm'}
 				text-gray-800 font-sans font-semibold sm:text-lg md:text-xl lg:text-lg xl:text-lg 2xl:text-lg flex flex-wrap text-center px-1`}>{name}</h2>
-				<div className="flex flex-col items-center justify-end ">
-					<p className="text-gray-500 font-sans font-medium font italic">{store}</p>
-					<p className="text-[#1A20AB] group-hover:shadow-2xl font-sans font-extrabold sm:text-lg md:text-xl lg:text-lg xl:text-lg 2xl:text-lg mt-3">{price} €</p>
-				</div>
+				<p className="text-gray-500 font-sans font-medium font italic my-2">{store}</p>
+				<p className="text-[#1A20AB] group-hover:shadow-2xl font-sans font-extrabold sm:text-lg md:text-xl lg:text-lg xl:text-lg 2xl:text-lg">{price} €</p>
+
 			</div>
 		</div>
 	)
