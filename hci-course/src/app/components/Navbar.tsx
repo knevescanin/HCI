@@ -2,16 +2,18 @@
 
 import { useSession, signOut } from "next-auth/react";
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import SearchUI from './UI/SearchUI'
+
 
 export default function Navbar() {
     const [navbar, setNavbar] = useState(false)
     const pathname = usePathname()
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const { data: session } = useSession();
+    const dropdownRef = useRef<HTMLDivElement>(null);
     const closeMenu = () => {
         setNavbar(false)
     }
@@ -24,6 +26,23 @@ export default function Navbar() {
         signOut();
         setDropdownOpen(false);
     };
+
+    useEffect(() => {
+        if (!dropdownOpen) return;
+        function handleClickOutside(event: MouseEvent) {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setDropdownOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropdownOpen]);
+
     return (
         <nav className={`w-full sticky z-40 h-fit flex flex-col items-center 
         ${pathname === "/" || pathname.includes("search") ? 'pb-7' : 'pb-14'}
@@ -101,16 +120,30 @@ export default function Navbar() {
                                         </button>
                                     </li>
                                     {dropdownOpen && (
-                                        <div className={`absolute ${navbar ? 'top-full right-50' : 'top-full right-0'} bg-white rounded-md shadow-lg w-auto`}>
+                                        <div ref={dropdownRef} className={`absolute ${navbar ? 'top-full right-50' : 'top-full right-0'} bg-white rounded-md shadow-lg w-auto`}>
                                             <ul className="text-gray-0 flex flex-col items-center">
-                                                <li className="px-4 py-2 font-bold text-lg">
+                                                <li className="hidden px-4 py-2 font-bold text-lg">
                                                     <Link href="/profile-settings" className="hover:text-[#1A20AB]">Profile Settings</Link>
                                                 </li>
                                                 <li
-                                                    className="px-4 py-2 font-bold text-lg text-red-600 hover:text-[#1A20AB] cursor-pointer"
+                                                    className="px-4 py-2 font-bold text-lg text-red-600 hover:text-[#1A20AB] cursor-pointer flex items-center gap-1"
                                                     onClick={handleSignOut}
                                                 >
-                                                    Sign Out
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        strokeWidth={2.1}
+                                                        stroke="currentColor"
+                                                        className="w-5 h-5"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 15l3-3m0 0l-3-3m3 3H9"
+                                                        />
+                                                    </svg>
+                                                    Log Out
                                                 </li>
                                             </ul>
                                         </div>
@@ -129,7 +162,7 @@ export default function Navbar() {
             </div>
             {navbar && (
                 <>
-                    <div className="fixed inset-0 backdrop-blur-sm z-30" onClick={() => { closeMenu(); toggleDropdown(); }}></div>
+                    <div className="fixed inset-0 backdrop-blur-sm z-30" onClick={() => { closeMenu(); }}></div>
                 </>
             )}
             {(pathname === "/" || pathname.includes("search")) && <SearchUI />}
