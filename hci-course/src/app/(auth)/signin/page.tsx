@@ -35,15 +35,15 @@ export default function SignIn() {
     };
     return (
         <div className="my-auto">
-            <div className="mx-auto my-10 w-11/12 max-w-4xl shadow-2xl rounded-b-lg md:rounded-none flex flex-col md:flex-row 3xl:my-auto">
-                <form onSubmit={handleSubmit} className="bg-[#1A20AB] flex-1 text-left p-6 md:p-10 rounded-t-lg md:rounded-l-2xl flex flex-col justify-center items-center">
+            <div className="mx-auto my-10 w-11/12 max-w-4xl shadow-2xl rounded-lg md:rounded-2xl flex flex-col md:flex-row">
+                <form onSubmit={handleSubmit} className="bg-[#1A20AB] flex-1 text-left p-6 md:p-10 rounded-t-lg md:rounded-l-2xl md:rounded-tr-none flex flex-col justify-center items-center">
                     <div className="font-latoBlack md:mt-12 md:mb-12 text-white text-center">
                         <p className="text-3xl md:text-5xl [text-shadow:_0_5px_0_rgb(0_0_0_/_90%)]">Sign In</p>
                     </div>
                     <div className="flex flex-col gap-1 md:mb-4 w-full max-w-sm">
                         <label className="block md:text-lg font-latoBlack text-white">E-mail</label>
                         <div className="relative">
-                            <input type="email" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="email" onChange={handleChange} required />
+                            <input type="email" placeholder="E-mail" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-md shadow-black py-1" name="email" onChange={handleChange} required />
                             <div className="absolute inset-y-0 items-center flex pl-3 pointer-events-none">
                                 <svg
                                     width="24"
@@ -64,7 +64,7 @@ export default function SignIn() {
                     <div className="flex flex-col gap-1 mt-3 md:mt-0 md:mb-4 w-full max-w-sm">
                         <label className="block md:text-lg font-latoBlack text-white">Password</label>
                         <div className="relative">
-                            <input type="password" placeholder="Password" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-lg shadow-black py-1" name="password" onChange={handleChange} required />
+                            <input type="password" placeholder="Password" className="border border-white rounded-2xl text-center font-semibold text-lg md:text-xl w-full max-w-sm placeholder-[#1A20AB] placeholder-opacity-85 shadow-md shadow-black py-1" name="password" onChange={handleChange} required />
                             <div className="absolute inset-y-0 items-center flex pl-3 pointer-events-none">
                                 <svg
                                     width="24"
@@ -81,7 +81,7 @@ export default function SignIn() {
 
 
 
-                    <button type="submit" className="mt-8 md:mt-12 p-1 md:p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-lg md:text-xl w-full max-w-sm md:w-1/2 md:max-w-md md:mb-8 shadow-lg shadow-black">Sign In</button>
+                    <button type="submit" className="mt-8 md:mt-12 p-1 md:p-3 bg-white text-[#1A20AB] font-bold rounded-2xl text-lg md:text-xl w-full max-w-sm md:w-1/2 md:max-w-md md:mb-8 shadow-md shadow-black">Sign In</button>
                     <div className="flex items-center my-6 w-full max-w-sm md:my-0 md:mb-8">
                         <div className="flex-grow border-t border-white"></div>
                         <span className="mx-4 text-white font-semibold">Or</span>
@@ -93,7 +93,7 @@ export default function SignIn() {
                     <button
                         type="button"
                         onClick={() => handleOAuthSignIn("google")}
-                        className="flex items-center justify-center w-full max-w-sm md:w-72 bg-white md:mb-6 text-gray-700 border border-gray-300 rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-gray-300 py-2 px-4 font-semibold shadow-lg shadow-black"
+                        className="flex items-center justify-center w-full max-w-sm md:w-72 bg-white md:mb-6 text-gray-700 border border-gray-300 rounded-full hover:shadow-md transition duration-300 ease-in-out hover:bg-gray-300 py-2 px-4 font-semibold shadow-md shadow-black"
                     >
                         <Image src="/google-icon.svg" width={100} height={100} alt="Google" className="w-6 h-6 mr-2" />
                         Sign in with Google
@@ -102,7 +102,7 @@ export default function SignIn() {
                     <button
                         type="button"
                         onClick={() => handleOAuthSignIn("facebook")}
-                        className="flex items-center justify-center w-full max-w-sm md:w-72 mt-4 md:mt-0 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition duration-300 ease-in-out hover:bg-[#165BD4] py-2 px-4 font-semibold shadow-lg shadow-black"
+                        className="flex items-center justify-center w-full max-w-sm md:w-72 mt-4 md:mt-0 bg-[#1877F2] text-white rounded-full hover:shadow-md transition duration-300 ease-in-out hover:bg-[#165BD4] py-2 px-4 font-semibold shadow-md shadow-black"
                     >
                         <Image src="/facebook-icon.svg" width={100} height={100} alt="Facebook" className="w-6 h-6 mr-2" />
                         Sign in with Facebook
@@ -112,7 +112,7 @@ export default function SignIn() {
 
 
 
-                <div className="bg-white flex-1 text-center p-0 text-[#1A20AB] shadow-lg rounded-b-lg md:rounded-r-2xl flex flex-col justify-center">
+                <div className="bg-white flex-1 text-center p-0 text-[#1A20AB] shadow-lg rounded-lg md:rounded-l-none md:rounded-r-2xl flex flex-col justify-center">
                     <h1 className="text-xl md:text-5xl font-latoBlack mb-2 md:mb-6 md:[text-shadow:_0_1.2px_0_rgb(0_0_0_/_90%)]">Welcome Back!</h1>
                     <p className="md:text-2xl px-2 md:px-0 md:mt-6 md:mb-6 md:mx-12">
                         <span className="font-black text-lg md:text-2xl">Sign in</span> to continue enjoying all the great features we offer.
