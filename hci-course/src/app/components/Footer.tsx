@@ -36,18 +36,18 @@ export default function Footer() {
 						<p className='text-[background] font-normal text-lg pb-2'>Information</p>
 						<Link
 							className="hover:underline"
-							href="/faqs">
+							href="/not-found">
 							<p>FAQs</p>
 						</Link>
 
 						<Link
 							className="hover:underline"
-							href="/about-us">
+							href="/not-found">
 							<p>About us</p>
 						</Link>
 						<Link
 							className="hover:underline"
-							href="/services">
+							href="/not-found">
 							<p>Services</p>
 						</Link>
 
@@ -59,18 +59,18 @@ export default function Footer() {
 							<div className='flex flex-col items-center'>
 								<Link
 									className="hover:underline"
-									href="/faqs">
+									href="/not-found">
 									<p>FAQs</p>
 								</Link>
 
 								<Link
 									className="hover:underline"
-									href="/about-us">
+									href="/not-found">
 									<p>About us</p>
 								</Link>
 								<Link
 									className="hover:underline"
-									href="/services">
+									href="/not-found">
 									<p className='pb-2'>Services</p>
 								</Link>
 							</div>
@@ -83,18 +83,18 @@ export default function Footer() {
 						<p className='text-[background] font-normal text-lg pb-2'>Support</p>
 						<Link
 							className="hover:underline"
-							href="/contact-us">
+							href="/not-found">
 							<p>Contact us</p>
 						</Link>
 
 						<Link
 							className="hover:underline"
-							href="/resources">
+							href="/not-found">
 							<p>Resources</p>
 						</Link>
 						<Link
 							className="hover:underline"
-							href="/ticket">
+							href="/not-found">
 							<p>Submit a ticket</p>
 						</Link>
 					</div>
@@ -106,18 +106,18 @@ export default function Footer() {
 							<div className='flex flex-col items-center'>
 								<Link
 									className="hover:underline"
-									href="/contact-us">
+									href="/not-found">
 									<p>Contact us</p>
 								</Link>
 
 								<Link
 									className="hover:underline"
-									href="/resources">
+									href="/not-found">
 									<p>Resources</p>
 								</Link>
 								<Link
 									className="hover:underline"
-									href="/ticket">
+									href="/not-found">
 									<p className='mb-2'>Submit a ticket</p>
 								</Link>
 							</div>
