@@ -102,12 +102,12 @@ export async function GET(req: NextRequest) {
 
         // Price range filter
         if (minPrice > 0 && maxPrice === 0) {
-            query += ` AND price > $${queryParams.length + 1}`;
-            countQuery += ` AND price > $${queryParams.length + 1}`;
+            query += ` AND price >= $${queryParams.length + 1}`;
+            countQuery += ` AND price >= $${queryParams.length + 1}`;
             queryParams.push(minPrice);
         } else if (minPrice === 0 && maxPrice > 0) {
-            query += ` AND price < $${queryParams.length + 1}`;
-            countQuery += ` AND price < $${queryParams.length + 1}`;
+            query += ` AND price <= $${queryParams.length + 1}`;
+            countQuery += ` AND price <= $${queryParams.length + 1}`;
             queryParams.push(maxPrice);
         } else if (minPrice > 0 && maxPrice > 0) {
             query += ` AND price BETWEEN $${queryParams.length + 1} AND $${queryParams.length + 2}`;
