@@ -100,7 +100,7 @@ export default function Footer() {
 					</div>
 
 
-					<div className='md:hidden'>
+					<div className='md:hidden flex flex-col items-center w-full'>
 						<button className='text-[background] font-normal text-xl pb-2 pointer-events-auto' onClick={toggleSupportDropdown}>Support</button>
 						{supportDropdownOpen && (
 							<div className='flex flex-col items-center'>
