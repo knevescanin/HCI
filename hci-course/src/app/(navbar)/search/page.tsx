@@ -133,7 +133,7 @@ export default function Page() {
 				})
 				.catch((error) => console.error("Failed to fetch favourites:", error));
 		}
-	}, [products.length]);
+	}, [userId]);
 
 	function handleToggleFavourite(productId: number, isFavourite: boolean) {
 
