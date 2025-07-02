@@ -173,37 +173,8 @@ export default function Page() {
 
                     </div>
                 </div>
-                {favourites.length === 0 ? (
-                    loading ? (
-                        <GridProvider gridColumns={gridColumns}>
-                            <div className={`
-						 ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-1 col-end-9 grid gap-0 overflow-x-hidden grid-cols-2'}
-						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-0
-						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:h-fit lg:my-5
-						xl:grid-cols-5 xl:gap-2`}>
-                                {Array.from({ length: 10 }).map((_, index) => (
-                                    <CardSkeletonLoader key={index} />
-                                ))}
-                            </div>
-                        </GridProvider>
-                    ) : (
-                        <div className='col-start-1 lg:col-start-2 col-end-9 my-auto lg:mx-auto px-8 sm:px-8 md:px-16 flex flex-col items-center'>
-                            <p className='text-[#1A20AB] font-sans text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-4'>
-                                You haven&apos;t added any favourites yet!
-                            </p>
-                            <p className='text-[#1A20AB] text-base sm:text-lg md:text-xl text-center mb-6'>
-                                Start exploring and tap the heart icon on products you love to save them here.
-                            </p>
-                            <ButtonUI
-                                onClick={() => window.location.href = '/'}
-                                textSize="lg"
-                                className="mt-0"
-                            >
-                                Browse Products
-                            </ButtonUI>
-                        </div>
-                    )
-                ) : (
+
+                {favourites.length > 0 ? (
                     <GridProvider gridColumns={gridColumns}>
                         <div className="flex flex-col items-center col-start-1 col-end-9 
                     md:col-start-1 md:col-end-9
@@ -233,11 +204,38 @@ export default function Page() {
                             </div>
                         </div>
                     </GridProvider >
-
-                )
-                }
+                ) : (
+                    loading ? (
+                        <GridProvider gridColumns={gridColumns}>
+                            <div className={`
+						 ${gridColumns === 1 ? 'mx-auto w-full' : 'col-start-1 col-end-9 grid gap-0 overflow-x-hidden grid-cols-2'}
+						md:col-start-1 md:col-end-9 md:grid md:grid-cols-3 md:w-auto md:my-0
+						lg:col-start-2 lg:grid-cols-4 lg:gap-0 lg:h-fit lg:my-5
+						xl:grid-cols-5 xl:gap-2`}>
+                                {Array.from({ length: 10 }).map((_, index) => (
+                                    <CardSkeletonLoader key={index} />
+                                ))}
+                            </div>
+                        </GridProvider>
+                    ) : (
+                        <div className='col-start-1 lg:col-start-2 col-end-9 my-auto lg:mx-auto px-8 sm:px-8 md:px-16 flex flex-col items-center'>
+                            <p className='text-[#1A20AB] font-sans text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-4'>
+                                You haven&apos;t added any favourites yet!
+                            </p>
+                            <p className='text-[#1A20AB] text-base sm:text-lg md:text-xl text-center mb-6'>
+                                Start exploring and tap the heart icon on products you love to save them here.
+                            </p>
+                            <ButtonUI
+                                onClick={() => window.location.href = '/'}
+                                textSize="lg"
+                                className="mt-0"
+                            >
+                                Browse Products
+                            </ButtonUI>
+                        </div>
+                    )
+                )}
             </div >
-
         );
     }
     else {
