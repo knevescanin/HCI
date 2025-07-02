@@ -35,6 +35,7 @@ export default function Page() {
     useEffect(() => {
         if (userId) {
             setLoading(true)
+            setFavourites([])
             const params = new URLSearchParams();
             if (productName) params.append("name", productName)
             if (userId) params.append("userId", userId);
