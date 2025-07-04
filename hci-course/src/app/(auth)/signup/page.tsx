@@ -35,7 +35,7 @@ export default function Page() {
         // Validate password strength
         if (!passwordRegex.test(form.password)) {
             setError(
-                "Password must be at least 8 characters long and contain both letters and numbers."
+                "Password must be at least 8 characters long and contain both letters and numbers and at least one special character."
             );
             return;
         }
