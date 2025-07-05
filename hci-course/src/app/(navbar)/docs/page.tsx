@@ -1,11 +1,12 @@
+'use client'
+import { useEffect } from "react";
+
 
 export default function Page() {
 
+	useEffect(() => {
+		window.location.href = "https://mediumslateblue-wombat-802134.hostingersite.com/";
+	}, []);
 
-	return (
-		<div>
-			<h1>Introduction</h1>
-			<p>Welcome to the documentation page. Here you will find all the information you need to get started.</p>
-		</div>
-	);
+	return null;
 }
